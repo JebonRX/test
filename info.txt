@@ -1,0 +1,2 @@
+1. buat xray + singbox(usage quota n limit qouta)
+2. vps port 81/5000. buat folder tersembunyi
