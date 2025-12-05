@@ -1,1 +1,1 @@
-apt update -y && apt upgrade -y && apt dist-upgrade -y && apt update && apt install -y bzip2 gzip coreutils screen wget curl && wget https://raw.githubusercontent.com/JebonRX/test/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
+apt update -y && apt upgrade -y && apt dist-upgrade -y && apt update && apt install -y bzip2 gzip coreutils screen wget curl && wget https://raw.githubusercontent.com/JebonRX/test/main/others/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
