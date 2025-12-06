@@ -11,20 +11,29 @@ back_text="1;47"
 box="1;34"
 creditt="NevermoreSSH"
 
+# Warna
+line="\e[1;36m"      # Cyan terang
+title="\e[1;37;44m"   # Putih + background biru gelap
+reset="\e[0m"
+
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
 clear
 
 # Ambil port dari log-install.txt
-tls="$(grep -w "Vless Ws Tls" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
-none="$(grep -w "Vless Ws None Tls" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
+tls="$(grep -w "VLESS WebSocket + TLS" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
+none="$(grep -w "VLESS WebSocket + NTLS" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
 none2="8080"
+patch="/vless"
 
-# Domain
-#read -p "Enter your domain (example: my1.nevermoressh.shop): " domain
 
 # Input username
+echo -e "${line}══════════════════════════════════════════════${reset}"
+echo -e "${title}   CREATE USER • XRAY VLESS WS                ${reset}"
+echo -e "${line}══════════════════════════════════════════════${reset}"
+#echo ""
+echo ""
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     read -rp "Username: " -e user
     CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless-tls.json | wc -l)
@@ -143,9 +152,9 @@ END
 
 # Tampilkan info
 clear
-echo -e "\e[$line═════════════════════════════════\e[m"
-echo -e "\e[$back_text      \e[30m[\e[$box XRAY VLESS WS\e[30m ]\e[1m          \e[m"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "${line}══════════════════════════════════════════${reset}"
+echo -e "${title}   XRAY VLESS WEBSOCKET                   ${reset}"
+echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
 echo -e "IP/Host          : $MYIP"
@@ -155,12 +164,12 @@ echo -e "Port Multipath   : $none2"
 echo -e "User ID          : ${uuid}"
 echo -e "Encryption       : None"
 echo -e "Network          : WebSocket"
-echo -e "Path             : $patchtls"
+echo -e "Path             : $patch"
 echo -e "Path Multipath   : /anypath"
 echo -e "allowInsecure    : True "
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Script By $creditt"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "WS TLS           : ${vlesslink1}"
 echo ""
 echo -e "WS NTLS          : ${vlesslink2}"
@@ -170,7 +179,7 @@ echo ""
 echo -e "Httpupgrade TLS  : ${vlesslink4}"
 echo ""
 echo -e "Httpupgrade NTLS : ${vlesslink5}"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
