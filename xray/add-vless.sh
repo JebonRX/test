@@ -103,8 +103,8 @@ vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryp
 vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_${user}_${exp}"
 vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
 # Generate link httpupgrade
-vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
-vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
+vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
+vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
 
 # Restart Xray VLESS services
 systemctl restart xray@vless-tls
@@ -132,7 +132,8 @@ Port Multipath   : $none2
 User ID          : ${uuid}
 Encryption       : None
 Network          : WebSocket
-Path             : $patchtls
+Path WS          : /vless
+Path httpupgrade : /httpupgrade
 allowInsecure    : True
 ====================================================================
 Link WS TLS : `$vlesslink1`
@@ -164,8 +165,8 @@ echo -e "Port Multipath   : $none2"
 echo -e "User ID          : ${uuid}"
 echo -e "Encryption       : None"
 echo -e "Network          : WebSocket"
-echo -e "Path             : $patch"
-echo -e "Path Multipath   : /anypath"
+echo -e "Path WS          : /vless"
+echo -e "Path httpupgrade : /httpupgrade"
 echo -e "allowInsecure    : True "
 echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Script By $creditt"
