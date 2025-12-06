@@ -19,6 +19,7 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
+DIR="/etc/xray/config"
 clear
 
 # Ambil port dari log-install.txt
@@ -112,6 +113,15 @@ systemctl restart xray@vless-none
 systemctl restart xray@vless-custom
 systemctl restart xray@httpupgrade-tls
 systemctl restart xray@httpupgrade-none
+
+# Check if the folder exists
+if [ -d "$DIR" ]; then
+    echo "Folder $DIR already exists. Skipping..."
+else
+    echo "Folder $DIR does not exist. Creating folder..."
+    mkdir -p "$DIR"
+    echo "Folder $DIR has been created successfully."
+fi
 
 cat > /etc/xray/config/vless-$user-$exp.txt <<-END
 
