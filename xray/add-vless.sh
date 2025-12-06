@@ -22,12 +22,12 @@ none="$(grep -w "Vless Ws None Tls" ~/log-install.txt | cut -d: -f2 | sed 's/ //
 none2="8080"
 
 # Domain
-read -p "Enter your domain (example: my1.nevermoressh.shop): " domain
+#read -p "Enter your domain (example: my1.nevermoressh.shop): " domain
 
 # Input username
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     read -rp "Username: " -e user
-    CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless.json | wc -l)
+    CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless-tls.json | wc -l)
     if [[ ${CLIENT_EXISTS} == '1' ]]; then
         echo "A client with the specified name already exists. Choose another."
         exit 1
