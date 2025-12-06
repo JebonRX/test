@@ -99,12 +99,12 @@ sed -i '/#vless-httpupgrade-tls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "
 sed -i '/#vless-httpupgrade-ntls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/httpupgrade-none.json
 
 # Generate links ws
-vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryption=none&type=ws&sni=$sni#VLESS_TLS_${user}_${exp}"
-vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_${user}_${exp}"
-vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
+vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryption=none&host=${domain}&type=ws&sni=${domain}#VLESS_TLS_${user}_${exp}"
+vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_${user}_${exp}"
+vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
 # Generate link httpupgrade
-vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
-vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
+vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&host=${domain}&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
+vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=${domain}&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
 
 # Restart Xray VLESS services
 systemctl restart xray@vless-tls
