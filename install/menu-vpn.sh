@@ -43,9 +43,10 @@ wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" &
 
 
 # System files
-wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/bbr.sh" && chmod +x menu.sh
+wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/menu.sh" && chmod +x menu.sh
 
 
 
 # end
+rm -r menu-vpn.sh
 clear

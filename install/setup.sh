@@ -108,7 +108,7 @@ echo -e "${yellow}       LICENSE KEY VERIFICATION${reset}"
 echo -e "${green}=========================================${reset}"
 echo -e "${cyan}Developed by NevermoreSSH | Telegram: @todfix667${reset}"
 echo ""
-read -p "$(echo -e ${yellow}Please insert your License Key: ${reset})" Passwordnya
+read -p "$(echo -e ${yellow}Please insert your License Key:  ${reset})" Passwordnya
 #if [ $Password = $Passwordnya ]; then
 clear
 echo -e ""
@@ -380,6 +380,14 @@ echo -e "\e[38;5;46m════════════════════
 sleep 5
 clear
 echo ""
+echo -e "${cyan}"
+echo "███    ██ ███████ ██    ██ ███████ ██████  ███    ███  ██████  ██████  ███████ "
+echo "████   ██ ██      ██    ██ ██      ██   ██ ████  ████ ██    ██ ██   ██ ██      "
+echo "██ ██  ██ █████   ██    ██ █████   ██████  ██ ████ ██ ██    ██ ██████  █████   "
+echo "██  ██ ██ ██       ██  ██  ██      ██   ██ ██  ██  ██ ██    ██ ██   ██ ██      "
+echo "██   ████ ███████   ████   ███████ ██   ██ ██      ██  ██████  ██   ██ ███████ "
+echo "                    N  E  V  E  R  M  O  R  E  S  S  H"
+echo -e "${RESET}"
 echo -e "    \e[1;32m.----------------------------------------------.\e[0m"
 echo -e "    \e[1;32m|     SUCCESFULLY INSTALLED PREMIUM SCRIPT     |\e[0m"
 echo -e "    \e[1;32m|           PREMIUM BY NevermoreSSH            |\e[0m"
