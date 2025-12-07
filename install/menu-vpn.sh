@@ -13,7 +13,7 @@ clear
 # url files
 Server_URL="raw.githubusercontent.com/JebonRX/test/main/xray"
 
-# directory bin
+# make directory Menu
 cd /usr/bin
 
 # XRAY VMESS FILES
@@ -37,16 +37,25 @@ wget -O show-vless "https://${Server_URL}/show-vless.sh" && chmod +x show-vless
 wget -O trial-vless "https://${Server_URL}/trial-vless.sh" && chmod +x trial-vless
 
 # SSH Websocket files
+sleep 1
 
 # Tweak files
-wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr.sh
+sleep 1
+wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr
 
 
 # System files
-wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/menu.sh" && chmod +x menu.sh
+sleep 1
+wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/menu.sh" && chmod +x menu
+wget -O netf "https://raw.githubusercontent.com/JebonRX/test/main/others/netf.sh" && chmod +x netf
+wget -O dns "https://raw.githubusercontent.com/JebonRX/test/main/others/dns.sh" && chmod +x dns
+
+
+
 
 
 
 # end
+cd
 rm -r menu-vpn.sh
 clear
