@@ -19,9 +19,8 @@ wget -O backup "https://raw.githubusercontent.com/JebonRX/test/main/others/backu
 wget -O restore "https://raw.githubusercontent.com/JebonRX/test/main/others/restore.sh"
 wget -O strt "https://raw.githubusercontent.com/JebonRX/test/main/others/strt.sh"
 wget -O limit-speed "https://raw.githubusercontent.com/JebonRX/test/main/others/limit-speed.sh"
-chmod +x autobackup
+wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log"
 chmod +x backup
-chmod +x bckp
 chmod +x restore
 chmod +x strt
 chmod +x limit-speed
