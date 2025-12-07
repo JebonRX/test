@@ -23,15 +23,15 @@ DIR="/etc/xray/config"
 clear
 
 # Ambil port dari log-install.txt
-tls="$(grep -w "VLESS WebSocket + TLS" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
-none="$(grep -w "VLESS WebSocket + NTLS" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
-none2="$(grep -w "VLESS WS + NTLS(Multipath)" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
-patch="/vless"
+tls="$(grep -w "VMESS WebSocket + TLS" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
+none="$(grep -w "VMESS WebSocket + NTLS" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
+none2="$(grep -w "VMESS WS + NTLS(Multipath)" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
+patch="/vmess"
 
 
 # Input username
 echo -e "${line}══════════════════════════════════════════════${reset}"
-echo -e "${title}   CREATE USER • XRAY VLESS WS                ${reset}"
+echo -e "${title}   CREATE USER • XRAY VMESS WS                ${reset}"
 echo -e "${line}══════════════════════════════════════════════${reset}"
 #echo ""
 echo ""
@@ -91,29 +91,73 @@ fi
 exp=$(date -d "$masaaktif days" +"%Y-%m-%d")
 harini=$(date +"%Y-%m-%d")
 
-# create vless websocket
-sed -i '/#vless-ws-tls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vless-tls.json
-sed -i '/#vless-ws-ntls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vless-none.json
-sed -i '/#vless-ws-custom$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vless-custom.json
-# create vless httpupgrade
-sed -i '/#vless-httpupgrade-tls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/httpupgrade-tls.json
-sed -i '/#vless-httpupgrade-ntls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/httpupgrade-none.json
+# create vmess websocket
+sed -i '/#vmess-ws-tls$/a\#vms '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vmess-tls.json
+sed -i '/#vmess-ws-ntls$/a\#vms '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vmess-none.json
+sed -i '/#vmess-ws-custom$/a\#vms '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vmess-custom.json
 
 # Generate links ws
-vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryption=none&host=${domain}&type=ws&sni=${domain}#VLESS_TLS_${user}_${exp}"
-vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_${user}_${exp}"
-vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
-# Generate link httpupgrade
-vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&host=${domain}&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
-vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=${domain}&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
+cat>/usr/local/etc/xray/$user-tls.json<<EOF
+      {
+      "v": "2",
+      "ps": "VMESS_TLS_${user}_${exp}",
+      "add": "${sts}${domain}",
+      "port": "${tls}",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "$patch",
+      "type": "none",
+      "host": "$sni",
+      "tls": "tls",
+	  "sni": "$sni"
+}
+EOF
+cat>/usr/local/etc/xray/$user-ntls.json<<EOF
+      {
+      "v": "2",
+      "ps": "VMESS_NTLS_${user}_${exp}",
+      "add": "${sts}${domain}",
+      "port": "${none}",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "$patch",
+      "type": "none",
+      "host": "$sni",
+      "tls": "none"
+}
+EOF
+# custom
+cat>/usr/local/etc/xray/$user-custom.json<<EOF
+      {
+      "v": "2",
+      "ps": "VMESS_NTLS_CUSTOM_${user}_${exp}",
+      "add": "${sts}${domain}",
+      "port": "${none2}",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "$patch",
+      "type": "none",
+      "host": "$sni",
+      "tls": "none"
+}
+EOF
 
-# Restart Xray VLESS services
-#systemctl restart xray@vless-tls
-#systemctl restart xray@vless-none
-#systemctl restart xray@vless-custom
-#systemctl restart xray@httpupgrade-tls
-#systemctl restart xray@httpupgrade-none
+# create vmess base64
+vmess_base641=$( base64 -w 0 <<< $vmess_json1)
+vmess_base642=$( base64 -w 0 <<< $vmess_json2)
+vmesslink1="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-tls.json)"
+vmesslink2="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-none.json)"
+vmesslink3="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-none2.json)"
+
+# Restart Xray VMESS services
+#systemctl restart xray@vmess-tls
+#systemctl restart xray@vmess-none
+#systemctl restart xray@vmess-custom
 systemctl restart xray@*
+service cron restart
 
 # Check if the folder exists
 if [ -d "$DIR" ]; then
@@ -124,7 +168,8 @@ else
     echo "Folder $DIR has been created successfully."
 fi
 
-cat > /etc/xray/config/vless-$user-$exp.txt <<-END
+# copy config to vps
+cat > /etc/xray/config/vmess-$user-$exp.txt <<-END
 
 ====================================================================
 P R O J E C T  O F  N E V E R M O R E S S H
@@ -132,7 +177,7 @@ P R O J E C T  O F  N E V E R M O R E S S H
 ====================================================================
 https://github.com/NevermoreSSH/SkyNode
 ====================================================================
-Premium XRAY VLESS config
+Premium XRAY VMESS config
 ====================================================================
 Remarks          : ${user}
 Domain           : ${domain}
@@ -143,8 +188,7 @@ Port Multipath   : $none2
 User ID          : ${uuid}
 Encryption       : None
 Network          : WebSocket
-Path WS          : /vless
-Path httpupgrade : /httpupgrade
+Path WS          : $patch
 allowInsecure    : True
 ====================================================================
 Link WS TLS : `$vlesslink1`
@@ -152,10 +196,6 @@ Link WS TLS : `$vlesslink1`
 Link WS NTLS : `$vlesslink2`
 ====================================================================
 Link WS NTLS Multipath: `$vlesslink3`
-====================================================================
-Link HTTPUPGRADE TLS : `$vlesslink4`
-====================================================================
-Link HTTPUPGRADE NTLS : `$vlesslink5`
 ====================================================================
 Expired On : $harini - $exp
 ====================================================================
@@ -165,7 +205,7 @@ END
 # Tampilkan info
 clear
 echo -e "${line}══════════════════════════════════════════${reset}"
-echo -e "${title}   XRAY VLESS WEBSOCKET                   ${reset}"
+echo -e "${title}   XRAY VMESS WEBSOCKET                   ${reset}"
 echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
@@ -175,21 +215,17 @@ echo -e "Port Multipath   : $none2"
 echo -e "User ID          : ${uuid}"
 echo -e "Encryption       : None"
 echo -e "Network          : WebSocket"
-echo -e "Path WS          : /vless"
-echo -e "Path httpupgrade : /httpupgrade"
+echo -e "Path WS          : /vmess"
+#echo -e "Path httpupgrade : /httpupgrade"
 echo -e "allowInsecure    : True "
 echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Script By $creditt"
 echo -e "${line}══════════════════════════════════════════${reset}"
-echo -e "WS TLS           : ${vlesslink1}"
+echo -e "WS TLS           : ${vmesslink1}"
 echo ""
-echo -e "WS NTLS          : ${vlesslink2}"
+echo -e "WS NTLS          : ${vmesslink2}"
 echo ""
-echo -e "Multipath NTLS   : ${vlesslink3}"
-echo ""
-echo -e "Httpupgrade TLS  : ${vlesslink4}"
-echo ""
-echo -e "Httpupgrade NTLS : ${vlesslink5}"
+echo -e "Multipath NTLS   : ${vmesslink3}"
 echo -e "${line}══════════════════════════════════════════${reset}"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"

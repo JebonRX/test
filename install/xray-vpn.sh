@@ -52,7 +52,6 @@ chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --issue -d $domain -d sshws.$domain --standalone -k ec-256 --listen-v6
 ~/.acme.sh/acme.sh --installcert -d $domain -d sshws.$domain --fullchainpath /usr/local/etc/xray/xray.crt --keypath /usr/local/etc/xray/xray.key --ecc
 chmod 755 /usr/local/etc/xray/xray.key;
-service squid start
 systemctl restart nginx
 sleep 1;
 clear;
@@ -106,7 +105,7 @@ cat> /usr/local/etc/xray/config.json << END
             "xver": 1
           },
           {
-            "path": "/httpupgrade", # vless httupgrade tls
+            "path": "/htppupgrade", # vless httupgrade tls
             "dest": 1213,
             "xver": 1
           }
