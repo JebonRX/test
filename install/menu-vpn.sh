@@ -44,6 +44,7 @@ sleep 1
 # Tweak files
 sleep 1
 wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
+wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
 
 
 # System files
@@ -51,6 +52,7 @@ sleep 1
 wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/menu.sh" && chmod +x menu
 wget -O netf "https://raw.githubusercontent.com/JebonRX/test/main/others/netf.sh" && chmod +x netf
 wget -O dns "https://raw.githubusercontent.com/JebonRX/test/main/others/dns.sh" && chmod +x dns
+wget -O add-shot "https://raw.githubusercontent.com/JebonRX/test/main/others/add-host.sh" && chmod +x add-host
 
 
 
