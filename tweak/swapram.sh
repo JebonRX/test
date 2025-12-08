@@ -1,6 +1,6 @@
 #!/bin/bash
 # =========================================
-# Quick Setup | Script Setup Manager
+# Quick Setup | Swap RAM Manager
 # Edition : Stable Edition V1.0
 # Auther  : NevermoreSSH
 # Date    : 22/11/2025
