@@ -249,7 +249,7 @@ printf '\033[1;32m╰───────────────────�
 sleep 1
 wget https://raw.githubusercontent.com/JebonRX/test/main/install/xray-vpn.sh && chmod +x xray-vpn.sh && screen -S xray-vpn ./xray-vpn.sh
 sleep 1
-wget https://raw.githubusercontent.com/JebonRX/test/main/install/singbox-vpn.sh && chmod +x singbox-vpn.sh && screen -S singbox-vpn ./singbox-vpn.sh
+#wget https://raw.githubusercontent.com/JebonRX/test/main/install/singbox-vpn.sh && chmod +x singbox-vpn.sh && screen -S singbox-vpn ./singbox-vpn.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ✅  \033[1;37mDone installing Xray Server\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
