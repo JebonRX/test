@@ -19,7 +19,7 @@ cd /usr/bin
 # XRAY VMESS FILES
 echo -e "[ ${green}INFO${NC} ] Downloading Vmess WS Files"
 sleep 1
-wget -O menu-vmess "https://${Server_URL}/add-vmess.sh" && chmod +x menu-vmess
+wget -O menu-vmess "https://${Server_URL}/menu-vmess.sh" && chmod +x menu-vmess
 wget -O add-vmess "https://${Server_URL}/add-vmess.sh" && chmod +x add-vmess
 wget -O check-vmess "https://${Server_URL}/check-vmess.sh" && chmod +x check-vmess
 wget -O delete-vmess "https://${Server_URL}/delete-vmess.sh" && chmod +x delete-vmess
@@ -30,7 +30,7 @@ wget -O trial-vmess "https://${Server_URL}/trial-vmess.sh" && chmod +x trial-vme
 # XRAY VLESS FILES
 echo -e "[ ${green}INFO${NC} ] Downloading Vless WS Files"
 sleep 1
-wget -O menu-vless "https://${Server_URL}/add-vless.sh" && chmod +x menu-vless
+wget -O menu-vless "https://${Server_URL}/menu-vless.sh" && chmod +x menu-vless
 wget -O add-vless "https://${Server_URL}/add-vless.sh" && chmod +x add-vless
 wget -O check-vless "https://${Server_URL}/check-vless.sh" && chmod +x check-vless
 wget -O delete-vless "https://${Server_URL}/delete-vless.sh" && chmod +x delete-vless
@@ -43,7 +43,7 @@ sleep 1
 
 # Tweak files
 sleep 1
-wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr
+wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
 
 
 # System files
