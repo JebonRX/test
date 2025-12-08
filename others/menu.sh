@@ -191,10 +191,19 @@ title="\e[30;107m"   # 30 = hitam, 107 = background putih
 number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
 below="0;37"         # Putih lembut
 reset="\e[0m"
+white="\e[97m"
 clear
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo ""
+echo -e "\e[97m"  # warna putih terang
+echo "███    ██ ███████ ██    ██ ███████ ██████  ███    ███  ██████  ██████  ███████ "
+echo "████   ██ ██      ██    ██ ██      ██   ██ ████  ████ ██    ██ ██   ██ ██      "
+echo "██ ██  ██ █████   ██    ██ █████   ██████  ██ ████ ██ ██    ██ ██████  █████   "
+echo "██  ██ ██ ██       ██  ██  ██      ██   ██ ██  ██  ██ ██    ██ ██   ██ ██      "
+echo "██   ████ ███████   ████   ███████ ██   ██ ██      ██  ██████  ██   ██ ███████ "
+echo "                    N  E  V  E  R  M  O  R  E  S  S  H"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ SERVER INFORMATION ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 
 echo -e "  \e[${text}mCpu Model            :${cname}, ${name}${reset}"
 echo -e "  \e[${text}mCPU Info             :${freq} MHz (${cpu_usage})${reset}"
@@ -208,9 +217,9 @@ echo -e "  \e[${text}mSystem Uptime        : ${uptime}${reset}"
 # ============================
 # TRAFFIC TABLE
 # ============================
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo -e "  \e[${title}[ VNSTAT STATUS ]${reset}   Total : (${totalmon})"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ VNSTAT STATUS ]${reset}      \e[97mTotal : (${totalmon})"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 
 echo -e "  \e[${text}mTRAFFIC     Today        Yesterday       Month${reset}"
 echo -e "  \e[${text}mDownload    ${dtoday}    ${dyest}      ${dmon}${reset}"
@@ -220,9 +229,9 @@ echo -e "  \e[${text}mTotal       ${ttoday}    ${tyest}      ${tmon}${reset}"
 # ============================
 # PANEL MENU
 # ============================
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ SERVICES MENU ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 
 echo -e "  \e[${number}m(•1)\e[0m \e[${below}mXRAY VLESS${reset}     ${PINK}[${GREEN}${vless}${PINK}]  "
 echo -e "  \e[${number}m(•2)\e[0m \e[${below}mXRAY VMESS${reset}     ${PINK}[${GREEN}${vmess}${PINK}]"
@@ -232,14 +241,14 @@ echo -e "  \e[${number}m(•4)\e[0m \e[${below}mSHADOWSOCKS${reset}    ${PINK}[$
 # ============================
 # VPS MENU
 # ============================
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ VPS MENU ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-
-echo -e "  \e[${number}m(•5)\e[0m \e[${below}mSYSTEM MENU${reset}          \e[${number}m(•9)\e[0m \e[${below}mSPEEDTEST${reset}"
-echo -e "  \e[${number}m(•6)\e[0m \e[${below}mCHECK RUNNING${reset}        \e[${number}m(10)\e[0m \e[${below}mINFO ALL PORT${reset}"
-echo -e "  \e[${number}m(•7)\e[0m \e[${below}mCHANGE PORT${reset}          \e[${number}m(11)\e[0m \e[${below}mCLEAR EXPIRED FILES${reset}"
-echo -e "  \e[${number}m(•8)\e[0m \e[${below}mCUSTOM DNS${reset}           \e[${number}m(12)\e[0m \e[${below}mCLEAR LOG VPS${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${number}m(•5)\e[0m \e[${below}mSYSTEM MENU${reset}          \e[${number}m(•6)\e[0m \e[${below}mCHECK RUNNING${reset}"
+echo -e "  \e[${number}m(•7)\e[0m \e[${below}mCHANGE PORT${reset}          \e[${number}m(•8)\e[0m \e[${below}mCUSTOM DNS${reset}"
+echo -e "  \e[${number}m(•9)\e[0m \e[${below}mSPEEDTEST${reset}            \e[${number}m(10)\e[0m \e[${below}mINFO ALL PORT${reset}"
+echo -e "  \e[${number}m(11)\e[0m \e[${below}mCLEAR LOG${reset}            \e[${number}m(12)\e[0m \e[${below}mCLEAR EXPIRED FILES${reset}"
+echo -e "  \e[${number}m(13)\e[0m \e[${below}mTWEAK MENU${reset}           \e[${number}m(14)\e[0m \e[${below}mRESTART SERVICES${reset}"
 
 echo -e ""
 echo -e ""
@@ -248,11 +257,12 @@ echo -e "  \e[${below}m[Ctrl + C] For exit from main menu${reset}"
 # ============================
 # FOOTER INFO
 # ============================
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${text}mSCRIPT NAME        : SSH XRAY WEBSOCKET (SkyNode) ${reset}"
 echo -e "  \e[${text}mVERSION            : $ver ${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════════════${reset}"
 echo -e ""
+echo -e "\e[97m"  # warna putih terang
 read -p " Select menu :  " menu
 echo -e ""
 case $menu in
@@ -290,7 +300,13 @@ case $menu in
     delete && xp
     ;;
 12)
-    clear-log
+    menu-tweak
+    ;;
+13)
+    netf
+    ;;
+14)
+    restart
     ;;
 x)
     clear

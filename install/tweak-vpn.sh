@@ -19,14 +19,13 @@ echo "=============================="
 # 1️⃣ System Optimization
 # -------------------------------
 echo "[*] Setting up swap RAM 1GB by default..."
-SWAPFILE="/swapfile"
-if [ ! -f $SWAPFILE ]; then
-    fallocate -l 1G $SWAPFILE
-    chmod 600 $SWAPFILE
-    mkswap $SWAPFILE
-    swapon $SWAPFILE
-    echo "$SWAPFILE none swap sw 0 0" >> /etc/fstab
-fi
+dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+mkswap /swapfile
+chmod 600 /swapfile
+swapon /swapfile
+sed -i '/\/swapfile/d' /etc/fstab
+echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+sleep 1
 
 # -------------------------------
 # 2️⃣ SSH Optimizations
@@ -72,12 +71,7 @@ netfilter-persistent save
 # -------------------------------
 # 5️⃣ Cron / Auto Maintenance
 # -------------------------------
-echo "[*] Setting cron jobs..."
-# Restart Xray weekly
-(crontab -l 2>/dev/null; echo "0 4 * * 0 systemctl restart xray") | crontab -
-# Clear Xray logs daily
-(crontab -l 2>/dev/null; echo "0 3 * * * truncate -s 0 /var/log/xray/*.log") | crontab -
-
+#
 # -------------------------------
 # 6️⃣ Done
 # -------------------------------

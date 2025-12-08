@@ -105,7 +105,7 @@ cat> /usr/local/etc/xray/config.json << END
             "xver": 1
           },
           {
-            "path": "/htppupgrade", # vless httupgrade tls
+            "path": "/httpupgrade", # vless httupgrade tls
             "dest": 1213,
             "xver": 1
           }
@@ -1108,7 +1108,7 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
                         "id": "${uuid}",
                         "alterId": 0,
                         "email": "admin@nevermoree.com"
-#xray-vmess-custom
+#vmess-ws-custom
           }
         ],
         "decryption": "none"

@@ -5,6 +5,27 @@
 # Author : NevermoreSSH
 # =========================================
 
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
+
+# Public IP
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+domain=$(cat /usr/local/etc/xray/domain)
+DIR="/etc/xray/config"
+clear
+
 # list config location
 vless_json="/usr/local/etc/xray/vless-tls.json"
 vless2="/usr/local/etc/xray/vless-none.json"
@@ -12,9 +33,10 @@ vless3="/usr/local/etc/xray/vless-custom.json"
 vless4="/usr/local/etc/xray/httpupgrade-tls.json"
 vless5="/usr/local/etc/xray/httpupgrade-none.json"
 
-tls="$(cat ~/log-install.txt | grep -w "Vless Ws Tls" | cut -d: -f2|sed 's/ //g')"
-none="$(cat ~/log-install.txt | grep -w "Vless Ws None Tls" | cut -d: -f2|sed 's/ //g')"
-none2="8080"
+tls="$(cat ~/log-install.txt | grep -w "VLESS WebSocket + TLS" | cut -d: -f2|sed 's/ //g')"
+none="$(cat ~/log-install.txt | grep -w "VLESS WebSocket + NTLS" | cut -d: -f2|sed 's/ //g')"
+none2="$(cat ~/log-install.txt | grep -w "VLESS WS + NTLS(Multipath)" | cut -d: -f2|sed 's/ //g')"
+patch=/vless
 
 NUMBER_OF_CLIENTS=$(grep -c -E "^#vls " "$vless_json")
 if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
@@ -46,39 +68,39 @@ vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryp
 vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_${user}_${exp}"
 vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
 # generate link for vless httpupgrade
-vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
-vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
+vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
+vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
 
 clear
-echo -e ""
-echo -e "\e[$line═════════════════════════════════\e[m"
-echo -e "\e[$back_text      \e[30m[\e[$box XRAY VLESS WS\e[30m ]\e[1m          \e[m"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ XRAY VLESS WEBSOCKET / HTTPUPGRADE ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
 echo -e "IP/Host          : $MYIP"
-echo -e "Port TLS         : $tls"
-echo -e "Port None TLS    : $none"
+echo -e "Port NTLS / TLS  : $none / $tls"
 echo -e "Port Multipath   : $none2"
 echo -e "User ID          : ${uuid}"
 echo -e "Encryption       : None"
-echo -e "Network          : WebSocket"
-echo -e "Path             : $patchtls"
-echo -e "Path Multipath   : /anypath"
-echo -e "allowInsecure    : True/allow"
-echo -e "\e[$line═════════════════════════════════\e[m"
-echo -e "Script By $creditt"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "Network          : WebSocket / HTTPUpgrade "
+echo -e "Path WS          : /vless"
+echo -e "Path HTTPUpgrade : /httpupgrade"
+echo -e "AllowInsecure    : True "
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title} Script By NevermoreSSH ${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "WS TLS           : ${vlesslink1}"
+echo ""
 echo -e "WS NTLS          : ${vlesslink2}"
+echo ""
 echo -e "Multipath NTLS   : ${vlesslink3}"
+echo ""
 echo -e "Httpupgrade TLS  : ${vlesslink4}"
+echo ""
 echo -e "Httpupgrade NTLS : ${vlesslink5}"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
-echo ""
 read -n 1 -s -r -p "Press any key to back on menu xray"
 menu-vless
-}

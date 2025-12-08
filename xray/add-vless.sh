@@ -4,16 +4,20 @@
 # Edition : Stable Edition V1.1
 # Auther  : NevermoreSSH
 # (C) Copyright 2025 - 2026
-
-# Set color
-line="1;32"
-back_text="1;47"
-box="1;34"
-creditt="NevermoreSSH"
-
+# =========================================
 # Warna
-line="\e[1;36m"      # Cyan terang
-title="\e[1;37;44m"   # Putih + background biru gelap
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
 reset="\e[0m"
 
 # Public IP
@@ -30,9 +34,9 @@ patch="/vless"
 
 
 # Input username
-echo -e "${line}══════════════════════════════════════════════${reset}"
-echo -e "${title}   CREATE USER • XRAY VLESS WS                ${reset}"
-echo -e "${line}══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ CREATE USER • XRAY VLESS WS / HTTPUPGRADE ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 #echo ""
 echo ""
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
@@ -137,15 +141,14 @@ Premium XRAY VLESS config
 Remarks          : ${user}
 Domain           : ${domain}
 IP/Host          : $MYIP
-Port TLS         : $tls
-Port None TLS    : $none
+Port NTLS / TLS  : $none / $tls
 Port Multipath   : $none2
 User ID          : ${uuid}
 Encryption       : None
-Network          : WebSocket
+Network          : WebSocket / HTTPUpgrade
 Path WS          : /vless
 Path httpupgrade : /httpupgrade
-allowInsecure    : True
+AllowInsecure    : True
 ====================================================================
 Link WS TLS : `$vlesslink1`
 ====================================================================
@@ -164,23 +167,23 @@ END
 
 # Tampilkan info
 clear
-echo -e "${line}══════════════════════════════════════════${reset}"
-echo -e "${title}   XRAY VLESS WEBSOCKET                   ${reset}"
-echo -e "${line}══════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ XRAY VLESS WEBSOCKET / HTTPUPGRADE ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
-echo -e "IP/Host          : $MYIP"
-echo -e "Port NTLS / TLS  : $none /$tls"
+echo -e "IP Address       : $MYIP"
+echo -e "Port NTLS / TLS  : $none / $tls"
 echo -e "Port Multipath   : $none2"
-echo -e "User ID          : ${uuid}"
+echo -e "UUID             : ${uuid}"
 echo -e "Encryption       : None"
-echo -e "Network          : WebSocket"
+echo -e "Network          : WebSocket / HTTPUpgrade "
 echo -e "Path WS          : /vless"
-echo -e "Path httpupgrade : /httpupgrade"
-echo -e "allowInsecure    : True "
-echo -e "${line}══════════════════════════════════════════${reset}"
-echo -e "Script By $creditt"
-echo -e "${line}══════════════════════════════════════════${reset}"
+echo -e "Path HTTPUpgrade : /httpupgrade"
+echo -e "AllowInsecure    : True "
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ Script By NevermoreSSH ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "WS TLS           : ${vlesslink1}"
 echo ""
 echo -e "WS NTLS          : ${vlesslink2}"
@@ -190,7 +193,9 @@ echo ""
 echo -e "Httpupgrade TLS  : ${vlesslink4}"
 echo ""
 echo -e "Httpupgrade NTLS : ${vlesslink5}"
-echo -e "${line}══════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
+read -n 1 -s -r -p "Press any key to back on menu xray"
+menu-vless

@@ -5,6 +5,27 @@
 # Author : NevermoreSSH
 # =========================================
 
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
+
+# Public IP
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+domain=$(cat /usr/local/etc/xray/domain)
+DIR="/etc/xray/config"
+clear
+
 # list config location
 vmess_json="/usr/local/etc/xray/vmess-tls.json"
 vmess2="/usr/local/etc/xray/vmess-none.json"
@@ -15,6 +36,7 @@ vmess5="/usr/local/etc/xray/httpupgrade-none.json"
 tls="$(cat ~/log-install.txt | grep -w "VMESS WebSocket + TLS" | cut -d: -f2|sed 's/ //g')"
 none="$(cat ~/log-install.txt | grep -w "VMESS WebSocket + NTLS" | cut -d: -f2|sed 's/ //g')"
 none2="$(cat ~/log-install.txt | grep -w "VMESS WS + NTLS(Multipath)" | cut -d: -f2|sed 's/ //g')"
+patch="/vmess"
 
 NUMBER_OF_CLIENTS=$(grep -c -E "^#vms " "$vmess_json")
 if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
@@ -26,10 +48,12 @@ fi
 
 clear
 echo ""
-echo "SHOW USER XRAY Vmess WS"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ SHOW USER XRAY VMESS WEBSOCKET ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo "Select the existing client you want to view"
 echo " Press CTRL+C to return"
-echo -e "==============================="
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 grep -E "^#vms " "$vmess_json" | cut -d ' ' -f 2-3 | nl -s ') '
 
 until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -95,36 +119,36 @@ vmess_base641=$( base64 -w 0 <<< $vmess_json1)
 vmess_base642=$( base64 -w 0 <<< $vmess_json2)
 vmesslink1="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-tls.json)"
 vmesslink2="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-none.json)"
-vmesslink3="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-none2.json)"
+vmesslink3="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-custom.json)"
 
 clear
 echo -e ""
-echo -e "\e[$line═════════════════════════════════\e[m"
-echo -e "\e[$back_text      \e[30m[\e[$box XRAY Vmess WS\e[30m ]\e[1m          \e[m"
-echo -e "\e[$line═════════════════════════════════\e[m"
-echo -e "Remarks          : ${user}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ XRAY VMESS WEBSOCKET ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "Remakrs          : ${user}"
 echo -e "Domain           : ${domain}"
-echo -e "IP/Host          : $MYIP"
-echo -e "Port TLS         : $tls"
-echo -e "Port None TLS    : $none"
+echo -e "IP Address       : $MYIP"
+echo -e "Port NTLS / TLS  : $none / $tls"
 echo -e "Port Multipath   : $none2"
-echo -e "User ID          : ${uuid}"
+echo -e "UUID             : ${uuid}"
 echo -e "Encryption       : None"
 echo -e "Network          : WebSocket"
-echo -e "Path             : $patchtls"
+echo -e "Path             : $patch"
 echo -e "Path Multipath   : /anypath"
-echo -e "allowInsecure    : True/allow"
-echo -e "\e[$line═════════════════════════════════\e[m"
-echo -e "Script By $creditt"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "AllowInsecure    : True "
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ Script By NevermoreSSH ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "WS TLS           : ${vmesslink1}"
+echo -e ""
 echo -e "WS NTLS          : ${vmesslink2}"
+echo -e ""
 echo -e "Multipath NTLS   : ${vmesslink3}"
-echo -e "\e[$line═════════════════════════════════\e[m"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu xray"
 menu-vmess
-}
