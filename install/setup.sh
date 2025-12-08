@@ -281,7 +281,7 @@ printf '   ⚙️  \033[1;37mInstalling Tweak Server...\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
 echo -e "\e[0;32mINSTALLING TWEAK...\e[0m"
 sleep 1
-wget https://raw.githubusercontent.com/JebonRX/test/main/install/tweak-vpn.sh && chmod +x tweak-vpn && ./tweak-vpn.sh
+wget https://raw.githubusercontent.com/JebonRX/test/main/install/tweak-vpn.sh && chmod +x tweak-vpn.sh && ./tweak-vpn.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ✅  \033[1;37mDone Installing Tweak Server\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'

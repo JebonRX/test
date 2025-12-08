@@ -108,8 +108,8 @@ vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryp
 vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_${user}_${exp}"
 vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
 # Generate link httpupgrade
-vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&host=${domain}&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
-vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=${domain}&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
+vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/hvless&security=tls&encryption=none&host=${domain}&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
+vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/hvless&encryption=none&host=${domain}&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
 
 # Restart Xray VLESS services
 #systemctl restart xray@vless-tls
@@ -147,7 +147,7 @@ User ID          : ${uuid}
 Encryption       : None
 Network          : WebSocket / HTTPUpgrade
 Path WS          : /vless
-Path httpupgrade : /httpupgrade
+Path httpupgrade : /hvless
 AllowInsecure    : True
 ====================================================================
 Link WS TLS : `$vlesslink1`
@@ -179,7 +179,7 @@ echo -e "UUID             : ${uuid}"
 echo -e "Encryption       : None"
 echo -e "Network          : WebSocket / HTTPUpgrade "
 echo -e "Path WS          : /vless"
-echo -e "Path HTTPUpgrade : /httpupgrade"
+echo -e "Path HTTPUpgrade : /hvless"
 echo -e "AllowInsecure    : True "
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ Script By NevermoreSSH ]${reset}"
@@ -197,5 +197,5 @@ echo -e "\e[${line}m════════════════════
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu xray"
+read -n 1 -s -r -p "Press any key to back on menu XRAY"
 menu-vless

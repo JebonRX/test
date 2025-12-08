@@ -105,7 +105,7 @@ cat> /usr/local/etc/xray/config.json << END
             "xver": 1
           },
           {
-            "path": "/httpupgrade", # vless httupgrade tls
+            "path": "/hvless", # vless httupgrade tls
             "dest": 1213,
             "xver": 1
           }
@@ -679,7 +679,7 @@ cat> /usr/local/etc/xray/httpupgrade-tls.json << END
           "alpn": ["http/1.1"]
         },
         "httpupgradeSettings": {
-          "path": "/httpupgrade",
+          "path": "/hvless",
           "acceptProxyProtocol": true
         }
       }
@@ -791,7 +791,7 @@ cat> /usr/local/etc/xray/httpupgrade-none.json << END
       "streamSettings": {
         "network": "httpupgrade",
         "httpupgradeSettings": {
-          "path": "/httpupgrade",
+          "path": "/hvless",
           "acceptProxyProtocol": true
         }
       }
@@ -911,7 +911,7 @@ cat> /usr/local/etc/xray/none.json << END
             "xver": 1
           },
           {
-             "path": "/httpupgrade", # vless httpupgarde ntls
+             "path": "/hvless", # vless httpupgarde ntls
             "dest": 1303,
             "xver": 1
           }

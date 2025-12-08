@@ -30,8 +30,6 @@ clear
 vmess_json="/usr/local/etc/xray/vmess-tls.json"
 vmess2="/usr/local/etc/xray/vmess-none.json"
 vmess3="/usr/local/etc/xray/vmess-custom.json"
-vmess4="/usr/local/etc/xray/httpupgrade-tls.json"
-vmess5="/usr/local/etc/xray/httpupgrade-none.json"
 
 tls="$(cat ~/log-install.txt | grep -w "VMESS WebSocket + TLS" | cut -d: -f2|sed 's/ //g')"
 none="$(cat ~/log-install.txt | grep -w "VMESS WebSocket + NTLS" | cut -d: -f2|sed 's/ //g')"

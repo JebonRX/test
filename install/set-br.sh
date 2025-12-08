@@ -17,12 +17,12 @@ rm -rf wondershaper
 cd /usr/bin
 wget -O backup "https://raw.githubusercontent.com/JebonRX/test/main/others/backup.sh"
 wget -O restore "https://raw.githubusercontent.com/JebonRX/test/main/others/restore.sh"
-wget -O strt "https://raw.githubusercontent.com/JebonRX/test/main/others/strt.sh"
+#wget -O strt "https://raw.githubusercontent.com/JebonRX/test/main/others/strt.sh"
 wget -O limit-speed "https://raw.githubusercontent.com/JebonRX/test/main/others/limit-speed.sh"
-wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log"
+wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log.sh"
 chmod +x backup
 chmod +x restore
-chmod +x strt
+#chmod +x strt
 chmod +x limit-speed
 chmod +x clear-log
 cd

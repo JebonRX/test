@@ -36,7 +36,7 @@ vless5="/usr/local/etc/xray/httpupgrade-none.json"
 tls="$(cat ~/log-install.txt | grep -w "VLESS WebSocket + TLS" | cut -d: -f2|sed 's/ //g')"
 none="$(cat ~/log-install.txt | grep -w "VLESS WebSocket + NTLS" | cut -d: -f2|sed 's/ //g')"
 none2="$(cat ~/log-install.txt | grep -w "VLESS WS + NTLS(Multipath)" | cut -d: -f2|sed 's/ //g')"
-patch=/vless
+patch="/vless"
 
 NUMBER_OF_CLIENTS=$(grep -c -E "^#vls " "$vless_json")
 if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
@@ -48,10 +48,12 @@ fi
 
 clear
 echo ""
-echo "SHOW USER XRAY VLESS WS"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ SHOW USER XRAY VLESS ACCOUNT ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo "Select the existing client you want to view"
 echo " Press CTRL+C to return"
-echo -e "==============================="
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 grep -E "^#vls " "$vless_json" | cut -d ' ' -f 2-3 | nl -s ') '
 
 until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -68,8 +70,8 @@ vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryp
 vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_${user}_${exp}"
 vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=$sni&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
 # generate link for vless httpupgrade
-vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/httpupgrade&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
-vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/httpupgrade&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
+vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/hvless&security=tls&encryption=none&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
+vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/hvless&encryption=none&host=$sni&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
 
 clear
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
@@ -77,17 +79,17 @@ echo -e "  \e[${title}[ XRAY VLESS WEBSOCKET / HTTPUPGRADE ]${reset}"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
-echo -e "IP/Host          : $MYIP"
+echo -e "IP Address       : $MYIP"
 echo -e "Port NTLS / TLS  : $none / $tls"
 echo -e "Port Multipath   : $none2"
-echo -e "User ID          : ${uuid}"
+echo -e "UUID             : ${uuid}"
 echo -e "Encryption       : None"
 echo -e "Network          : WebSocket / HTTPUpgrade "
 echo -e "Path WS          : /vless"
-echo -e "Path HTTPUpgrade : /httpupgrade"
+echo -e "Path HTTPUpgrade : /hvless"
 echo -e "AllowInsecure    : True "
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo -e "  \e[${title} Script By NevermoreSSH ${reset}"
+echo -e "  \e[${title}[ Script By NevermoreSSH ]${reset}"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "WS TLS           : ${vlesslink1}"
 echo ""

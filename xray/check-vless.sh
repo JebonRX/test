@@ -8,9 +8,11 @@
 clear
 vless_json="/usr/local/etc/xray/vless-tls.json"
 
-echo -e "\033[0;34m══════════════════════════════════════════\033[0m"
-echo -e "\E[0;44;37m       ⇱ XRAY Vless WS User Login ⇲       \E[0m"
-echo -e "\033[0;34m══════════════════════════════════════════\033[0m"
+echo ""
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ XRAY VLESS USER LOGIN ]${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo ""
 
 # Ambil list user sekali sahaja
 mapfile -t users < <(grep '^#vls' "$vless_json" | awk '{print $2}')
