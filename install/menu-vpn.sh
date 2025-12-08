@@ -39,6 +39,15 @@ wget -O show-vless "https://${Server_URL}/show-vless.sh" && chmod +x show-vless
 wget -O trial-vless "https://${Server_URL}/trial-vless.sh" && chmod +x trial-vless
 
 # SSH Websocket files
+echo -e "[ ${green}INFO${NC} ] Downloading SSH WS Files"
+wget -O menu-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-ssh.sh" && chmod +x menu-ssh
+wget -O add-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/add-ssh.sh" && chmod +x add-ssh
+wget -O check-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/check-ssh.sh" && chmod +x check-ssh
+wget -O delete-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/delete-ssh.sh" && chmod +x delete-ssh
+wget -O renew-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/renew-ssh.sh" && chmod +x renew-ssh
+wget -O show-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/show-ssh.sh" && chmod +x show-ssh
+wget -O trial-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/trial-ssh.sh" && chmod +x trial-ssh
+
 sleep 1
 
 # Tweak files
@@ -52,7 +61,7 @@ sleep 1
 wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/menu.sh" && chmod +x menu
 wget -O netf "https://raw.githubusercontent.com/JebonRX/test/main/others/netf.sh" && chmod +x netf
 wget -O dns "https://raw.githubusercontent.com/JebonRX/test/main/others/dns.sh" && chmod +x dns
-wget -O add-shot "https://raw.githubusercontent.com/JebonRX/test/main/others/add-host.sh" && chmod +x add-host
+wget -O add-host "https://raw.githubusercontent.com/JebonRX/test/main/others/add-host.sh" && chmod +x add-host
 
 
 

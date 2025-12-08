@@ -32,7 +32,11 @@ vmess3="/usr/local/etc/xray/vmess-custom.json"
 
 # restart after delete config
 restart_xray() {
-systemctl restart xray@*
+systemctl restart xray@vmess-tls
+systemctl restart xray@vmess-none
+systemctl restart xray@vmess-custom
+#systemctl restart xray@*
+
 }
 
 clear

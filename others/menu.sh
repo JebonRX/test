@@ -236,7 +236,7 @@ echo -e "\e[${line}m════════════════════
 echo -e "  \e[${number}m(•1)\e[0m \e[${below}mXRAY VLESS${reset}     ${PINK}[${GREEN}${vless}${PINK}]  "
 echo -e "  \e[${number}m(•2)\e[0m \e[${below}mXRAY VMESS${reset}     ${PINK}[${GREEN}${vmess}${PINK}]"
 echo -e "  \e[${number}m(•3)\e[0m \e[${below}mSSH WEBSOCKET${reset}  ${PINK}[${GREEN}${sshws}${PINK}]"
-echo -e "  \e[${number}m(•4)\e[0m \e[${below}mSHADOWSOCKS${reset}    ${PINK}[${GREEN}${ss}${PINK}]"
+echo -e "  \e[${number}m(•4)\e[0m \e[${below}mSHADOWSOCKS${reset}    ${PINK}[${GREEN}0${ss}${PINK}]"
 
 # ============================
 # VPS MENU
@@ -276,7 +276,7 @@ case $menu in
     menu-ssh
     ;;
 4)
-    menu-ss
+    clear;echo "Coming soon!. . .";sleep 5;menu
     ;;
 5)
     system

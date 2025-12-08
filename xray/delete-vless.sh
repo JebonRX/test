@@ -34,7 +34,12 @@ vless5="/usr/local/etc/xray/httpupgrade-none.json"
 
 # restart after delete config
 restart_xray() {
-systemctl restart xray@*
+systemctl restart xray@vless-tls
+systemctl restart xray@vless-none
+systemctl restart xray@vless-custom
+systemctl restart xray@httpupgrade-tls
+systemctl restart xray@httpupgrade-none
+#systemctl restart xray@*
 }
 
 clear

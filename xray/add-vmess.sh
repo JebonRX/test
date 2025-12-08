@@ -157,11 +157,11 @@ vmesslink2="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-none.json)"
 vmesslink3="vmess://$(base64 -w 0 /usr/local/etc/xray/$user-custom.json)"
 
 # Restart Xray VMESS services
-#systemctl restart xray@vmess-tls
-#systemctl restart xray@vmess-none
-#systemctl restart xray@vmess-custom
-systemctl restart xray@*
-service cron restart
+systemctl restart xray@vmess-tls
+systemctl restart xray@vmess-none
+systemctl restart xray@vmess-custom
+#systemctl restart xray@*
+#service cron restart
 
 # Check if the folder exists
 if [ -d "$DIR" ]; then

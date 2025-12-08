@@ -22,7 +22,6 @@ sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/vless-none.json
 sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/vless-custom.json
 sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/httpupgrade-tls.json
 sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/httpupgrade-none.json
-systemctl restart xray@vless
 systemctl restart xray@vless-tls
 systemctl restart xray@vless-none
 systemctl restart xray@vless-custom
@@ -51,7 +50,6 @@ rm -f /usr/local/etc/xray/$user-custom.json
 systemctl restart xray@vmess-tls
 systemctl restart xray@vmess-none
 systemctl restart xray@vmess-custom
-systemctl restart xray@*
 fi
 done
 

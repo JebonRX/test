@@ -112,12 +112,12 @@ vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/hvless&security=tls&encry
 vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/hvless&encryption=none&host=${domain}&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
 
 # Restart Xray VLESS services
-#systemctl restart xray@vless-tls
-#systemctl restart xray@vless-none
-#systemctl restart xray@vless-custom
-#systemctl restart xray@httpupgrade-tls
-#systemctl restart xray@httpupgrade-none
-systemctl restart xray@*
+systemctl restart xray@vless-tls
+systemctl restart xray@vless-none
+systemctl restart xray@vless-custom
+systemctl restart xray@httpupgrade-tls
+systemctl restart xray@httpupgrade-none
+#systemctl restart xray@*
 
 # Check if the folder exists
 if [ -d "$DIR" ]; then
