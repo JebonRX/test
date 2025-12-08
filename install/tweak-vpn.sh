@@ -28,36 +28,6 @@ echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 sleep 1
 
 # -------------------------------
-# 2️⃣ SSH Optimizations
-# -------------------------------
-echo "[*] Tweaking SSH..."
-SSH_CONF="/etc/ssh/sshd_config"
-sed -i '/Port 22/a Port 500' $SSH_CONF
-sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' $SSH_CONF
-sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' $SSH_CONF
-echo "ClientAliveInterval 60" >> $SSH_CONF
-echo "ClientAliveCountMax 3" >> $SSH_CONF
-echo "MaxAuthTries 3" >> $SSH_CONF
-systemctl restart sshd
-
-# -------------------------------
-# 3️⃣ Firewall (iptables)
-# -------------------------------
-echo "[*] Configuring iptables..."
-iptables -F
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 500 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p tcp -m connlimit --connlimit-above 5 --connlimit-mask 32 -j REJECT
-iptables -A INPUT -j DROP
-
-# Save iptables
-apt install -y iptables-persistent
-netfilter-persistent save
-
-# -------------------------------
 # 4️⃣ Xray Optimizations
 # -------------------------------
 #echo "[*] Tweaking Xray configuration..."
@@ -78,3 +48,5 @@ netfilter-persistent save
 echo "==================================="
 echo "✅ VPS VPN & Xray tweak completed!"
 echo "==================================="
+rm -r tweak-vpn.sh
+sleep 1
