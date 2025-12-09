@@ -71,6 +71,7 @@ wget -O port-xray "https://raw.githubusercontent.com/JebonRX/test/main/others/po
 wget -O port-websocket "https://raw.githubusercontent.com/JebonRX/test/main/others/port-websocket.sh" && chmod +x port-websocket
 wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log.sh" && chmod +x clear-log
 wget -O restart "https://raw.githubusercontent.com/JebonRX/test/main/others/restart.sh" && chmod +x restart
+wget -O system "https://raw.githubusercontent.com/JebonRX/test/main/others/system.sh" && chmod +x system
 
 
 
