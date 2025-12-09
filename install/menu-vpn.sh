@@ -47,6 +47,7 @@ wget -O delete-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/dele
 wget -O renew-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/renew-ssh.sh" && chmod +x renew-ssh
 wget -O show-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/show-ssh.sh" && chmod +x show-ssh
 wget -O trial-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/trial-ssh.sh" && chmod +x trial-ssh
+wget -O member-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/member-ssh.sh" && chmod +x member-ssh
 
 sleep 1
 

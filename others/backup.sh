@@ -45,9 +45,9 @@ cp -r /etc/xray/config /root/backup/config >/dev/null 2>&1
 
 # compress for gdrive
 cd /root
-zip -r $IP-$date-$domain-SynXNet.zip backup > /dev/null 2>&1
-rclone copy /root/$IP-$date-$domain-SynXNet.zip dr:backup/
-url=$(rclone link dr:backup/$IP-$date-$domain-SynXNet.zip)
+zip -r $IP-$date-$domain-SkyNode.zip backup > /dev/null 2>&1
+rclone copy /root/$IP-$date-$domain-SkyNode.zip dr:backup/
+url=$(rclone link dr:backup/$IP-$date-$domain-SkyNode.zip)
 id=(`echo $url | grep '^https' | cut -d'=' -f2`)
 link="https://drive.google.com/u/4/uc?id=${id}&export=download"
 clear
@@ -62,5 +62,5 @@ echo -e "\033[1;37m$link\033[0m"
 echo ""
 echo "If you want to restore data, please enter the link above"
 rm -rf /root/backup
-rm -r /root/$IP-$date-$domain-SynXNet.zip
+rm -r /root/$IP-$date-$domain-SkyNode.zip
 echo ""

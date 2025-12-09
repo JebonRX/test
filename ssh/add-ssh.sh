@@ -26,8 +26,8 @@ domain=$IP
 fi
 
 export ssl="$(cat ~/log-install.txt | grep -w "Stunnel4" | cut -d: -f2)"
-export wsdropbear="$(cat ~/log-install.txt | grep -w "Websocket SSH(HTTP)" | cut -d: -f2|sed 's/ //g')"
-export wsstunnel="$(cat ~/log-install.txt | grep -w "Websocket SSL(HTTPS)" | cut -d: -f2|sed 's/ //g')"
+export wsdropbear="$(cat ~/log-install.txt | grep -w "Websocket HTTP" | cut -d: -f2|sed 's/ //g')"
+export wsstunnel="$(cat ~/log-install.txt | grep -w "Websocket HTTPS" | cut -d: -f2|sed 's/ //g')"
 nsdomain1=$(cat /root/nsdomain)
 pubkey1=$(cat /etc/slowdns/server.pub)
 
@@ -47,12 +47,12 @@ useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 export exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 export exp1=`date -d "$masaaktif days" +"%Y-%m-%d"`
 
-cat > /home/vps/public_html/ssh-$Login.txt <<-END
+cat >  /etc/xray/config/ssh-$Login.txt <<-END
 ====================================================================
 P R O J E C T  O F  N E V E R M O R E S S H
 [Freedom Internet]
 ====================================================================
-https://github.com/NevermoreSSH/SynXNet
+https://github.com/NevermoreSSH/SkyNode
 ====================================================================
 Format SSH Websocket Account
 ====================================================================
