@@ -76,4 +76,7 @@ systemctl enable ws-http
 systemctl restart ws-http
 
 # delete any setup
+rm -r websocket.sh
+echo "✅ SSH Websocket installed and running!"
+sleep 1
 
