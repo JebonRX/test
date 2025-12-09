@@ -26,6 +26,7 @@ wget -O delete-vmess "https://${Server_URL}/delete-vmess.sh" && chmod +x delete-
 wget -O renew-vmess "https://${Server_URL}/renew-vmess.sh" && chmod +x renew-vmess
 wget -O show-vmess "https://${Server_URL}/show-vmess.sh" && chmod +x show-vmess
 wget -O trial-vmess "https://${Server_URL}/trial-vmess.sh" && chmod +x trial-vmess
+wget -O xp-xrayssh "https://${Server_URL}/xp-xrayssh.sh" && chmod +x xp-xrayssh
 
 # XRAY VLESS FILES
 echo -e "[ ${green}INFO${NC} ] Downloading Vless WS Files"
@@ -53,8 +54,10 @@ sleep 1
 
 # Tweak files
 sleep 1
+wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-tweak.sh" && chmod +x menu-tweak
 wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
+wget -O xraychanger "https://raw.githubusercontent.com/JebonRX/test/main/tweak/xraychanger.sh" && chmod +x xraychanger
 
 
 # System files
@@ -63,6 +66,12 @@ wget -O menu "https://raw.githubusercontent.com/JebonRX/test/main/others/menu.sh
 wget -O netf "https://raw.githubusercontent.com/JebonRX/test/main/others/netf.sh" && chmod +x netf
 wget -O dns "https://raw.githubusercontent.com/JebonRX/test/main/others/dns.sh" && chmod +x dns
 wget -O add-host "https://raw.githubusercontent.com/JebonRX/test/main/others/add-host.sh" && chmod +x add-host
+wget -O running "https://raw.githubusercontent.com/JebonRX/test/main/others/running.sh" && chmod +x running
+wget -O port-xray "https://raw.githubusercontent.com/JebonRX/test/main/others/port-xray.sh" && chmod +x port-xray
+wget -O port-websocket "https://raw.githubusercontent.com/JebonRX/test/main/others/port-websocket.sh" && chmod +x port-websocket
+wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log.sh" && chmod +x clear-log
+wget -O restart "https://raw.githubusercontent.com/JebonRX/test/main/others/restart.sh" && chmod +x restart
+
 
 
 
