@@ -23,7 +23,7 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
 
 # Ambil port dari log-install.txt

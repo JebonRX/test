@@ -22,9 +22,9 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
-echo " "
+echo -e "\e[${below}m"
 
 if [ -e "/var/log/auth.log" ]; then
         LOG="/var/log/auth.log";

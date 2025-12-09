@@ -121,7 +121,7 @@ fi
 # ───────────────────────────────
 # UPDATE FILE CONFIG JIKA ADA
 # ───────────────────────────────
-CONFIG_FILE="/etc/xray/config/ssh-$User.txt"
+CONFIG_FILE="/etc/logcon/config/ssh-$User.txt"
 if [[ -f "$CONFIG_FILE" ]]; then
     # update line Expired sesuai format: "Expired          : YYYY-MM-DD"
     if grep -q "^Expired" "$CONFIG_FILE"; then

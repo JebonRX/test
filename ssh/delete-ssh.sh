@@ -18,7 +18,7 @@ reset="\e[0m"
 
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
 echo -e "\e[32mloading...\e[0m"
 clear
@@ -68,7 +68,7 @@ if id "$Pengguna" &>/dev/null; then
     echo "User $Pengguna removed."
 
     # DELETE FILE CONFIG
-    filepath="/etc/xray/config/ssh-$Pengguna.txt"
+    filepath="/etc/logcon/config/ssh-$Pengguna.txt"
     if [ -f "$filepath" ]; then
         rm -f "$filepath"
         echo "File expired $Pengguna deleted."

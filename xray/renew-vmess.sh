@@ -22,7 +22,7 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
 
 # list config location
@@ -88,4 +88,4 @@ echo " Expired On  : $exp4"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
-exec menu-vmess
+menu-vmess

@@ -22,19 +22,19 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m-----------------------------------------------${reset}\e[${below}m"
 echo -e "        SHOW SSH WEBSOCKET CONFIG"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
-echo ""
+echo -e "\e[${line}m-----------------------------------------------${reset}"
+echo -e "\e[${below}m"
 
 declare -A users
 count=1
 
 # Ambil user bukan sistem (UID >= 1000)
 for user in $(awk -F: '$3>=1000 && $1!="nobody"{print $1}' /etc/passwd); do
-    config_file="/etc/xray/config/ssh-$user.txt"
+    CONFIG_FILE="/etc/logcon/config/ssh-$user.txt"
     
     if [[ -f "$config_file" ]]; then
         printf " %2s) %-20s\n" "$count" "$user"
@@ -49,13 +49,13 @@ if [ ${#users[@]} -eq 0 ]; then
 fi
 
 echo ""
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m-----------------------------------------------${reset}\e[${below}m"
 
-# ───────────────────────────────────────────────
+# -----------------------------------------------
 #  PILIH USER BERDASARKAN NOMBOR
-# ───────────────────────────────────────────────
+# -----------------------------------------------
 while true; do
-    read -p " Pilih nombor user untuk tunjuk config : " user_no
+    read -p " Select the user number to show the config : " user_no
     if [[ -n "${users[$user_no]}" ]]; then
         User="${users[$user_no]}"
         break
@@ -64,22 +64,22 @@ while true; do
     fi
 done
 
-# ───────────────────────────────────────────────
+# -----------------------------------------------
 # TUNJUK ISI CONFIG
-# ───────────────────────────────────────────────
+# -----------------------------------------------
 clear
-config_file="/etc/xray/config/ssh-$User.txt"
+CONFIG_FILE="/etc/logcon/config/ssh-$User.txt"
 
 echo ""
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m-----------------------------------------------${reset}\e[${below}m"
 echo -e " Config SSH WEBSOCKET untuk user: $User"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m-----------------------------------------------${reset}\e[${below}m"
 echo ""
 
 cat "$config_file"
 
 echo ""
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m-----------------------------------------------${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu SSH"
 exec menu-ssh

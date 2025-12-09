@@ -23,7 +23,7 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
 
 # Ambil port dari log-install.txt
@@ -129,7 +129,7 @@ else
     echo "Folder $DIR has been created successfully."
 fi
 
-cat > /etc/xray/config/vless-$user-$exp.txt <<-END
+cat > /etc/logcon/config/vless-$user-$exp.txt <<-END
 
 =============================================
 P R O J E C T  O F  N E V E R M O R E S S H

@@ -22,7 +22,7 @@ reset="\e[0m"
 # Public IP
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/xray/config"
+DIR="/etc/logcon/config"
 clear
 P='\e[0;35m'
 B='\033[0;36m'
@@ -33,19 +33,18 @@ echo -e "  ${title}[ MENU SSH WEBSOCKET ]${reset}"
 echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
 echo ""
 echo ""
-echo -e " [\033[1;36m•1\033[0m]  Add SSH WEBSOCKET Account"
-echo -e " [\033[1;36m•2\033[0m]  Delete SSH WEBSOCKET Account"
-echo -e " [\033[1;36m•3\033[0m]  Renew SSH WEBSOCKET Account"
-echo -e " [\033[1;36m•4\033[0m]  Show SSH WEBSOCKET Config"
-echo -e " [\033[1;36m•5\033[0m]  Check User Login SSH WEBSOCKET"
-echo -e " [\033[1;36m•6\033[0m]  Check List Member SSH WEBSOCKET"
+echo -e " [\033[1;36m•1\033[0m]  \e[${below}mAdd SSH WEBSOCKET Account ${reset}"
+echo -e " [\033[1;36m•2\033[0m]  \e[${below}mDelete SSH WEBSOCKET Account ${reset}"
+echo -e " [\033[1;36m•3\033[0m]  \e[${below}mRenew SSH WEBSOCKET Account ${reset}"
+echo -e " [\033[1;36m•4\033[0m]  \e[${below}mShow SSH WEBSOCKET Config ${reset}"
+echo -e " [\033[1;36m•5\033[0m]  \e[${below}mCheck User Login SSH WEBSOCKET ${reset}"
+echo -e " [\033[1;36m•6\033[0m]  \e[${below}mCheck List Member SSH WEBSOCKET ${reset}"
 echo ""
-echo ""
-echo -e " [\033[1;36m•0\033[0m]  Back To Main Menu"
+echo -e " [\033[1;36m•0\033[0m]  \e[${below}mBack To Main Menu"
 echo ""
 echo -e " \033[1;37mPress [ Ctrl+C ] • To-Exit-Script\033[0m"
 echo ""
-
+echo -e "\e[${below}m"
 read -p " Select menu : " opt
 echo -e ""
 case $opt in

@@ -6,14 +6,20 @@
 # =========================================
 #!/bin/bash
 
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
 # ============================
-# WARNA
+# COLOR THEME PREMIUM
 # ============================
-line="38;5;208"           # Oren terang untuk border
-GREEN="\e[92m"            # Hijau untuk UNLOCKED
-RED="\e[91m"              # Merah untuk LOCKED
-PINK="\e[38;5;205m"       # Pink terang
-reset="\e[0m"             # Reset warna
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
 
 # ============================
 # INFO
@@ -29,9 +35,9 @@ clear
 # ────────────────────────────────
 # HEADER TABLE
 # ────────────────────────────────
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}\e[${below}m"
 printf "%-17s %-17s %-10s\n" "USERNAME" "EXP DATE" "STATUS"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}\e[${below}m"
 
 # ────────────────────────────────
 # LOOP USER
@@ -45,9 +51,9 @@ while read user_entry; do
     # Hanya user normal (UID >= 1000)
     if [[ $ID -ge 1000 ]]; then
         if [[ "$status" == "L" ]]; then
-            STAT="${RED}LOCKED${reset}"
+            STAT="LOCKED"
         else
-            STAT="${GREEN}UNLOCKED${reset}"
+            STAT="UNLOCKED"
         fi
 
         # Cetak table
@@ -59,9 +65,9 @@ done < /etc/passwd
 # TOTAL USER
 # ────────────────────────────────
 JUMLAH=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}\e[${below}m"
 echo "Account number: $JUMLAH user"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu SSH"
 exec menu-ssh
