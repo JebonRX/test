@@ -28,13 +28,23 @@ IP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me);
 DIR="/etc/xray/config"
 clear
 
+# start make config ssh ws
 clear
 echo ""
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ CREATE USER • SSH WEBSOCKET ]${reset}"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo ""
+echo -e "\e[${below}m"
 read -p "   Username : " Login
+
+# Periksa sama ada username sudah wujud
+if id "$Login" &>/dev/null; then
+    echo "❌ Username '$Login' already exists. Sila pilih nama lain."
+    echo ""
+    read -n 1 -s -r -p "Press any key to back on menu SSH"
+    exec menu-ssh  # Panggil skrip atau fungsi menu SSH
+    exit 0
+fi
 read -p "   Password : " Pass
 read -p "   Expired (days): " masaaktif
 
@@ -71,16 +81,12 @@ fi
 
 cat >  /etc/xray/config/ssh-$Login.txt <<-END
 ====================================================================
-P R O J E C T  O F  N E V E R M O R E S S H
-[Freedom Internet]
+P R O J E C T   O F   N E V E R M O R E S S H
+[ Freedom Internet ]
 ====================================================================
 https://github.com/NevermoreSSH/SkyNode
 ====================================================================
-Format SSH Websocket Account
-====================================================================
-
-====================================================================
-Premium Account SSH & OpenVPN
+Premium Account SSH Websocket
 ====================================================================
 Username         : $Login
 Password         : $Pass
@@ -119,13 +125,13 @@ clear
 echo -e ""
 # OUTPUT
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo -e "  \e[${line}m[ PREMIUM SERVER SSH WEBSOCKET ]\e[${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ PREMIUM SERVER SSH WEBSOCKET ]\e[${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "Username         : $Login"
 echo -e "Password         : $Pass"
 echo -e "Created          : $harini"
 echo -e "Expired          : $exp1"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "Domain           : $domain"
 #echo -e "Name Server(NS)  : $nsdomain1"
 #echo -e "Pubkey           : $pubkey1"
@@ -138,7 +144,7 @@ echo -e "SSL/TLS          :$ssl"
 echo -e "WS SSH(HTTP)     : $wsdropbear"
 echo -e "WS SSL(HTTPS)    : $wsstunnel"
 echo -e "Badvpn(UDPGW)    : 7100-7300"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "CONFIG SSH WS"
 echo "---------------"
 #echo -e "SSH Config  : http://${domain}:81/ssh-$Login.txt"
@@ -146,12 +152,12 @@ echo -e "SSH 22      : $(cat /usr/local/etc/xray/domain):22@$Login:$Pass"
 echo -e "SSH 80      : $(cat /usr/local/etc/xray/domain):80@$Login:$Pass"
 echo -e "SSH 443     : $(cat /usr/local/etc/xray/domain):443@$Login:$Pass"
 #echo -e "UDP-CUSTOM  : $(cat /usr/local/etc/xray/domain):1-65535@$Login:$Pass"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 #echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "PAYLOAD WS       : GET / HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "PAYLOAD WSS      : GET wss://$sni/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf]Connection: Keep-Alive[crlf][crlf]"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu SSH"
 exec menu-ssh

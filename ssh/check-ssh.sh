@@ -1,34 +1,28 @@
-#wget https://github.com/${GitUser}/
-GitUser="NevermoreSSH"
-#IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -s ipinfo.io/ip )
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -sS ifconfig.me )
-echo -e "\e[32mloading...\e[0m"
-clear
-# Valid Script
-VALIDITY () {
-    today=`date -d "0 days" +"%Y-%m-%d"`
-    Exp1=$(curl https://raw.githubusercontent.com/${GitUser}/allow/main/ipvps.conf | grep $MYIP | awk '{print $4}')
-    if [[ $today < $Exp1 ]]; then
-    echo -e "\e[32mYOUR SCRIPT ACTIVE..\e[0m"
-    else
-    echo -e "\e[31mYOUR SCRIPT HAS EXPIRED!\e[0m";
-    echo -e "\e[31mPlease renew your ipvps first\e[0m"
-    exit 0
-fi
-}
-IZIN=$(curl https://raw.githubusercontent.com/${GitUser}/allow/main/ipvps.conf | awk '{print $5}' | grep $MYIP)
-if [ $MYIP = $IZIN ]; then
-echo -e "\e[32mPermission Accepted...\e[0m"
-VALIDITY
-else
-echo -e "\e[31mPermission Denied!\e[0m";
-echo -e "\e[31mPlease buy script first\e[0m"
-exit 0
-fi
-echo -e "\e[32mloading...\e[0m"
+#!/bin/bash
+# =========================================
+# Quick Menu | Check User Login SSH Config
+# Date: 2025-11-29
+# Author : NevermoreSSH
+# =========================================
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
+
+# Public IP
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+domain=$(cat /usr/local/etc/xray/domain)
+DIR="/etc/xray/config"
 clear
 echo " "
 
@@ -71,23 +65,7 @@ do
                 echo "$PID - $USER - $IP";
         fi
 done
-if [ -f "/etc/openvpn/server/openvpn-tcp.log" ]; then
-        echo " "
-        echo "----=[ OpenVPN TCP User Login ]=----";
-        echo "Username  |  IP Address  |  Connected Since";
-        echo "------------------------------------";
-        cat /etc/openvpn/server/openvpn-tcp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/      /g' > /tmp/vpn-login-tcp.txt
-        cat /tmp/vpn-login-tcp.txt
-fi
 echo "------------------------------------"
-
-if [ -f "/etc/openvpn/server/openvpn-udp.log" ]; then
-        echo " "
-        echo "----=[ OpenVPN UDP User Login ]=----";
-        echo "Username  |  IP Address  |  Connected Since";
-        echo "------------------------------------";
-        cat /etc/openvpn/server/openvpn-udp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/      /g' > /tmp/vpn-login-udp.txt
-        cat /tmp/vpn-login-udp.txt
-fi
-echo "------------------------------------"
-echo "";
+echo ""
+read -n 1 -s -r -p "Press any key to back on menu SSH"
+exec menu-ssh
