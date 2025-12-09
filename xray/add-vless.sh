@@ -32,7 +32,6 @@ none="$(grep -w "VLESS WebSocket + NTLS" ~/log-install.txt | cut -d: -f2 | sed '
 none2="$(grep -w "VLESS WS + NTLS(Multipath)" ~/log-install.txt | cut -d: -f2 | sed 's/ //g')"
 patch="/vless"
 
-
 # Input username
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ CREATE USER • XRAY VLESS WS / HTTPUPGRADE ]${reset}"
@@ -99,6 +98,7 @@ harini=$(date +"%Y-%m-%d")
 sed -i '/#vless-ws-tls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vless-tls.json
 sed -i '/#vless-ws-ntls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vless-none.json
 sed -i '/#vless-ws-custom$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/vless-custom.json
+
 # create vless httpupgrade
 sed -i '/#vless-httpupgrade-tls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/httpupgrade-tls.json
 sed -i '/#vless-httpupgrade-ntls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": "'$uuid'","email": "'$user'"' /usr/local/etc/xray/httpupgrade-none.json
@@ -107,6 +107,7 @@ sed -i '/#vless-httpupgrade-ntls$/a\#vls '"$user $exp $harini $uuid"'\n},{"id": 
 vlesslink1="vless://${uuid}@${sts}${domain}:$tls?path=/vless&security=tls&encryption=none&host=${domain}&type=ws&sni=${domain}#VLESS_TLS_${user}_${exp}"
 vlesslink2="vless://${uuid}@${sts}${domain}:$none?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_${user}_${exp}"
 vlesslink3="vless://${uuid}@${sts}${domain}:$none2?path=/vless&encryption=none&host=${domain}&type=ws#VLESS_NTLS_CUSTOM_${user}_${exp}"
+
 # Generate link httpupgrade
 vlesslink4="vless://${uuid}@${sts}${domain}:$tls?path=/hvless&security=tls&encryption=none&host=${domain}&type=httpupgrade&sni=$sni#VLESS_HTTPUPGRADE_TLS_${user}_${exp}"
 vlesslink5="vless://${uuid}@${sts}${domain}:$none?path=/hvless&encryption=none&host=${domain}&type=httpupgrade#VLESS_HTTPUPGRADE_NTLS_${user}_${exp}"
@@ -130,14 +131,14 @@ fi
 
 cat > /etc/xray/config/vless-$user-$exp.txt <<-END
 
-====================================================================
+=============================================
 P R O J E C T  O F  N E V E R M O R E S S H
-[Freedom Internet]
-====================================================================
+[ Freedom Internet ]
+=============================================
 https://github.com/NevermoreSSH/SkyNode
-====================================================================
+=============================================
 Premium XRAY VLESS config
-====================================================================
+=============================================
 Remarks          : ${user}
 Domain           : ${domain}
 IP/Host          : $MYIP
@@ -149,19 +150,20 @@ Network          : WebSocket / HTTPUpgrade
 Path WS          : /vless
 Path httpupgrade : /hvless
 AllowInsecure    : True
-====================================================================
-Link WS TLS : `$vlesslink1`
-====================================================================
-Link WS NTLS : `$vlesslink2`
-====================================================================
-Link WS NTLS Multipath: `$vlesslink3`
-====================================================================
-Link HTTPUPGRADE TLS : `$vlesslink4`
-====================================================================
-Link HTTPUPGRADE NTLS : `$vlesslink5`
-====================================================================
-Expired On : $harini - $exp
-====================================================================
+==============================================
+Link WS TLS : ${vlesslink1}
+==============================================
+Link WS NTLS : ${vlesslink2}
+==============================================
+Link WS NTLS Multipath: ${vlesslink3}
+==============================================
+Link HTTPUPGRADE TLS : ${vlesslink4}
+==============================================
+Link HTTPUPGRADE NTLS : ${vlesslink5}
+==============================================
+Created : $harini
+Expired : $exp
+==============================================
 
 END
 
@@ -188,7 +190,7 @@ echo -e "WS TLS           : ${vlesslink1}"
 echo ""
 echo -e "WS NTLS          : ${vlesslink2}"
 echo ""
-echo -e "Multipath NTLS   : ${vlesslink3}"
+echo -e "WS NTLS Multipath: ${vlesslink3}"
 echo ""
 echo -e "Httpupgrade TLS  : ${vlesslink4}"
 echo ""
