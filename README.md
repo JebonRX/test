@@ -13,4 +13,7 @@ apt install -y screen wget curl && wget https://raw.githubusercontent.com/JebonR
 
 ♦️ XRAY VLESS HTTPUGRADE 443 / 80
 
+♦️ XRAY SHADOWSOCKS WEBSOCKET 443 / 80
+
 ♦️ SSH WEBSOCKET 443 / 80
+
