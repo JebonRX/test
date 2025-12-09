@@ -54,4 +54,4 @@ service cron restart
 # back to settings
 sleep 5
 system
-clear
+sleep 1

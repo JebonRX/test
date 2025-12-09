@@ -45,13 +45,37 @@ echo ""
 read -p " Select menu : " opt
 echo -e ""
 case $opt in
-1) clear ; add-vless ;;
-2) clear ; delete-vless ;;
-3) clear ; renew-vless ;;
-4) clear ; show-vless ;;
-5) clear ; check-vless ;;
-0) clear ; menu ;;
-x) clear ; menu ;;
-#x) exit ;;
-*) echo "Wrong Button" ; sleep 1 ; menu-vless ;;
+1) 
+    clear
+    exec add-vless
+    ;;
+2) 
+    clear
+    exec delete-vless
+    ;;
+3) 
+    clear
+    exec renew-vless
+    ;;
+4) 
+    clear
+    exec show-vless
+    ;;
+5) 
+    clear
+    exec check-vless
+    ;;
+0) 
+    clear
+    exec menu
+    ;;
+x) 
+    clear
+    exec menu
+    ;;
+*) 
+    echo "Wrong Button"
+    sleep 1
+    exec menu-vless
+    ;;
 esac

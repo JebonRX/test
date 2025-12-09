@@ -50,4 +50,4 @@ done
 
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu xray"
-menu-vless
+exec menu-vless

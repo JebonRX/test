@@ -81,4 +81,4 @@ echo " Expired On  : $exp"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
-menu-vmess
+exec menu-vmess

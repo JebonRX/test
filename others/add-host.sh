@@ -7,10 +7,10 @@
 # (C) Copyright 2025
 # =========================================
 # // CODE WARNA
-export RED='\e[1;31m'
-export GREEN='\e[0;32m'
-export BLUE='\e[0;34m'
-export NC='\e[0m'
+RED='\e[1;31m'
+GREEN='\e[0;32m'
+BLUE='\e[0;34m'
+NC='\e[0m'
 
 #wget https://github.com/${GitUser}/
 GitUser="NevermoreSSH"
@@ -21,8 +21,8 @@ clear
 
 # // GMAIL && DOMAIN
 clear
-export default_email=$( curl -sS https://raw.githubusercontent.com/${GitUser}/email/main/default.conf )
-export emailcf=$(cat /usr/local/etc/xray/email)
+default_email=$( curl -sS https://raw.githubusercontent.com/${GitUser}/email/main/default.conf )
+emailcf=$(cat /usr/local/etc/xray/email)
 
 clear
 echo ""
@@ -36,8 +36,8 @@ read -rp "Domain/Host: " -e host
 echo "IP=$host" >> /var/lib/premium-script/ipvps.conf
 echo "$host" > /usr/local/etc/xray/domain
 
-export dom=$(cat /etc/xray/domain)
-export domain=$(cat /usr/local/etc/xray/domain)
+dom=$(cat /etc/xray/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 
 sed -i "s/sshws.${dom}/sshws.${domain}/g" /usr/local/etc/xray/config.json;
 rm -f /etc/xray/domain;

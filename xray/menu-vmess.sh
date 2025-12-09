@@ -48,13 +48,37 @@ echo ""
 read -p " Select menu : " opt
 echo -e ""
 case $opt in
-1) clear ; add-vmess ;;
-2) clear ; delete-vmess ;;
-3) clear ; renew-vmess ;;
-4) clear ; show-vmess ;;
-5) clear ; check-vmess ;;
-0) clear ; menu ;;
-x) clear ; menu ;;
-#x) exit ;;
-*) echo "Wrong Button" ; sleep 1 ; menu-vmess ;;
+1) 
+    clear
+    exec add-vmess
+    ;;
+2) 
+    clear
+    exec delete-vmess
+    ;;
+3) 
+    clear
+    exec renew-vmess
+    ;;
+4) 
+    clear
+    exec show-vmess
+    ;;
+5) 
+    clear
+    exec check-vmess
+    ;;
+0) 
+    clear
+    exec menu
+    ;;
+x) 
+    clear
+    exec menu
+    ;;
+*) 
+    echo "Wrong Button"
+    sleep 1
+    exec menu-vmess
+    ;;
 esac

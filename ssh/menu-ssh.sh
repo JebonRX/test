@@ -49,14 +49,45 @@ echo ""
 read -p " Select menu : " opt
 echo -e ""
 case $opt in
-1) clear ; add-ssh ;;
-2) clear ; delete-ssh ;;
-3) clear ; renew-ssh ;;
-4) clear ; show-ssh ;;
-5) clear ; check-ssh ;;
-6) clear ; member-ssh ;;
-0) clear ; menu ;;
-x) clear ; menu ;;
-#x) exit ;;
-*) echo "Wrong Button" ; sleep 1 ; menu-ssh ;;
+1)
+    clear
+    exec add-ssh
+    ;;
+2)
+    clear
+    exec delete-ssh
+    ;;
+3)
+    clear
+    exec renew-ssh
+    ;;
+4)
+    clear
+    exec show-ssh
+    ;;
+5)
+    clear
+    exec check-ssh
+    ;;
+6)
+    clear
+    exec member-ssh
+    ;;
+0)
+    clear
+    exec menu
+    ;;
+x)
+    clear
+    exec menu
+    ;;
+#x)
+#    exit
+#    ;;
+*)
+    echo "Wrong Button"
+    sleep 1
+    exec menu-ssh
+    ;;
 esac
+sleep 1

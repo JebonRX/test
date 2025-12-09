@@ -162,3 +162,4 @@ esac
 }
 
 swapram
+sleep 1

@@ -336,4 +336,5 @@ echo -e ""
 #echo -e "${green}JIKA TERDAPAT NOT RUNNING, PLEASE REPORT TO ADMIN FOR FIX$NC"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
-menu
+exec menu
+sleep 1

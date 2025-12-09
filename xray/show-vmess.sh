@@ -149,4 +149,4 @@ echo -e "Expired   : $exp"
 echo ""
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu xray"
-menu-vmess
+exec menu-vmess

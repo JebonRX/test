@@ -106,4 +106,4 @@ echo -e " Delete Exp User Xray Success"
 echo 
 echo -e " Back To Menu In 2 Sec"
 sleep 2
-menu
+exec menu

@@ -57,4 +57,5 @@ echo -e "\e[0;32m         ALL Services Restarted        \e[0m"
 echo -e "\e[0;32m======================================\e[0m"
 echo ""
 echo -e "   \e[1;32m Back to Menu In 5 seconds\e[0m"
-sleep 5;menu
+sleep 5
+exec menu

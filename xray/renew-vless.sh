@@ -94,4 +94,4 @@ echo " Expired On  : $exp4"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu VLESS"
-menu-vless
+exec menu-vless

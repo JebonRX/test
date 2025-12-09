@@ -267,56 +267,58 @@ read -p " Select menu :  " menu
 echo -e ""
 case $menu in
 1)
-    menu-vless
+    exec menu-vless
     ;;
 2)
-    menu-vmess
+    exec menu-vmess
     ;;
 3)
-    menu-ssh
+    exec menu-ssh
     ;;
 4)
-    clear;echo "Coming soon!. . .";sleep 5;menu
+    exec menu
     ;;
 5)
-    system
+    exec system
     ;;
 6)
-    running
+    exec running
     ;;
 7)
-    change-port
+    exec change-port
     ;;
 8)
-    dns
+    exec dns
     ;;
 9)
-    speedtest
+    exec speedtest
     ;;
 10)
     cat log-install.txt
+    read -n 1 -s -r -p "Press any key to back on menu"
+    exec menu
     ;;
 11)
-    delete && xp
+    exec bash -c 'delete && xp; exec menu'
     ;;
 12)
-    menu-tweak
+    exec menu-tweak
     ;;
 13)
-    netf
+    exec netf
     ;;
 14)
-    restart
+    exec restart
     ;;
 x)
     clear
-    exit
     echo -e "\e[1;31mPlease Type menu For More Service, Thank You\e[0m"
+    exit
     ;;
 *)
     clear
     echo -e "\e[1;31mPlease enter an correct number\e[0m"
     sleep 1
-    menu
+    exec menu
     ;;
 esac

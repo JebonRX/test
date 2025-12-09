@@ -198,4 +198,4 @@ echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
-menu-vless
+exec menu-vless
