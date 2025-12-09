@@ -15,6 +15,7 @@ clear
 
 # public ip
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+IP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 date=$(date +"%Y-%m-%d-%H:%M:%S")
 domain=$(cat /usr/local/etc/xray/domain)
 clear

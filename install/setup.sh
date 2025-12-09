@@ -249,7 +249,6 @@ printf '\033[1;32m╰───────────────────�
 sleep 1
 wget https://raw.githubusercontent.com/JebonRX/test/main/install/xray-vpn.sh && chmod +x xray-vpn.sh && screen -S xray-vpn ./xray-vpn.sh
 sleep 1
-#wget https://raw.githubusercontent.com/JebonRX/test/main/install/singbox-vpn.sh && chmod +x singbox-vpn.sh && screen -S singbox-vpn ./singbox-vpn.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ✅  \033[1;37mDone installing Xray Server\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
@@ -316,9 +315,9 @@ apt -y install nginx
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JebonRX/test/main/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/nginx.conf"
 mkdir -p /home/vps/public_html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JebonRX/test/main/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/vps.conf"
 /etc/init.d/nginx restart
 
 # Version
