@@ -41,6 +41,7 @@ wget -O trial-vless "https://${Server_URL}/trial-vless.sh" && chmod +x trial-vle
 
 # SSH Websocket files
 echo -e "[ ${green}INFO${NC} ] Downloading SSH WS Files"
+sleep 1
 wget -O menu-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-ssh.sh" && chmod +x menu-ssh
 wget -O add-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/add-ssh.sh" && chmod +x add-ssh
 wget -O check-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/check-ssh.sh" && chmod +x check-ssh
@@ -50,8 +51,6 @@ wget -O show-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/show-s
 wget -O trial-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/trial-ssh.sh" && chmod +x trial-ssh
 wget -O member-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/member-ssh.sh" && chmod +x member-ssh
 
-sleep 1
-
 # Tweak files
 sleep 1
 wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-tweak.sh" && chmod +x menu-tweak
@@ -59,7 +58,6 @@ wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" &
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
 wget -O xraychanger "https://raw.githubusercontent.com/JebonRX/test/main/tweak/xraychanger.sh" && chmod +x xraychanger
 wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/other/change-dropbear.sh" && chmod +x change-dropbear
-
 
 # System files
 sleep 1
@@ -73,12 +71,6 @@ wget -O port-websocket "https://raw.githubusercontent.com/JebonRX/test/main/othe
 wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log.sh" && chmod +x clear-log
 wget -O restart "https://raw.githubusercontent.com/JebonRX/test/main/others/restart.sh" && chmod +x restart
 wget -O system "https://raw.githubusercontent.com/JebonRX/test/main/others/system.sh" && chmod +x system
-
-
-
-
-
-
 
 # end
 cd
