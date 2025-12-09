@@ -59,10 +59,10 @@ EOF
 # ================================
 # DOWNLOAD PYTHON FILES
 # ================================
-wget -q -O /usr/local/bin/ws-https https://raw.githubusercontent.com/JebonRX/sapphire/main/ssh/ws-https
+wget -q -O /usr/local/bin/ws-https https://raw.githubusercontent.com/JebonRX/test/main/ssh/ws-https
 chmod +x /usr/local/bin/ws-https
 
-wget -q -O /usr/local/bin/ws-http https://raw.githubusercontent.com/JebonRX/sapphire/main/ssh/ws-http
+wget -q -O /usr/local/bin/ws-http https://raw.githubusercontent.com/JebonRX/test/main/ssh/ws-http
 chmod +x /usr/local/bin/ws-http
 
 

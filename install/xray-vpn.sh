@@ -897,7 +897,7 @@ cat> /usr/local/etc/xray/none.json << END
         "decryption": "none",
         "fallbacks": [
           {
-            "dest": 2092, # ssh wss
+            "dest": 2092, # ssh ws
             "xver": 1
           },
           {
