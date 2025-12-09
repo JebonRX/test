@@ -90,4 +90,3 @@ x)
     exec menu-ssh
     ;;
 esac
-sleep 1

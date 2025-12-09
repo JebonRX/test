@@ -233,7 +233,10 @@ clear
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ⚙️  \033[1;37mInstalling SSH Server...\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
+# install ssh
 wget https://raw.githubusercontent.com/JebonRX/test/main/install/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
+# install websocket
+wget https://raw.githubusercontent.com/JebonRX/test/main/ssh/websocket.sh && chmod +x websocket.sh && screen -S websocket ./websocket.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ✅  \033[1;37mDone installing SSH Server\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'

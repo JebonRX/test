@@ -130,4 +130,3 @@ echo -e "\e[$line═════════════════════
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu SSH"
 exec menu-ssh
-sleep 1
