@@ -58,6 +58,7 @@ wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu
 wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
 wget -O xraychanger "https://raw.githubusercontent.com/JebonRX/test/main/tweak/xraychanger.sh" && chmod +x xraychanger
+wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/other/change-dropbear.sh" && chmod +x change-dropbear
 
 
 # System files
