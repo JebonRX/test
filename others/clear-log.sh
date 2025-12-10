@@ -6,7 +6,7 @@
 # (C) Copyright 2025 - 2026
 # =========================================
 # public ip
-MYIP=$(curl -sS ipv4.icanhazip.com)
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 echo -e "\e[32mloading...\e[0m"
 clear
 data=(`find /var/log/ -name *.log`);
@@ -31,4 +31,7 @@ echo > /var/log/syslog
 echo > /var/log/btmp
 echo > /var/log/messages
 echo > /var/log/debug
-echo -e "Script By NevermoreSSH"
+echo -e "Done Clear-log XRAYS"
+echo -e ""
+read -n 1 -s -r -p "Press any key to back on menu XRAY"
+exec menu-vless

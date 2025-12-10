@@ -5,15 +5,29 @@
 # Auther  : NevermoreSSH
 # (C) Copyright 2022
 # =========================================
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
 P='\e[0;35m'
 B='\033[0;36m'
 G='\033[0;32m'
 NC='\e[0m'
 N='\e[0m'
 clear
-echo -e "\e[36m╒════════════════════════════════════════════╕\033[0m"
-echo -e " \E[0;47;30m                 DNS CHANGER                \E[0m"
-echo -e "\e[36m╘════════════════════════════════════════════╛\033[0m
+echo -e "\e[${line}m══════════════════════════════════${reset}"
+echo -e "  \e[${title}[ CUSTOM DNS CHANGER ]${reset}"
+echo -e "\e[${line}m══════════════════════════════════${reset}
 \033[1;37mDNS Changer By NevermoreSSH\033[0m
 \033[1;37mTelegram : https://t.me/todfix667 \033[0m"
 dnsfile="/root/dns"
