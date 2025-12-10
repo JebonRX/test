@@ -1,65 +1,48 @@
-#wget https://github.com/${GitUser}/
-GitUser="NevermoreSSH"
-#IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -s ipinfo.io/ip )
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -sS ifconfig.me )
-echo -e "\e[32mloading...\e[0m"
-
-clear
-# LINE COLOUR
-line=$(cat /etc/line)
-# TEXT COLOUR BELOW
-below=$(cat /etc/below)
-# BACKGROUND TEXT COLOUR
-back_text=$(cat /etc/back)
-# NUMBER COLOUR
-number=$(cat /etc/number)
-# TEXT ON BOX COLOUR
-box=$(cat /etc/box)
-clear
-red='\e[1;31m'
-green='\e[0;32m'
-NC='\e[0m'
-MYIP=$(wget -qO- ifconfig.me/ip);
+#!/bin/bash
+# =========================================
+# MENU SERVICES
+# Date: 2025-11-29
+# Author : NevermoreSSH
+# =========================================
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
+white="\e[97m"
+# public ip
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 clear
 echo -e ""
-echo -e "   \e[$line════════════════════════════════════════\e[m"
-echo -e "   \e[$back_text             \e[30m═[\e[$box SYSTEM MENU\e[30m ]═          \e[m"
-echo -e "   \e[$line════════════════════════════════════════\e[m"
-echo -e "   \e[$number (•1)\e[m \e[$below Add New Subdomain\e[m"
-echo -e "   \e[$number (•2)\e[m \e[$below Renew Cert Xray Core\e[m"
-echo -e "   \e[$number (•3)\e[m \e[$below DNS Changer\e[m"
-echo -e "   \e[$number (•4)\e[m \e[$below Netflix Checker\e[m"
-echo -e "   \e[$number (•5)\e[m \e[$below Panel Domain\e[m"
-echo -e "   \e[$number (•6)\e[m \e[$below Backup Vps\e[m"
-echo -e "   \e[$number (•7)\e[m \e[$below Restore Vps\e[m"
-echo -e "   \e[$number (•8)\e[m \e[$below Install Webmin\e[m"
-echo -e "   \e[$number (•9)\e[m \e[$below Setup Speed VPS\e[m"
-echo -e "   \e[$number (10)\e[m \e[$below Restart VPN\e[m"
-echo -e "   \e[$number (11)\e[m \e[$below Speedtest VPS\e[m"
-echo -e "   \e[$number (12)\e[m \e[$below Xray Version\e[m"
-echo -e "   \e[$number (13)\e[m \e[$below Install BBR\e[m"
-echo -e "   \e[$number (14)\e[m \e[$below Install Ads Block\e[m"
-echo -e "   \e[$number (15)\e[m \e[$below Ads Block Panel\e[m"
-echo -e "   \e[$number (16)\e[m \e[$below ON/OF Auto Reboot\e[m"
-echo -e "   \e[$number (17)\e[m \e[$below Change Password VPS\e[m"
-echo -e "   \e[$number (18)\e[m \e[$below Check CPU & RAM\e[m"
-echo -e "   \e[$number (19)\e[m \e[$below Change Banner SSH\e[m"
-echo -e "   \e[$number (20)\e[m \e[$below SwapRAM Menu \e[m"
-echo -e ""
-echo -e "   \e[$number (55)\e[m \e[$below Install Noobzvpns\e[m"
-echo -e "   \e[$number (66)\e[m \e[$below Uninstall Noobzvpns\e[m"
-echo -e ""
-echo -e "   \e[$number (77)\e[m \e[$below Install SlowDNS\e[m"
-echo -e "   \e[$number (88)\e[m \e[$below Install UDP Custom\e[m"
-echo -e "   \e[$number (99)\e[m \e[$below Xray-core Changer\e[m"
-echo -e "   \e[$line════════════════════════════════════════\e[m"
-echo -e "   \e[$back_text \e[$box x)   MENU                             \e[m"
-echo -e "   \e[$line════════════════════════════════════════\e[m"
+echo -e "\e[${line}m══════════════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ SYSTEM MENU ]${reset}"
+echo -e "\e[${line}m══════════════════════════════════════════════${reset}"
+echo -e "   \e[${number}m(•1) \e[${below}mAdd New Subdomain\e[m"
+echo -e "   \e[${number}m(•2) \e[${below}mRenew Cert Xray Core\e[m"
+echo -e "   \e[${number}m(•3) \e[${below}mCustom DNS Changer\e[m"
+echo -e "   \e[${number}m(•4) \e[${below}mNetflix Checker\e[m"
+echo -e "   \e[${number}m(•5) \e[${below}mBackup VPS\e[m"
+echo -e "   \e[${number}m(•6) \e[${below}mRestore VPS\e[m"
+echo -e "   \e[${number}m(•7) \e[${below}mLimit Speed VPS\e[m"
+echo -e "   \e[${number}m(•8) \e[${below}mReboot VPN\e[m"
+echo -e "   \e[${number}m(•9) \e[${below}mRestart VPN\e[m"
+echo -e "   \e[${number}m(10) \e[${below}mSpeedtest VPS\e[m"
+echo -e "   \e[${number}m(11) \e[${below}mChange Password VPS\e[m"
+#echo -e ""
+#echo -e "   \e[${number}m(77) \e[${below}mInstall SlowDNS\e[m"
+#echo -e "   \e[${number}m(88) \e[${below}mInstall UDP Custom\e[m"
+echo -e "   \e[${line}m═══════════════════════════════════════════${reset}"
 echo -e "\e[$line"
-read -p "    Please Input Number  [1-99 or x] :  "  sys
+read -p "       PPlease Input Number  [1-99 or x] :  "  sys
 echo -e ""
 case $sys in
 1)
@@ -75,69 +58,31 @@ dns
 netf
 ;;
 5)
-panel-domain
-;;
-6)
 backup
 ;;
-7)
+6)
 restore
 ;;
-8)
-wbmn
-;;
-9)
+7)
 limit-speed
 ;;
-10)
+8)
+reboot
+;;
+9)
 restart
 ;;
-11)
+10)
 speedtest
 ;;
-12)
-xray version
-;;
-13)
-bbr
-;;
-14)
-ins-helium
-;;
-15)
-helium
-;;
-16)
-autoreboot
-;;
-17)
+11)
 passwd
-;;
-18)
-htop
-;;
-19)
-message-ssh
-;;
-20)
-wget -q -O /usr/bin/swapram "https://raw.githubusercontent.com/NevermoreSSH/swapram/main/swapram.sh" && chmod +x /usr/bin/swapram && swapram
-;;
-55)
-apt update && apt install git && git clone https://github.com/NevermoreSSH/noobzvpns.git && cd noobzvpns/ && sh ./install.sh;
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/NevermoreSSH/noobzvpns/main/sapphire/menu" && chmod +x /usr/bin/menu;
-wget -q -O /usr/bin/nnoobz "https://raw.githubusercontent.com/NevermoreSSH/noobzvpns/main/sapphire/nnoobz" && chmod +x /usr/bin/nnoobz;
-;;
-66)
-cd noobzvpns/ && sh ./uninstall.sh && cd && rm -r noobzvpns && rm -r /usr/bin/nnoobz && reboot
 ;;
 77)
 wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main2/addons/dns2.sh && chmod +x dns2.sh && ./dns2.sh
 ;;
 88)
 wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main/Tunnel/udp.sh && bash udp.sh
-;;
-99)
-wget -q -O /usr/bin/xraychanger "https://raw.githubusercontent.com/NevermoreSSH/Xcore-custompath/main/xraychanger.sh" && chmod +x /usr/bin/xraychanger && xraychanger
 ;;
 x)
 menu

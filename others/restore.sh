@@ -6,6 +6,23 @@
 # (C) Copyright 2025 - 2026
 # =========================================
 # color
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
+white="\e[97m"
+# public ip
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 red='\e[1;31m'
 green='\e[0;32m'
 purple='\e[0;35m'
@@ -13,9 +30,9 @@ orange='\e[0;33m'
 NC='\e[0m'
 clear
 echo ""
-echo -e   "  \e[$line═══════════════════════════════════════════════════════\e[m"
-echo -e   "  \e[$back_text            \e[30m[\e[$box RESTORE SSH & XRAY ACCOUNT \e[30m ]\e[1m            \e[m"
-echo -e   "  \e[$line═══════════════════════════════════════════════════════\e[m"
+echo -e "  \e[${line}m═══════════════════════════════════════════${reset}"
+echo -e "    \e[${title}[ RESTORE SSH & XRAY ACCOUNT ]${reset}"
+echo -e "  \e[${line}m═══════════════════════════════════════════${reset}"
 echo ""
 echo " This Feature Can Only Be Used According To VPS Data With This Autoscript"
 echo " Please Insert VPS Data Backup Link To Restore The Data"
@@ -55,4 +72,3 @@ service cron restart
 # back to settings
 sleep 5
 system
-sleep 1
