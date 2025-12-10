@@ -320,7 +320,40 @@ rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/nginx.conf"
 mkdir -p /home/vps/public_html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/vps.conf"
+#wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/vps.conf"
+sudo cat <<EOF > /etc/nginx/conf.d/vps.conf
+server {
+    listen       81;
+	listen       5000;
+    server_name  127.0.0.1 localhost;
+
+    access_log /var/log/nginx/vps-access.log;
+    error_log  /var/log/nginx/vps-error.log error;
+
+    # Root asal
+    root /home/vps/public_html;
+
+    location / {
+        index  index.html index.htm index.php;
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    # Folder Xray config
+    location /xray/ {
+        alias /etc/logcon/config/;
+        autoindex on;
+        autoindex_exact_size off;
+        autoindex_localtime on;
+    }
+
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+EOF
 /etc/init.d/nginx restart
 
 # Version
