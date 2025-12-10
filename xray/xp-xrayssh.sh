@@ -23,7 +23,7 @@ sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/vless-custom.json
 sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/httpupgrade-tls.json
 sed -i "/^#vls $user $exp/,/^},{/d" /usr/local/etc/xray/httpupgrade-none.json
 # config from html
-rm -r /etc/xray/config/vless-$user-$exp.txt
+rm -r /etc/logcon/config/vless-$user-$exp.txt
 systemctl restart xray@vless-tls
 systemctl restart xray@vless-none
 systemctl restart xray@vless-custom
@@ -50,7 +50,7 @@ rm -f /usr/local/etc/xray/$user-vmesstls.json
 rm -f /usr/local/etc/xray/$user-vmessnone.json
 rm -f /usr/local/etc/xray/$user-custom.json
 # config from html
-rm -r /etc/xray/config/vmess-$user-$exp.txt
+rm -r /etc/logcon/config/vmess-$user-$exp.txt
 systemctl restart xray@vmess-tls
 systemctl restart xray@vmess-none
 systemctl restart xray@vmess-custom
@@ -104,7 +104,7 @@ do
         userdel $rawuser 2>/dev/null
 
         # DELETE FILE CONFIG
-        filepath="/etc/xray/config/ssh-$rawuser.txt"
+        filepath="/etc/logcon/config/ssh-$rawuser.txt"
         if [ -f "$filepath" ]; then
             rm -f "$filepath"
             echo "File expired $rawuser deleted."
