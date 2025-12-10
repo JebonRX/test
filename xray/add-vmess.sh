@@ -165,11 +165,11 @@ systemctl restart xray@vmess-custom
 
 # Check if the folder exists
 if [ -d "$DIR" ]; then
-    echo "Folder $DIR already exists. Skipping..."
+    echo "log data already exists. Skipping..."
 else
-    echo "Folder $DIR does not exist. Creating folder..."
+    echo "log data does not exist. Creating folder..."
     mkdir -p "$DIR"
-    echo "Folder $DIR has been created successfully."
+    echo "log data has been created successfully."
 fi
 
 # copy config to vps
