@@ -1,8 +1,9 @@
 #!/bin/bash
 # =========================================
-# Fast Xray VMESS WS User Check
-# Date: 2025-11-29
-# Author : NevermoreSSH
+# Menu Services | Check User login XRAY Config
+# Edition : Stable Edition V1.1
+# Auther  : NevermoreSSH
+# (C) Copyright 2025 - 2026
 # =========================================
 # Warna
 line="38;5;208"         # Oyen terang
@@ -24,49 +25,54 @@ MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me
 domain=$(cat /usr/local/etc/xray/domain)
 DIR="/etc/logcon/config"
 clear
-vmess_json="/usr/local/etc/xray/vmess-tls.json"
 
-echo ""
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo -e "  \e[${title}[ XRAY VMESS USER LOGIN ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo ""
+LOG="/var/log/xray/access.log"
+LINES=1000  # ambil last 1000 line
 
-# Ambil list user sekali sahaja
-mapfile -t users < <(grep '^#vls' "$vless_json" | awk '{print $2}')
+echo -e "\e[${line}m══════════════════════════════════════${reset}"
+echo -e "  \e[${title}[ XRAY VMESS User Login ]${reset}"
+echo -e "\e[${line}m══════════════════════════════════════${reset}"
+echo -e ""
+# Ambil last N line sahaja
+TEMP=$(mktemp)
+tail -n $LINES "$LOG" > "$TEMP"
 
-# Ambil IP aktif sekali sahaja
-mapfile -t active_ips < <(ss -nptu | grep xray | awk '{print $5}' | cut -d: -f1 | sort -u)
+# Masukkan waktu sekarang (epoch)
+NOW=$(date +%s)
 
-# Ambil log access sekali sahaja
-mapfile -t access_log < <(awk '{print $3,$7}' /var/log/xray/access.log | sed 's/:.*//')
-
-declare -A user_ips
-
-# Proses matching sekali sahaja
-for ip in "${active_ips[@]}"; do
-    for entry in "${access_log[@]}"; do
-        log_ip=$(echo "$entry" | awk '{print $1}')
-        log_user=$(echo "$entry" | awk '{print $2}')
-
-        if [[ "$ip" == "$log_ip" ]]; then
-            user_ips["$log_user"]+="$ip "
-        fi
-    done
-done
-
-# Papar output
-for user in "${users[@]}"; do
-    ips="${user_ips[$user]}"
-
-    if [[ -n "$ips" ]]; then
-        echo "User : $user"
-        echo "$ips" | tr ' ' '\n' | nl
-        echo -e "\033[0;34m──────────────────────────────────────────\033[0m"
+# Filter line dalam 1 jam terakhir
+FILTERED=$(mktemp)
+while IFS= read -r line; do
+    TS=$(echo "$line" | awk '{print $1" "$2}' | cut -d'.' -f1)
+    LOG_EPOCH=$(date -d "$TS" +%s 2>/dev/null)
+    if [[ $((NOW - LOG_EPOCH)) -le 3600 ]]; then
+        echo "$line" >> "$FILTERED"
     fi
+done < "$TEMP"
+
+# Ambil user unik
+USERS=$(grep -oP 'email:\s*\K\S+' "$FILTERED" | sort -u)
+
+COUNT=1
+for USER in $USERS; do
+    # Kira login per IP
+    RESULT=$(grep "email: $USER" "$FILTERED" | \
+        grep "from tcp:" | \
+        awk -F"from tcp:" '{print $2}' | \
+        awk -F":" '{print $1}' | \
+        grep -Eo '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
+        sort | uniq -c)
+
+    [[ -z "$RESULT" ]] && continue
+
+    echo "${COUNT}. user : $USER"
+    echo "$RESULT"
+    echo "-------------------------------"
+
+    COUNT=$((COUNT+1))
 done
 
-echo ""
+rm -f "$TEMP" "$FILTERED"
+echo -e ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
 exec menu-vmess
-#
