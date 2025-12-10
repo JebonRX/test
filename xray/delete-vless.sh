@@ -80,11 +80,12 @@ rm -r /etc/logcon/config/vless-$user-$exp.txt
 restart_xray
 
 clear
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo " XRAY VLESS Account Deleted Successfully"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo " Client Name : $user"
 echo " Expired On  : $exp"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu Vless"
+read -n 1 -s -r -p "Press any key to back on menu XRAY"
 exec menu-vless

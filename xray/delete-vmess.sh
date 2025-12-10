@@ -50,7 +50,7 @@ fi
 
 echo " Delete User XRAY VMESS WS"
 echo " Select the existing client you want to remove"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo "     No   Expired    User"
 
 grep -E "^#vms " "$vmess_json" | cut -d ' ' -f 2-3 | nl -s ') '
@@ -75,12 +75,12 @@ rm -r /etc/logcon/config/vmess-$user-$exp.txt
 restart_xray
 
 clear
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo " XRAY VMESS WS Account Deleted Successfully"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
+echo " XRAY VMESS Account Deleted Successfully"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo " Client Name : $user"
 echo " Expired On  : $exp"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
 exec menu-vmess

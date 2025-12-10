@@ -51,6 +51,12 @@ wget -O show-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/show-s
 #wget -O trial-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/trial-ssh.sh" && chmod +x trial-ssh
 wget -O member-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/member-ssh.sh" && chmod +x member-ssh
 
+# Shadowsocks Websocket files
+echo -e "[ ${green}INFO${NC} ] Downloading Shadowsocks Websocket Files"
+wget -O menu-ssws "https://${Server_URL}/menu-ssws.sh" && chmod +x menu-ssws
+sleep 1
+
+
 # Tweak files
 sleep 1
 wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-tweak.sh" && chmod +x menu-tweak

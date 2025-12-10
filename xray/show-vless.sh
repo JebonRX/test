@@ -104,5 +104,5 @@ echo -e "\e[${line}m════════════════════
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu xray"
+read -n 1 -s -r -p "Press any key to back on menu XRAY"
 exec menu-vless

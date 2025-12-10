@@ -50,7 +50,7 @@ fi
 
 echo " Renew User Xray VMESS WS"
 echo " Select the existing client"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 grep -E "^#vms " "$vmess_json" | cut -d ' ' -f 2-3 | nl -s ') '
 
 until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -84,11 +84,12 @@ mv "/etc/logcon/config/vmess-$user-$exp.txt" "/etc/logcon/config/vmess-$user-$ex
 restart_xray
 
 clear
-echo " VMESS WS Account Successfully Renewed"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
+echo " XRAY VMESS Account Successfully Renewed"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo " Client Name : $user"
 echo " Expired On  : $exp4"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
 menu-vmess

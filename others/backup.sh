@@ -41,7 +41,7 @@ cp -r /etc/group /root/backup/group >/dev/null 2>&1
 
 # backup others
 cp -r /usr/bin/xraay /root/backup/xraay >/dev/null 2>&1
-cp -r /etc/xray/config /root/backup/config >/dev/null 2>&1
+cp -r /etc/logcon/config /root/backup/config >/dev/null 2>&1
 
 # compress for gdrive
 cd /root

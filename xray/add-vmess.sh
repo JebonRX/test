@@ -38,13 +38,20 @@ echo ""
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ CREATE USER • XRAY VMESS WEBSOCKET ]${reset}"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
-echo ""
+#echo ""
+echo -e "\e[${below}m"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     read -rp "Username: " -e user
-    CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless-tls.json | wc -l)
-    if [[ ${CLIENT_EXISTS} == '1' ]]; then
-        echo "A client with the specified name already exists. Choose another."
-        exit 1
+
+    CLIENT_EXISTS=$(grep -w "$user" /usr/local/etc/xray/vmess-tls.json | wc -l)
+
+    if [[ $CLIENT_EXISTS -ge 1 ]]; then
+        echo "A client with the specified name already exists. Back to menu..."
+        sleep 1
+        exec menu-vless   # <-- call your menu function here
+        return       # or exit the loop/function
+    else
+        break
     fi
 done
 
@@ -210,7 +217,7 @@ END
 clear
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ XRAY VMESS WEBSOCKET ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
 echo -e "IP Address       : $MYIP"
@@ -224,13 +231,13 @@ echo -e "Path WS          : /vmess"
 echo -e "AllowInsecure    : True "
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ Script By NevermoreSSH ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "WS TLS           : ${vmesslink1}"
 echo ""
 echo -e "WS NTLS          : ${vmesslink2}"
 echo ""
 echo -e "Multipath NTLS   : ${vmesslink3}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
 echo ""

@@ -26,9 +26,9 @@ clear
 LOG="/var/log/xray/access.log"
 LINES=1000   # ambil 1000 log terbaru ikut timestamp
 
-echo -e "\e[${line}m══════════════════════════════════════${reset}"
+echo -e "\e[${line}m--------------------------------------${reset}"
 echo -e "  \e[${title}[ XRAY VMESS User Login ]${reset}"
-echo -e "\e[${line}m══════════════════════════════════════${reset}"
+echo -e "\e[${line}m--------------------------------------${reset}"
 echo -e ""
 
 # =============================
@@ -61,7 +61,7 @@ while IFS= read -r line; do
         # FORMAT lengkap: YYYY/MM/DD HH:MM:SS(.micro)
         TS="$TS1 $TS2"
     else
-        # FORMAT pendek: DD HH:MM:SS → tambahkan year & month semasa
+        # FORMAT pendek: DD HH:MM:SS ? tambahkan year & month semasa
         DAY="$TS1"
         TIME="$TS2"
         TS="${CURRENT_YEAR}/${CURRENT_MONTH}/${DAY} ${TIME}"
