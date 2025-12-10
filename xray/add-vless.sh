@@ -37,15 +37,22 @@ echo -e "\e[${line}m════════════════════
 echo -e "  \e[${title}[ CREATE USER • XRAY VLESS WS / HTTPUPGRADE ]${reset}"
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 #echo ""
-echo ""
+echo -e "\e[${below}m"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     read -rp "Username: " -e user
-    CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless-tls.json | wc -l)
-    if [[ ${CLIENT_EXISTS} == '1' ]]; then
-        echo "A client with the specified name already exists. Choose another."
-        exit 1
+
+    CLIENT_EXISTS=$(grep -w "$user" /usr/local/etc/xray/vless-tls.json | wc -l)
+
+    if [[ $CLIENT_EXISTS -ge 1 ]]; then
+        echo "A client with the specified name already exists. Back to menu..."
+        sleep 1
+        exec menu-vless   # <-- call your menu function here
+        return       # or exit the loop/function
+    else
+        break
     fi
 done
+
 
 # UUID
 uuid=$(cat /proc/sys/kernel/random/uuid)
@@ -128,7 +135,7 @@ else
     mkdir -p "$DIR"
     echo "log data has been created successfully."
 fi
-
+clear
 cat > /etc/logcon/config/vless-$user-$exp.txt <<-END
 
 =============================================
@@ -171,7 +178,7 @@ END
 clear
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ XRAY VLESS WEBSOCKET / HTTPUPGRADE ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "Remarks          : ${user}"
 echo -e "Domain           : ${domain}"
 echo -e "IP Address       : $MYIP"
@@ -185,7 +192,7 @@ echo -e "Path HTTPUpgrade : /hvless"
 echo -e "AllowInsecure    : True "
 echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
 echo -e "  \e[${title}[ Script By NevermoreSSH ]${reset}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "WS TLS           : ${vlesslink1}"
 echo ""
 echo -e "WS NTLS          : ${vlesslink2}"
@@ -195,9 +202,9 @@ echo ""
 echo -e "Httpupgrade TLS  : ${vlesslink4}"
 echo ""
 echo -e "Httpupgrade NTLS : ${vlesslink5}"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo -e "Created   : $harini"
 echo -e "Expired   : $exp"
-echo ""
+echo -e "\e[${below}m"
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
 exec menu-vless

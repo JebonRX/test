@@ -53,7 +53,7 @@ fi
 
 echo " Delete User XRAY VLESS ACC"
 echo " Select the existing client you want to remove"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo "     No   Expired    User"
 
 grep -E "^#vls " "$vless_json" | cut -d ' ' -f 2-3 | nl -s ') '
@@ -81,10 +81,10 @@ restart_xray
 
 clear
 echo " XRAY VLESS Account Deleted Successfully"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo " Client Name : $user"
 echo " Expired On  : $exp"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu Vless"
 exec menu-vless
