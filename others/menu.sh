@@ -210,7 +210,7 @@ echo -e "  \e[${text}mCPU Info             :${freq} MHz (${cpu_usage})${reset}"
 echo -e "  \e[${text}mOperating System     : ${OS2}${reset}"
 echo -e "  \e[${text}mKernel               : $(uname -r)${reset}"
 echo -e "  \e[${text}mRAM Info             : ${uram} MB / ${tram} MB${reset}"
-echo -e "  \e[${text}mIp VPS/Address       : ${IPVPS}, ${IPV6}${reset}"
+echo -e "  \e[${text}mIPVPS/ IP Address    : ${IPVPS}, ${IPV6}${reset}"
 echo -e "  \e[${text}mDomain Name          : ${domain}${reset}"
 echo -e "  \e[${text}mSystem Uptime        : ${uptime}${reset}"
 
