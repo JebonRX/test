@@ -64,6 +64,7 @@ done
 #----- Auto Delete Expired SSH Account
 clear
 hariini=`date +%d-%m-%Y`
+echo "Clear Expired User SSH Websocket"
 echo "Thank you for removing the EXPIRED USERS"
 echo "--------------------------------------"
 cat /etc/shadow | cut -d: -f1,8 | sed /:$/d > /tmp/expirelist.txt
@@ -105,6 +106,7 @@ do
 
         # DELETE FILE CONFIG
         filepath="/etc/logcon/config/ssh-$rawuser.txt"
+		
         if [ -f "$filepath" ]; then
             rm -f "$filepath"
             echo "File expired $rawuser deleted."
@@ -122,7 +124,35 @@ echo "Script successfully run"
 
 # (5)
 # backup config for restore later
-sleep 5;backup
+sleep 5
+# public ip
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+IP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+date=$(date +"%Y-%m-%d-%H:%M:%S")
+domain=$(cat /usr/local/etc/xray/domain)
+clear
+# backup ssh xray
+echo "Clear Expired User XRAY Accounts"
+mkdir -p /root/backup
+cp -r /usr/local/etc/xray/ /root/backup/xray/ >/dev/null 2>&1
+cp -r /etc/shadow /root/backup/shadow >/dev/null 2>&1
+cp -r /etc/gshadow /root/backup/gshadow >/dev/null 2>&1
+cp -r /etc/passwd /root/backup/passwd >/dev/null 2>&1
+cp -r /etc/group /root/backup/group >/dev/null 2>&1
+# backup others
+cp -r /usr/bin/xraay /root/backup/xraay >/dev/null 2>&1
+cp -r /etc/logcon/config /root/backup/config >/dev/null 2>&1
+# compress for gdrive
+cd /root
+zip -r $IP-$date-$domain-SkyNode.zip backup > /dev/null 2>&1
+rclone copy /root/$IP-$date-$domain-SkyNode.zip dr:backup/
+url=$(rclone link dr:backup/$IP-$date-$domain-SkyNode.zip)
+id=(`echo $url | grep '^https' | cut -d'=' -f2`)
+link="https://drive.google.com/u/4/uc?id=${id}&export=download"
+clear
+rm -rf /root/backup
+rm -r /root/$IP-$date-$domain-SkyNode.zip
+sleep 1
 
 # (5)
 # complete delete all exp config
