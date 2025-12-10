@@ -54,7 +54,7 @@ fi
 
 echo " Renew User XRAY VLESS Account"
 echo " Select the existing client"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 grep -E "^#vls " "$vless_json" | cut -d ' ' -f 2-3 | nl -s ') '
 
 until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -91,10 +91,10 @@ restart_xray
 
 clear
 echo " XRAY VLESS Account Successfully Renewed"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo " Client Name : $user"
 echo " Expired On  : $exp4"
-echo -e "\e[${line}m════════════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m════════════════════════════════════════════════════${reset}\e[${below}m"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu VLESS"
 menu-vless
