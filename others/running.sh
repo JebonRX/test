@@ -72,7 +72,9 @@ cpu_usage+=" %"
 clear
 echo -e "${magenta}╔══════════════════════════════════════════╗${NC}"
 echo -e "${magenta}║         VPS STATUS DASHBOARD             ║${NC}"
-echo -e "${magenta}╚══════════════════════════════════════════╝${NC}"
+echo -e "${magenta}╚══════════════════════════════════════════╝${NC}
+\033[1;37mServices Status By NevermoreSSH\033[0m
+\033[1;37mTelegram : https://t.me/todfix667 \033[0m"
 echo ""
 
 # ----------------------
@@ -127,10 +129,10 @@ echo -e "${blue}------------------------------${NC}"
 
 # SSH / VPN
 check_service "ssh.service" "OpenSSH"
-check_service "stunnel4.service" "Stunnel(SSL)"
+check_service "stunnel4.service" "Stunnel"
 check_service "dropbear.service" "Dropbear"
-check_service "server-sldns.service" "SlowDNS"
-check_service "udp-custom.service" "UDP Custom"
+#check_service "server-sldns.service" "SlowDNS"
+#check_service "udp-custom.service" "UDP Custom"
 check_service "ws-http.service" "Websocket HTTP"
 check_service "ws-https.service" "Websocket HTTPS"
 

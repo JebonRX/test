@@ -27,21 +27,23 @@ clear
 echo ""
 echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
 echo -e "  ${title}[ MENU XRAY VLESS WEBSOCKET / HTTPUPGRADE ]${reset}"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}
+\033[1;37mXRAY VLESS By NevermoreSSH\033[0m
+\033[1;37mTelegram : https://t.me/todfix667 \033[0m"
 echo ""
 echo ""
-echo -e " [\033[1;36m•1\033[0m]  Add XRAY VLESS Account"
-echo -e " [\033[1;36m•2\033[0m]  Delete XRAY VLESS Account"
-echo -e " [\033[1;36m•3\033[0m]  Renew XRAY VLESS Account"
-echo -e " [\033[1;36m•4\033[0m]  Show XRAY VLESS Config"
-echo -e " [\033[1;36m•5\033[0m]  Check User Login XRAY VLESS"
+echo -e " [\033[1;36m•1\033[0m]  \e[${below}mAdd XRAY VLESS Account${reset}"
+echo -e " [\033[1;36m•2\033[0m]  \e[${below}mDelete XRAY VLESS Account${reset}"
+echo -e " [\033[1;36m•3\033[0m]  \e[${below}mRenew XRAY VLESS Account${reset}"
+echo -e " [\033[1;36m•4\033[0m]  \e[${below}mShow XRAY VLESS Config${reset}"
+echo -e " [\033[1;36m•5\033[0m]  \e[${below}mCheck User Login XRAY VLESS${reset}"
 echo ""
 echo ""
-echo -e " [\033[1;36m•0\033[0m]  Back To Main Menu"
+echo -e " [\033[1;36m•0\033[0m]  \e[${below}mBack To Main Menu"
 echo ""
 echo -e " \033[1;37mPress [ Ctrl+C ] • To-Exit-Script\033[0m"
 echo ""
-
+echo -e "\e[${below}m"
 read -p " Select menu : " opt
 echo -e ""
 case $opt in

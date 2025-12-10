@@ -173,7 +173,7 @@ else
 fi
 
 # copy config to vps
-cat > /etc/xray/config/vmess-$user-$exp.txt <<-END
+cat > /etc/logcon/config/vmess-$user-$exp.txt <<-END
 
 ====================================================================
 P R O J E C T  O F  N E V E R M O R E S S H
@@ -194,13 +194,14 @@ Network          : WebSocket
 Path WS          : $patch
 AllowInsecure    : True
 ====================================================================
-Link WS TLS : `$vlesslink1`
+Link WS TLS : $vmesslink1
 ====================================================================
-Link WS NTLS : `$vlesslink2`
+Link WS NTLS : $vmesslink2
 ====================================================================
-Link WS NTLS Multipath: `$vlesslink3`
+Link WS NTLS Multipath: $vmesslink3
 ====================================================================
-Expired On : $harini - $exp
+Created : $harini
+Expired : $exp
 ====================================================================
 
 END

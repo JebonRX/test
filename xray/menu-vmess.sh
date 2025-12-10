@@ -30,21 +30,23 @@ N='\e[0m'
 clear
 echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
 echo -e "  ${title}[ MENU XRAY VMESS WEBSOCKET ]${reset}"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}
+\033[1;37mXRAY VMESS By NevermoreSSH\033[0m
+\033[1;37mTelegram : https://t.me/todfix667 \033[0m"
 echo ""
 echo ""
-echo -e " [\033[1;36m•1\033[0m]  Add XRAY VMESS Account"
-echo -e " [\033[1;36m•2\033[0m]  Delete XRAY VMESS Account"
-echo -e " [\033[1;36m•3\033[0m]  Renew XRAY VMESS Account"
-echo -e " [\033[1;36m•4\033[0m]  Show XRAY VMESS Config"
-echo -e " [\033[1;36m•5\033[0m]  Check User Login XRAY VMESS"
+echo -e " [\033[1;36m•1\033[0m]  \e[${below}mAdd XRAY VMESS Account${reset}"
+echo -e " [\033[1;36m•2\033[0m]  \e[${below}mDelete XRAY VMESS Account${reset}"
+echo -e " [\033[1;36m•3\033[0m]  \e[${below}mRenew XRAY VMESS Account${reset}"
+echo -e " [\033[1;36m•4\033[0m]  \e[${below}mShow XRAY VMESS Config${reset}"
+echo -e " [\033[1;36m•5\033[0m]  \e[${below}mCheck User Login XRAY VMESS${reset}"
 echo ""
 echo ""
 echo -e " [\033[1;36m•0\033[0m]  Back To Main Menu"
 echo ""
 echo -e " \033[1;37mPress [ Ctrl+C ] • To-Exit-Script\033[0m"
 echo ""
-
+echo -e "\e[${below}m"
 read -p " Select menu : " opt
 echo -e ""
 case $opt in

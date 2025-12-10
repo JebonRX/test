@@ -76,6 +76,9 @@ exp4=$(date -d "$exp3 days" +"%Y-%m-%d")
 sed -i "s/#vms $user $exp $harini $uuid/#vms $user $exp4 $harini $uuid/g" "$vmess_json"
 sed -i "s/#vms $user $exp $harini $uuid/#vms $user $exp4 $harini $uuid/g" "$vmess2"
 sed -i "s/#vms $user $exp $harini $uuid/#vms $user $exp4 $harini $uuid/g" "$vmess3"
+# logcon
+sed -i "s/$exp/$exp4/g" "/etc/logcon/config/vmess-$user-$exp.txt"
+mv "/etc/logcon/config/vmess-$user-$exp.txt" "/etc/logcon/config/vmess-$user-$exp4.txt"
 
 # restart after delete config
 restart_xray

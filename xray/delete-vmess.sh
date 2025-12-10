@@ -68,6 +68,8 @@ exp=$(grep -E "^#vms " "$vmess_json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER
 sed -i "/^#vms $user $exp $harini $uuid/,/^},{/d" "$vmess_json"
 sed -i "/^#vms $user $exp $harini $uuid/,/^},{/d" "$vmess2"
 sed -i "/^#vms $user $exp $harini $uuid/,/^},{/d" "$vmess3"
+# logcon
+rm -r /etc/logcon/config/vmess-$user-$exp.txt
 
 # clear any expired config
 restart_xray

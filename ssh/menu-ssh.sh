@@ -30,7 +30,9 @@ N='\e[0m'
 clear
 echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
 echo -e "  ${title}[ MENU SSH WEBSOCKET ]${reset}"
-echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}
+\033[1;37mSSH Websocket By NevermoreSSH\033[0m
+\033[1;37mTelegram : https://t.me/todfix667 \033[0m"
 echo ""
 echo ""
 echo -e " [\033[1;36m•1\033[0m]  \e[${below}mAdd SSH WEBSOCKET Account ${reset}"
