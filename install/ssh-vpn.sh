@@ -260,7 +260,35 @@ echo 'Config file is at /usr/local/ddos/ddos.conf'
 echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
 
 # banner /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/JebonRX/test/main/others/issue.net"
+#wget -O /etc/issue.net "https://raw.githubusercontent.com/JebonRX/test/main/others/issue.net"
+cat <<EOF > /etc/issue.net
+<font color="white">
+<H3 style="text-align:center">
+🚀 Premium Server SSH Websocket 🚀</span></H3>
+
+<H3 style="text-align:center">
+⛔ NO DDOS ⛔</span></H3>
+
+<H3 style="text-align:center">
+⛔ NO HACKING ⛔</span></H3>
+
+<H3 style="text-align:center">
+⛔ NO TORRENT ⛔</span></H3>
+
+<H3 style="text-align:center">
+⛔ NO SPAMMING ⛔</span></H3>
+
+<H3 style="text-align:center">
+⛔ MAX LOGIN 2 DEVICE ⛔</span></H3>
+
+<H3 style="text-align:center">
+🚀 SILA PATUH PERATURAN 🚀</span></H3>
+<font>
+
+<H3 style="text-align:center">
+👍 Thank you for support 👍</span></H3>
+<font>
+EOF
 echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
@@ -282,16 +310,11 @@ netfilter-persistent save
 netfilter-persistent reload
 
 # cron setup
-echo "0 1 * * * root delete" >> /etc/crontab
-echo "0 2 * * * root xp" >> /etc/crontab
+echo "0 4 * * * root xp-xrayssh" >> /etc/crontab
+echo "50 4 * * * root clear-log" >> /etc/crontab
 echo "0 5 * * * root reboot" >> /etc/crontab
 echo "0 6 * * * root backup" >> /etc/crontab
-echo "0 8 * * * root clear-log" >> /etc/crontab
 echo "0 23 * * * root backup" >> /etc/crontab
-echo "10 1 * * * root /usr/bin/delete" >> /etc/crontab
-echo "10 2 * * * root /usr/bin/xp" >> /etc/crontab
-echo "10 8 * * * root /usr/bin/clear-log" >> /etc/crontab
-echo "10 23 * * * root /usr/bin/backup" >> /etc/crontab
 
 # remove unnecessary files
 cd
