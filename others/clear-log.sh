@@ -31,7 +31,8 @@ echo > /var/log/syslog
 echo > /var/log/btmp
 echo > /var/log/messages
 echo > /var/log/debug
+echo -e ""
 echo -e "Done Clear-log XRAYS"
 echo -e ""
-read -n 1 -s -r -p "Press any key to back on menu XRAY"
-exec menu-vless
+read -n 1 -s -r -p "Press any key to back on menu"
+exec menu
