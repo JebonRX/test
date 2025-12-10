@@ -40,7 +40,7 @@ echo -e "   \e[${number}m(11) \e[${below}mChange Password VPS\e[m"
 #echo -e ""
 #echo -e "   \e[${number}m(77) \e[${below}mInstall SlowDNS\e[m"
 #echo -e "   \e[${number}m(88) \e[${below}mInstall UDP Custom\e[m"
-echo -e "   \e[${line}m═══════════════════════════════════════════${reset}"
+echo -e "   \e[${line}m═══════════════════════════════════════════${reset}\e[${below}m"
 echo -e "\e[$line"
 read -p "       PPlease Input Number  [1-99 or x] :  "  sys
 echo -e ""
