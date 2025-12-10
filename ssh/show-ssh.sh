@@ -34,7 +34,7 @@ count=1
 
 # Ambil user bukan sistem (UID >= 1000)
 for user in $(awk -F: '$3>=1000 && $1!="nobody"{print $1}' /etc/passwd); do
-    CONFIG_FILE="/etc/logcon/config/ssh-$user.txt"
+    config_file="/etc/logcon/config/ssh-$user.txt"
     
     if [[ -f "$config_file" ]]; then
         printf " %2s) %-20s\n" "$count" "$user"
@@ -44,7 +44,10 @@ for user in $(awk -F: '$3>=1000 && $1!="nobody"{print $1}' /etc/passwd); do
 done
 
 if [ ${#users[@]} -eq 0 ]; then
-    echo " Tiada config SSH Websocket ditemui!"
+    echo " No detect any config SSH Websocket!"
+    echo ""
+    read -n 1 -s -r -p "Press any key to back on menu SSH"
+    exec menu-ssh
     exit 0
 fi
 
@@ -68,7 +71,7 @@ done
 # TUNJUK ISI CONFIG
 # -----------------------------------------------
 clear
-CONFIG_FILE="/etc/logcon/config/ssh-$User.txt"
+config_file="/etc/logcon/config/ssh-$User.txt"
 
 echo ""
 echo -e "\e[${line}m-----------------------------------------------${reset}\e[${below}m"
