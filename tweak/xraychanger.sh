@@ -5,6 +5,20 @@
 # Auther  : NevermoreSSH
 # (C) Copyright 2022
 # =========================================
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
 R='\e[1;31m'
 P='\e[0;35m'
 B='\033[0;36m'
@@ -16,6 +30,7 @@ green='\e[0;32m'
 purple='\e[0;35m'
 orange='\e[0;33m'
 NC='\e[0m'
+
 # Xray-Core Version
 xrays_path=$(which xray)
 xrays_version=$("$xrays_path" --version 2>&1)
@@ -25,9 +40,9 @@ latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases |
 # / / Installation Xray Core
 xraycore_link="https://github.com/XTLS/Xray-core/releases/download/v$latest_version/Xray-linux-64.zip"
 clear
-echo -e "\e[36m╒════════════════════════════════════════════╕\033[0m"
-echo -e " \E[0;47;30m               XRAY-CORE CHANGER            \E[0m"
-echo -e "\e[36m╘════════════════════════════════════════════╛\033[0m
+echo -e "\e[${line}m══════════════════════════════════${reset}"
+echo -e "  \e[${title}[ XRAY-CORE CHANGER ]${reset}"
+echo -e "\e[${line}m══════════════════════════════════${reset}
 \033[1;37mXray-core Changer By NevermoreSSH\033[0m
 \033[1;37mTelegram : https://t.me/todfix667 \033[0m"
 echo -e 
@@ -46,7 +61,7 @@ echo -e "
  [\033[1;36m•89\033[0m]  Xray-core MOD v25.3.31
 
  [\033[1;36m•99\033[0m]  Check Xray-core version
- [\033[1;36m• 0\033[0m]  Back To Main Menu
+ [\033[1;36m• 0 / x\033[0m]  Back To Main Menu
 
  Notes: 
 ❇️ Please restart / reboot server after change Xray-core.
@@ -124,7 +139,11 @@ xraychanger
 ;;
 0)
 clear
-menu
+exec menu
+;;
+x)
+clear
+exec menu
 ;;
 *)
 clear
