@@ -82,6 +82,9 @@ sed -i "s/#vls $user $exp $harini $uuid/#vls $user $exp4 $harini $uuid/g" "$vles
 sed -i "s/#vls $user $exp $harini $uuid/#vls $user $exp4 $harini $uuid/g" "$vless3"
 sed -i "s/#vls $user $exp $harini $uuid/#vls $user $exp4 $harini $uuid/g" "$vless4"
 sed -i "s/#vls $user $exp $harini $uuid/#vls $user $exp4 $harini $uuid/g" "$vless5"
+# logcon
+sed -i "s/$exp/$exp4/g" "/etc/logcon/config/vless-$user-$exp.txt"
+mv "/etc/logcon/config/vless-$user-$exp.txt" "/etc/logcon/config/vless-$user-$exp4.txt"
 
 # restart after delete config
 restart_xray

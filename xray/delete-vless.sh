@@ -73,6 +73,8 @@ sed -i "/^#vls $user $exp $harini $uuid/,/^},{/d" "$vless2"
 sed -i "/^#vls $user $exp $harini $uuid/,/^},{/d" "$vless3"
 sed -i "/^#vls $user $exp $harini $uuid/,/^},{/d" "$vless4"
 sed -i "/^#vls $user $exp $harini $uuid/,/^},{/d" "$vless5"
+# logcon
+rm -r /etc/logcon/config/vless-$user-$exp.txt
 
 # clear any expired config
 restart_xray

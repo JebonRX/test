@@ -25,7 +25,7 @@ wget -O check-vmess "https://${Server_URL}/check-vmess.sh" && chmod +x check-vme
 wget -O delete-vmess "https://${Server_URL}/delete-vmess.sh" && chmod +x delete-vmess
 wget -O renew-vmess "https://${Server_URL}/renew-vmess.sh" && chmod +x renew-vmess
 wget -O show-vmess "https://${Server_URL}/show-vmess.sh" && chmod +x show-vmess
-wget -O trial-vmess "https://${Server_URL}/trial-vmess.sh" && chmod +x trial-vmess
+#wget -O trial-vmess "https://${Server_URL}/trial-vmess.sh" && chmod +x trial-vmess
 wget -O xp-xrayssh "https://${Server_URL}/xp-xrayssh.sh" && chmod +x xp-xrayssh
 
 # XRAY VLESS FILES
@@ -37,7 +37,7 @@ wget -O check-vless "https://${Server_URL}/check-vless.sh" && chmod +x check-vle
 wget -O delete-vless "https://${Server_URL}/delete-vless.sh" && chmod +x delete-vless
 wget -O renew-vless "https://${Server_URL}/renew-vless.sh" && chmod +x renew-vless
 wget -O show-vless "https://${Server_URL}/show-vless.sh" && chmod +x show-vless
-wget -O trial-vless "https://${Server_URL}/trial-vless.sh" && chmod +x trial-vless
+#wget -O trial-vless "https://${Server_URL}/trial-vless.sh" && chmod +x trial-vless
 
 # SSH Websocket files
 echo -e "[ ${green}INFO${NC} ] Downloading SSH WS Files"
@@ -48,7 +48,7 @@ wget -O check-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/check
 wget -O delete-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/delete-ssh.sh" && chmod +x delete-ssh
 wget -O renew-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/renew-ssh.sh" && chmod +x renew-ssh
 wget -O show-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/show-ssh.sh" && chmod +x show-ssh
-wget -O trial-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/trial-ssh.sh" && chmod +x trial-ssh
+#wget -O trial-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/trial-ssh.sh" && chmod +x trial-ssh
 wget -O member-ssh "https://raw.githubusercontent.com/JebonRX/test/main/ssh/member-ssh.sh" && chmod +x member-ssh
 
 # Tweak files
@@ -57,7 +57,7 @@ wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu
 wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
 wget -O xraychanger "https://raw.githubusercontent.com/JebonRX/test/main/tweak/xraychanger.sh" && chmod +x xraychanger
-wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/other/change-dropbear.sh" && chmod +x change-dropbear
+wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/others/change-dropbear.sh" && chmod +x change-dropbear
 
 # System files
 sleep 1
