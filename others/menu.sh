@@ -299,13 +299,13 @@ case $menu in
     exec menu
     ;;
 11)
-    exec bash -c 'delete && xp; exec menu'
+    exec clear-log
     ;;
 12)
-    exec menu-tweak
+    exec xp-xrayssh
     ;;
 13)
-    exec netf
+    exec menu-tweak
     ;;
 14)
     exec restart
