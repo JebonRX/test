@@ -379,7 +379,7 @@ echo "   - Websocket HTTPS          : 443" | tee -a log-install.txt
 echo "   - BadVPN                   : 7100, 7200, 7300" | tee -a log-install.txt
 echo "   - Nginx                    : 81, 5000" | tee -a log-install.txt
 echo "" | tee -a log-install.txt
-echo -e "\e[38;5;208m   [ XRAY WEBSOCKET ]\e[0m" | tee -a log-install.txt
+echo -e "\e[38;5;208m   [ XRAY SERVICES ]\e[0m" | tee -a log-install.txt
 echo -e "   \e[38;5;245m───────────────────────────────────────────────\e[0m" | tee -a log-install.txt
 echo "   VMESS WebSocket + TLS      : 443" | tee -a log-install.txt
 echo "   VLESS WebSocket + TLS      : 443" | tee -a log-install.txt

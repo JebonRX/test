@@ -11,15 +11,15 @@ clear
 export RED='\033[0;31m';
 export NC='\033[0m';
 
-tls="$(cat ~/log-install.txt | grep -w "Vmess Ws Tls" | cut -d: -f2|sed 's/ //g')"
-none="$(cat ~/log-install.txt | grep -w "Vmess Ws None Tls" | cut -d: -f2|sed 's/ //g')"
+tls="$(cat ~/log-install.txt | grep -w "VLESS WebSocket + TLS " | cut -d: -f2|sed 's/ //g')"
+none="$(cat ~/log-install.txt | grep -w "VLESS WebSocket + NTLS" | cut -d: -f2|sed 's/ //g')"
 clear
 echo -e "\e[0;34m.-----------------------------------------.\e[0m"
-echo -e "\e[0;34m|             \e[1;33mCHANGE PORT XRAY\e[m            \e[0;34m|\e[0m"
+echo -e "\e[0;34m|             \e[1;33mCHANGE PORT XRAYS\e[m            \e[0;34m|\e[0m"
 echo -e "\e[0;34m'-----------------------------------------'\e[0m"
 echo -e " \e[1;31m>>\e[0m\e[0;32mChange Port For Xray :\e[0m"
-echo -e "  [1]  Change Port Xray Core Tls      [ ${RED}$tls${NC} ]"
-echo -e "  [2]  Change Port Xray Core None TLS [ ${RED}$none${NC} ]"
+echo -e "  [1]  Change Port Fallback TLS  [ ${RED}$tls${NC} ]"
+echo -e "  [2]  Change Port Fallback NTLS [ ${RED}$none${NC} ]"
 echo -e " ============================================="
 echo -e "  [x]  Back To Menu Change Port"
 echo -e "  [y]  Go To Main Menu"
@@ -36,12 +36,10 @@ fi
 cek=$(netstat -nutlp | grep -w $tls1)
 if [[ -z $cek ]]; then
 sed -i "s/$tls/$tls1/g" /usr/local/etc/xray/config.json
-sed -i "s/   - Websocket SSL(HTTPS)    : $tls/   - Websocket SSL(HTTPS)    : $tls1/g" /root/log-install.txt
-sed -i "s/   - Xray Vless Tcp Xtls     : $tls/   - Xray Vless Tcp Xtls     : $tls1/g" /root/log-install.txt
-sed -i "s/   - Xray Trojan Tcp Tls     : $tls/   - Xray Trojan Tcp Tls     : $tls1/g" /root/log-install.txt
-sed -i "s/   - Xray Vless Ws Tls       : $tls/   - Xray Vless Ws Tls       : $tls1/g" /root/log-install.txt
-sed -i "s/   - Xray Vmess Ws Tls       : $tls/   - Xray Vmess Ws Tls       : $tls1/g" /root/log-install.txt
-sed -i "s/   - Xray Trojan Ws Tls      : $tls/   - Xray Trojan Ws Tls      : $tls1/g" /root/log-install.txt
+sed -i "s/   - Websocket HTTPS   	   : $tls/   - Websocket HTTPS   	   : $tls1/g" /root/log-install.txt
+sed -i "s/   - VMESS WebSocket + TLS   : $tls/   - VMESS WebSocket + TLS   : $tls1/g" /root/log-install.txt
+sed -i "s/   - VLESS WebSocket + TLS   : $tls/   - VLESS WebSocket + TLS   : $tls1/g" /root/log-install.txt
+sed -i "s/   - VLESS HTTPUpgrade + TLS : $tls/   - VLESS HTTPUpgrade + TLS : $tls1/g" /root/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $xtls -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $xtls -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $tls1 -j ACCEPT
@@ -65,11 +63,11 @@ exit 0
 fi
 cek=$(netstat -nutlp | grep -w $none1)
 if [[ -z $cek ]]; then
-sed -i "s/$none/$none1/g" /usr/local/etc/xray/none.json
-sed -i "s/   - Websocket SSH(HTTP)     : $none/   - Websocket SSH(HTTP)     : $none1/g" /root/log-install.txt
-sed -i "s/   - Xray Vless Ws None Tls  : $none/   - Xray Vless Ws None Tls  : $none1/g" /root/log-install.txt
-sed -i "s/   - Xray Vmess Ws None Tls  : $none/   - Xray Vmess Ws None Tls  : $none1/g" /root/log-install.txt
-sed -i "s/   - Xray Trojan Ws None Tls : $none/   - Xray Trojan Ws None Tls : $none1/g" /root/log-install.txt
+sed -i "s/$none/$none1/g" /usr/local/etc/xray/vless-none.json
+sed -i "s/   - Websocket HTTP           : $none/   - Websocket HTTP           : $none1/g" /root/log-install.txt
+sed -i "s/   - VMESS WebSocket + NTLS   : $none/   - VMESS WebSocket + NTLS   : $none1/g" /root/log-install.txt
+sed -i "s/   - VLESS WebSocket + NTLS   : $none/   - VLESS WebSocket + NTLS   : $none1/g" /root/log-install.txt
+sed -i "s/   - VLESS HTTPUpgrade + NTLS : $none/   - VLESS HTTPUpgrade + NTLS : $none1/g" /root/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $none -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $none -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $none1 -j ACCEPT
