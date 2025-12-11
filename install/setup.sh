@@ -377,7 +377,7 @@ echo "   - Stunnel4                   : 222, 777" | tee -a log-install.txt
 echo "   - Websocket HTTP             : 80" | tee -a log-install.txt
 echo "   - Websocket HTTPS            : 443" | tee -a log-install.txt
 echo "   - BadVPN                     : 7100, 7200, 7300" | tee -a log-install.txt
-echo "   - Nginx                      : 81, 5000" | tee -a log-install.txt
+echo "   - Nginx                      : 81" | tee -a log-install.txt
 echo "" | tee -a log-install.txt
 echo -e "\e[38;5;208m   [ XRAY SERVICES ]\e[0m" | tee -a log-install.txt
 echo -e "   \e[38;5;245m───────────────────────────────────────────────\e[0m" | tee -a log-install.txt
@@ -389,23 +389,23 @@ echo "   - VLESS WebSocket + NTLS     : 80" | tee -a log-install.txt
 echo "   - VLESS HTTPUpgrade + NTLS   : 80" | tee -a log-install.txt
 echo -e "\e[38;5;208m   [ CUSTOM-PATH ]\e[0m" | tee -a log-install.txt
 echo -e "   \e[38;5;245m───────────────────────────────────────────────\e[0m" | tee -a log-install.txt
-echo "   VMESS WS + NTLS(Multipath) : 8880" | tee -a log-install.txt
-echo "   VLESS WS + NTLS(Multipath) : 8080" | tee -a log-install.txt
+echo "   VMESS WS + NTLS(Multipath)   : 8880" | tee -a log-install.txt
+echo "   VLESS WS + NTLS(Multipath)   : 8080" | tee -a log-install.txt
 echo "" | tee -a log-install.txt
 echo -e "\e[38;5;46m──────────────────────────────────────────────────────────────\e[0m" | tee -a log-install.txt
 echo "" | tee -a log-install.txt
 echo "   ▶ SERVER INFORMATION & FEATURES" | tee -a log-install.txt
 echo -e "   \e[38;5;245m───────────────────────────────────────────────\e[0m" | tee -a log-install.txt
-echo "   - Timezone                 : Asia/Kuala_Lumpur (GMT +8)" | tee -a log-install.txt
-echo "   - Fail2Ban                 : [ENABLED]" | tee -a log-install.txt
-echo "   - Dflate                   : [ENABLED]" | tee -a log-install.txt
-echo "   - IPTables                 : [ENABLED]" | tee -a log-install.txt
-echo "   - Auto-Reboot              : [ENABLED]" | tee -a log-install.txt
-echo "   - Daily Reboot Time        : 05:00 (GMT +8)" | tee -a log-install.txt
-echo "   - Auto Backup Data         : Yes" | tee -a log-install.txt
-echo "   - Restore Data             : Yes" | tee -a log-install.txt
-echo "   - Auto Delete Expired      : Yes" | tee -a log-install.txt
-echo "   - Full Orders Support      : Yes" | tee -a log-install.txt
+echo "   - Timezone                   : Asia/Kuala_Lumpur (GMT +8)" | tee -a log-install.txt
+echo "   - Fail2Ban                   : [ENABLED]" | tee -a log-install.txt
+echo "   - Dflate                     : [ENABLED]" | tee -a log-install.txt
+echo "   - IPTables                   : [ENABLED]" | tee -a log-install.txt
+echo "   - Auto-Reboot                : [ENABLED]" | tee -a log-install.txt
+echo "   - Daily Reboot Time          : 05:00 (GMT +8)" | tee -a log-install.txt
+echo "   - Auto Backup Data           : Yes" | tee -a log-install.txt
+echo "   - Restore Data               : Yes" | tee -a log-install.txt
+echo "   - Auto Delete Expired        : Yes" | tee -a log-install.txt
+echo "   - Full Orders Support        : Yes" | tee -a log-install.txt
 #echo "   - White Label Ready        : Yes" | tee -a log-install.txt
 #echo "   - Log File                 : /root/log-install.txt" | tee -a log-install.txt
 echo "" | tee -a log-install.txt

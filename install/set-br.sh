@@ -71,16 +71,12 @@ chmod +x /usr/local/bin/limit-speed-apply.sh
 cat <<EOF > /etc/systemd/system/limit-speed.service
 [Unit]
 Description=Apply bandwidth limit with wondershaper
-After=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c '
-if [[ -f /home/limit ]] && [[ -s /home/limit ]]; then
-    read NIC DOWN UP < /home/limit
-    wondershaper -a $NIC -d $((DOWN*1000)) -u $((UP*1000))
-fi
-'
+ExecStart=/usr/local/bin/limit-speed-apply.sh
 RemainAfterExit=yes
 
 [Install]
@@ -89,8 +85,9 @@ EOF
 
 # start limit speed boot
 systemctl daemon-reload
-systemctl enable limit-speed.service
 systemctl start limit-speed.service
+#systemctl status limit-speed.service
+systemctl enable limit-speed.service
 
 #done
 rm -r set-br.sh
