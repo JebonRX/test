@@ -321,7 +321,7 @@ rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/nginx.conf"
 mkdir -p /home/vps/public_html
 #wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/vps.conf"
-sudo cat <<EOF > /etc/nginx/conf.d/vps.conf
+cat <<EOF > /etc/nginx/conf.d/vps.conf
 server {
     listen       81;
 	listen       5000;
