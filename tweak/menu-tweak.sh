@@ -34,7 +34,7 @@ echo -e " [${CYAN}•1${RESET}]  IPv4v6 Toggle"
 echo -e " [${CYAN}•2${RESET}]  Swap RAM Manager"
 echo -e " [${CYAN}•3${RESET}]  BBR Manager"
 echo -e " [${CYAN}•4${RESET}]  Xray Core Changer"
-echo -e " [${CYAN}•5${RESET}]  Check System Info"
+#echo -e " [${CYAN}•5${RESET}]  Check System Info"
 echo ""
 echo -e " [${CYAN}•0${RESET}]  Back To Main Menu"
 echo ""
@@ -67,10 +67,10 @@ case $opt in
     clear
     exec xraychanger    # Xray Core changer
     ;;
-5)
-    clear
-    exec system-info    # Check system info
-    ;;
+#5)
+##    clear
+ #   exec system-info    # Check system info
+ #   ;;
 0|x)
     clear
     exec menu           # Back to main menu
