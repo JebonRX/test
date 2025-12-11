@@ -1253,8 +1253,8 @@ systemctl enable xray@httpupgrade-none
 systemctl restart xray@httpupgrade-none
 
 # enables xray custom protocol
-systemctl enable xray@xrays-custom
-systemctl restart xray@xrays-custom
+#systemctl enable xray@xrays-custom
+#systemctl restart xray@xrays-custom
 
 # end
 cd

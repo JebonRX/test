@@ -250,7 +250,7 @@ printf '\n\033[1;32m╭───────────────────
 printf '   ⚙️  \033[1;37mInstalling Xray Server...\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
 sleep 1
-wget https://raw.githubusercontent.com/JebonRX/test/main/install/xray-vpn2.sh && chmod +x xray-vpn2.sh && screen -S xray-vpn ./xray-vpn2.sh
+wget https://raw.githubusercontent.com/JebonRX/test/main/install/xray-vpn2.sh && chmod +x xray-vpn2.sh && screen -S xray-vpn2 ./xray-vpn2.sh
 sleep 1
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ✅  \033[1;37mDone installing Xray Server\033[0m\n'
