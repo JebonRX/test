@@ -21,7 +21,6 @@ loading_bar
 for svc in ssh dropbear stunnel4 fail2ban cron nginx; do
     /etc/init.d/$svc restart &>/dev/null
 done
-
 # Restart Xray services
 xray_services=(
     xray
@@ -35,6 +34,7 @@ xray_services=(
     xray@vmess-tls
     xray@vmess-none
     xray@vmess-custom
+	nginx
     ws-http
     ws-https
     client-sldns
