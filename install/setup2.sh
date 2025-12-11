@@ -431,6 +431,6 @@ echo ""
 echo -e "   \e[1;32m Server Will Reboot In 5 seconds\e[0m"
 
 #finish
-rm -r setup.sh
+rm -r setup2.sh
 sleep 5
 reboot
