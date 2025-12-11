@@ -1210,13 +1210,13 @@ iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 # custom path port tcp
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
+#iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
 # ipt udp
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 443 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
 # custom path port udp
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
+#iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
 #
 iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
