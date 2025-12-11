@@ -323,19 +323,18 @@ mkdir -p /home/vps/public_html
 #wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/vps.conf"
 cat <<EOF > /etc/nginx/conf.d/vps.conf
 server {
-    listen       81;
-	listen       5000;
-    server_name  127.0.0.1 localhost;
+    listen 81;
+    listen 5000;
+    server_name _;
 
     access_log /var/log/nginx/vps-access.log;
     error_log  /var/log/nginx/vps-error.log error;
 
-    # Root asal
     root /home/vps/public_html;
+    index index.php index.html index.htm;
 
     location / {
-        index  index.html index.htm index.php;
-        try_files $uri $uri/ /index.php?$args;
+        try_files \$uri \$uri/ /index.php?\$args;
     }
 
     # Folder Xray config
@@ -346,14 +345,15 @@ server {
         autoindex_localtime on;
     }
 
-    location ~ \.php$ {
-        include /etc/nginx/fastcgi_params;
+    location ~ \\.php\$ {
+        include fastcgi_params;
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
     }
 }
 EOF
+#restart nginx
 /etc/init.d/nginx restart
 
 ### Version
