@@ -1004,36 +1004,46 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
     "access": "/var/log/xray/access.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
-       },
-    "inbounds": [
-           {
-            "port": 8880,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "${uuid}",
-                        "alterId": 0,
-                        "email": "admin@nevermoree.com"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 10085, ##
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "127.0.0.1"
+      },
+      "tag": "api"
+    },
+    {
+      "port": 5001, ##
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid4}",
+            "alterId": 0,
+            "level": 0
 #vmess-ws-custom
           }
         ],
-        "decryption": "none"
+        "fallbacks": [
+          {
+            "dest": 8080,
+            "xver": 1
+          }
+        ]
       },
       "streamSettings": {
         "network": "ws",
-	"security": "none",
+        "security": "none",
         "wsSettings": {
           "path": "/vmess",
           "headers": {
             "Host": ""
           }
-         },
-        "quicSettings": {},
-        "sockopt": {
-          "mark": 0,
-          "tcpFastOpen": true
-        }
+        },
+        "quicSettings": {}
       },
       "sniffing": {
         "enabled": true,
@@ -1041,8 +1051,87 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
           "http",
           "tls"
         ]
+      }
+    },
+    {
+      "port": 5002, ##
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid6}"
+#vless-ws-custom
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 8080,
+            "xver": 1
+          }
+        ]
       },
-      "domain": "${domain}"
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/vless",
+          "headers": {
+            "Host": ""
+          }
+        },
+        "quicSettings": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 5003, ##
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid7}"
+#vless-httpupgrade-custom
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 8080,
+            "xver": 1
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/httpupg",
+          "headers": {
+            "Host": ""
+          }
+        },
+        "httpSettings": {
+          "host": [
+            "example.com"
+          ],
+          "path": "/httpupg"
+        },
+        "quicSettings": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
     }
   ],
   "outbounds": [
@@ -1079,6 +1168,13 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
         "outboundTag": "blocked"
       },
       {
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api",
+        "type": "field"
+      },
+      {
         "type": "field",
         "outboundTag": "blocked",
         "protocol": [
@@ -1086,6 +1182,25 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
         ]
       }
     ]
+  },
+  "stats": {},
+  "api": {
+    "services": [
+      "StatsService"
+    ],
+    "tag": "api"
+  },
+  "policy": {
+    "levels": {
+      "0": {
+        "statsUserDownlink": true,
+        "statsUserUplink": true
+      }
+    },
+    "system": {
+      "statsInboundUplink": true,
+      "statsInboundDownlink": true
+    }
   }
 }
 END
