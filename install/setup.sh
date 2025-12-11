@@ -22,7 +22,7 @@ NC='\033[0;37m'
 # starting
 clear
 echo "Updating system packages..."
-apt update -y && apt upgrade -y && apt dist-upgrade -y
+#apt update -y && apt upgrade -y && apt dist-upgrade -y
 echo "Installing base packages..."
 apt install -y bzip2 gzip coreutils screen wget curl
 clear
