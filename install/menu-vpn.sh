@@ -64,7 +64,7 @@ wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" &
 wget -O bbr-manager "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr-manager.sh" && chmod +x bbr-manager
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
 wget -O xraychanger "https://raw.githubusercontent.com/JebonRX/test/main/tweak/xraychanger.sh" && chmod +x xraychanger
-wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/others/change-dropbear.sh" && chmod +x change-dropbear
+wget -O ip6menu "https://raw.githubusercontent.com/JebonRX/test/main/tweak/ip6menu.sh" && chmod +x ip6menu
 
 # System files
 sleep 1
@@ -79,6 +79,7 @@ wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/cl
 wget -O restart "https://raw.githubusercontent.com/JebonRX/test/main/others/restart.sh" && chmod +x restart
 wget -O system "https://raw.githubusercontent.com/JebonRX/test/main/others/system.sh" && chmod +x system
 wget -O certv2ray "https://raw.githubusercontent.com/JebonRX/test/main/others/certv2ray.sh" && chmod +x certv2ray
+wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/others/change-dropbear.sh" && chmod +x change-dropbear
 
 # end
 cd
