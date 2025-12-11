@@ -9,6 +9,7 @@ set -euo pipefail
 # - NOTE: This modified version REMOVES creation of a systemd drop-in file.
 #
 # Run as root: sudo ./install-dropbear-interactive-latest.sh
+clear
 
 if [[ "${EUID:-0}" -ne 0 ]]; then
   echo "Sila jalankan sebagai root (sudo)." >&2
@@ -49,7 +50,7 @@ detect_latest_version() {
 echo "Mencuba kesan versi terbaru dari upstream..."
 LATEST_VER="$(detect_latest_version || true)"
 if [[ -n "${LATEST_VER:-}" ]]; then
-  echo "Versi terbaru dikesan: ${LATEST_VER}"
+  echo "Versi terbaru dikesan: ${LATEST_VER} , Current Version: $(dropbear -V)"
 else
   echo "Gagal mengesan versi terbaru (Latest will show as unknown)."
 fi
