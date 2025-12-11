@@ -1,193 +1,87 @@
 #!/bin/bash
-
-# ===========================
-#     VPS TWEAK MENU
-# ===========================
-
-# --- Warna ---
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
-
-# ===========================
-#   CHECK STATUS IPV6
-# ===========================
-ipv6_status_simple() {
-    if sysctl net.ipv6.conf.all.disable_ipv6 2>/dev/null | grep -q "1"; then
-        echo -e "${RED}Disabled${NC}"
-    else
-        echo -e "${GREEN}Enabled${NC}"
-    fi
-}
-
-# ===========================
-#  ENABLE / DISABLE IPV6
-# ===========================
-disable_ipv6() {
-    echo "Disabling IPv6..."
-    sed -i '/net.ipv6.conf.all.disable_ipv6/d' /etc/sysctl.conf
-    sed -i '/net.ipv6.conf.default.disable_ipv6/d' /etc/sysctl.conf
-
-    echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
-
-    sysctl -p >/dev/null 2>&1
-    echo -e "${GREEN}IPv6 telah di-disable!${NC}"
-    sleep 1
-}
-
-enable_ipv6() {
-    echo "Enabling IPv6..."
-    sed -i '/net.ipv6.conf.all.disable_ipv6/d' /etc/sysctl.conf
-    sed -i '/net.ipv6.conf.default.disable_ipv6/d' /etc/sysctl.conf
-
-    sysctl -p >/dev/null 2>&1
-    echo -e "${GREEN}IPv6 telah di-enable!${NC}"
-    sleep 1
-}
-
-# ===========================
-#        MENU IPV6
-# ===========================
-ipv6_menu() {
-    while true; do
-        clear
-        echo "=============================="
-        echo "           IPv6 MENU"
-        echo "=============================="
-        echo "1) Disable IPv6"
-        echo "2) Enable IPv6"
-        echo "0) Kembali"
-        echo "------------------------------"
-        read -p "Pilih: " ip
-
-        case $ip in
-            1) disable_ipv6 ;;
-            2) enable_ipv6 ;;
-            0) break ;;
-            *) echo -e "${RED}Pilihan tidak sah!${NC}"; sleep 1 ;;
-        esac
-    done
-}
-
-# ===========================
-#       SWAP FUNCTIONS
-# ===========================
-
-check_swap() {
-    swapon --show | grep -q "file" || swapon --show | grep -q "partition"
-}
-
-create_swap_custom() {
-    read -p "Masukkan saiz swap (contoh: 1G, 2G, 4096M): " CUSTOMSWAP
-    if [[ -z "$CUSTOMSWAP" ]]; then
-        echo -e "${RED}Nilai kosong!${NC}"
-        return
-    fi
-    fallocate -l $CUSTOMSWAP /swapfile
-    chmod 600 /swapfile
-    mkswap /swapfile
-    swapon /swapfile
-
-    if ! grep -q "/swapfile" /etc/fstab; then
-        echo "/swapfile none swap sw 0 0" >> /etc/fstab
-    fi
-
-    echo -e "${GREEN}Swap $CUSTOMSWAP berjaya dibuat!${NC}"
-}
-
-create_swap() {
-    SIZE=$1
-    echo -e "${YELLOW}Sedang membuat swap ${SIZE}...${NC}"
-
-    fallocate -l $SIZE /swapfile
-    chmod 600 /swapfile
-    mkswap /swapfile
-    swapon /swapfile
-
-    if ! grep -q "/swapfile" /etc/fstab; then
-        echo "/swapfile none swap sw 0 0" >> /etc/fstab
-    fi
-
-    echo -e "${GREEN}Swap ${SIZE} berjaya dibuat!${NC}"
-}
-
-remove_swap() {
-    if check_swap; then
-        swapoff -a
-        rm -f /swapfile
-        sed -i '/swapfile/d' /etc/fstab
-        echo -e "${GREEN}Swap berjaya dibuang!${NC}"
-    else
-        echo -e "${RED}Tiada swap untuk dibuang.${NC}"
-    fi
-}
-
-swap_menu() {
-    while true; do
-        clear
-        echo "============================"
-        echo "          SWAP MENU"
-        echo "============================"
-        echo "1) Create Swap 1GB"
-        echo "2) Create Swap 2GB"
-        echo "3) Create Swap 4GB"
-        echo "4) Create Custom Swap"
-        echo "5) Remove Swap"
-        echo "0) Kembali"
-        echo "----------------------------"
-        read -p "Pilih: " sw
-
-        case $sw in
-            1) create_swap "1G" ;;
-            2) create_swap "2G" ;;
-            3) create_swap "4G" ;;
-            4) create_swap_custom ;;
-            5) remove_swap ;;
-            0) break ;;
-            *) echo -e "${RED}Pilihan tidak sah!${NC}"; sleep 1 ;;
-        esac
-    done
-}
-
-# ===========================
-#       MENU UTAMA
-# ===========================
-main_menu() {
-while true; do
 clear
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
+reset="\e[0m"
 
-echo "==============================="
-echo "         VPS TWEAK MENU"
-echo "==============================="
-echo -n "IPv6 Status: "; ipv6_status_simple
-echo "-------------------------------"
-echo "1) System Optimization"
-echo "2) Network Optimization"
-echo "3) Security Hardening"
-echo "4) Monitoring Tools"
-echo "5) Tools Tambahan"
-echo "6) Swap RAM"
-echo "7) IPv6 Settings"
-echo "0) Exit"
-echo "-------------------------------"
-read -p "Pilih menu: " menu
+# Public IP
+MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+domain=$(cat /usr/local/etc/xray/domain)
+clear
+# Warna dan reset
+line="36"   # cyan
+below="33"  # yellow
+reset="0"
 
-case $menu in
-    1) echo "System Optimization (placeholder)"; sleep 1 ;;
-    2) echo "Network Optimization (placeholder)"; sleep 1 ;;
-    3) echo "Security Hardening (placeholder)"; sleep 1 ;;
-    4) echo "Monitoring Tools (placeholder)"; sleep 1 ;;
-    5) echo "Tools Tambahan (placeholder)"; sleep 1 ;;
-    6) swap_menu ;;
-    7) ipv6_menu ;;
-    0) exit ;;
-    *) echo -e "${RED}Pilihan tidak sah!${NC}"; sleep 1 ;;
+# Judul Menu
+title="\033[1;37m"
+
+echo ""
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "  ${title}[ TWEAK MENU SYSTEM OPTIMIZATION ]${reset}"
+echo -e "\e[${line}m═══════════════════════════════════════════════${reset}"
+echo -e "\033[1;37mSystem Tweaks by NevermoreSSH\033[0m"
+echo -e "\033[1;37mTelegram : https://t.me/todfix667 \033[0m"
+echo ""
+echo ""
+
+# Pilihan Menu (Button text diubah, detail tetap sama)
+echo -e " [\033[1;36m•1\033[0m]  \e[${below}mIPv4v6 Toggle${reset}"              # asal: IPv4 / IPv6 Toggle
+echo -e " [\033[1;36m•2\033[0m]  \e[${below}mSwap RAM Manager${reset}"             # asal: Swap RAM Manager
+echo -e " [\033[1;36m•3\033[0m]  \e[${below}mBBR Manager${reset}"  # tetap sama
+echo -e " [\033[1;36m•4\033[0m]  \e[${below}mXray Core Changer${reset}"         # asal: Xray Core Changer
+echo -e " [\033[1;36m•5\033[0m]  \e[${below}mCheck System Info${reset}"   # tetap sama
+echo ""
+echo -e " [\033[1;36m•0\033[0m]  \e[${below}mBack To Main Menu${reset}"
+echo ""
+echo -e " \033[1;37mPress [ Ctrl+C ] • To Exit Script\033[0m"
+echo ""
+echo -e "\e[${below}m"
+
+# Input dari user
+read -p " Select menu : " opt
+echo -e ""
+
+# Case statement untuk menu (detail tetap sama)
+case $opt in
+1)
+    clear
+    exec ip6menu        # tetap sama
+    ;;
+2)
+    clear
+    exec swapram        # tetap sama
+    ;;
+3)
+    clear
+    exec bbr-manager    # tetap sama
+    ;;
+4)
+    clear
+    exec xraychanger    # tetap sama
+    ;;
+5)
+    clear
+    exec system-info    # tetap sama
+    ;;
+0|x)
+    clear
+    exec menu           # Kembali ke main menu
+    ;;
+*)
+    echo "Wrong Button"
+    sleep 1
+    exec tweak-menu     # Reload tweak menu
+    ;;
 esac
-
-done
-}
-
-# Start Program
-main_menu

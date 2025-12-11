@@ -52,6 +52,21 @@ apt-get install speedtest -y
 # 5️⃣ Jalankan ujian speed
 #speedtest
 
+#Buat script helper systemd
+cat <<'EOF' > /usr/local/bin/limit-speed-apply.sh
+#!/bin/bash
+LIMIT_FILE="/home/limit"
+
+if [[ -f "$LIMIT_FILE" ]] && [[ -s "$LIMIT_FILE" ]]; then
+    read NIC DOWN UP < "$LIMIT_FILE"
+    wondershaper -c -a "$NIC" 2>/dev/null
+    wondershaper -a "$NIC" -d $((DOWN*1000)) -u $((UP*1000))
+fi
+EOF
+
+chmod +x /usr/local/bin/limit-speed-apply.sh
+
+
 #Buat systemd service untuk auto-apply limit saat boot
 cat <<EOF > /etc/systemd/system/limit-speed.service
 [Unit]
@@ -71,6 +86,7 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 EOF
+
 # start limit speed boot
 systemctl daemon-reload
 systemctl enable limit-speed.service

@@ -1,8 +1,8 @@
 #!/bin/bash
 # =========================================
-# Limit Bandwidth Speed - Improved Version
-# Edition : Stable Edition V1.6 (Color, Bash-safe)
-# Author  : NevermoreSSH
+# Limit Bandwidth Speed - Persistent Version
+# Edition : v1.8
+# Author  : NevermoreSSH (Improved by ChatGPT)
 # =========================================
 
 # Colors
@@ -24,6 +24,20 @@ NIC=$(ip -o link show | awk -F': ' '$2!="lo"{print $2; exit}')
 
 # ----------------------------------------------------------------------------- #
 
+save_limit() {
+    # Simpan NIC, download, upload ke file untuk systemd
+    echo "$NIC $1 $2" > "$STATUS_FILE"
+}
+
+apply_limit() {
+    # $1 = download Mbps, $2 = upload Mbps
+    down=$(( $1 * 1000 ))
+    up=$(( $2 * 1000 ))
+    wondershaper -c -a "$NIC" 2>/dev/null
+    wondershaper -a "$NIC" -d "$down" -u "$up"
+    save_limit "$1" "$2"
+}
+
 start() {
     clear
     echo -e "${Cyan}============================================${NC}"
@@ -31,13 +45,6 @@ start() {
     echo -e "${Cyan}============================================${NC}"
     echo ""
 
-    # Input bandwidth limit
-        echo "Example:"
-    echo "  - 100  = 100 Mbps"
-    echo "  - 300  = 300 Mbps"
-    echo "  - 1000 = 1 Gbps"
-    echo "  - 5000 = 5 Gbps"
-    echo ""
     read -p $'\033[97mSet maximum DOWNLOAD rate (Mbps): \033[0m' down_mbps
     read -p $'\033[97mSet maximum UPLOAD rate   (Mbps): \033[0m' up_mbps
 
@@ -46,30 +53,11 @@ start() {
         exit 1
     fi
 
-    # Convert Mbps → Kbps
-    down=$(( down_mbps * 1000 ))
-    up=$(( up_mbps * 1000 ))
-
     echo ""
-    echo -e "${Magenta}Preparing to apply new limit...${NC}"
-    sleep 1
+    echo -e "${Magenta}Applying new bandwidth limit...${NC}"
+    apply_limit "$down_mbps" "$up_mbps"
 
-    # OFF old limit only AFTER new input
-    if [[ -f "$STATUS_FILE" ]] && grep -q "start" "$STATUS_FILE"; then
-        echo -e "${Yellow}Old bandwidth limit detected. Removing old limit...${NC}"
-        wondershaper -c -a "$NIC"
-        sleep 1
-    fi
-
-    # Apply new limit
-    echo -e "${Green}Applying new bandwidth limit...${NC}"
-    wondershaper -a "$NIC" -d "$down" -u "$up"
-
-    # Save new limit
-    echo "start ${down_mbps} ${up_mbps}" > "$STATUS_FILE"
-
-    echo ""
-    echo -e "${Green}Done! New bandwidth limit is now active.${NC}"
+    echo -e "${Green}Done! Bandwidth limit is now active.${NC}"
     echo -e "${Yellow}DOWNLOAD Limit: ${down_mbps} Mbps${NC}"
     echo -e "${Yellow}UPLOAD Limit  : ${up_mbps} Mbps${NC}"
 
@@ -83,13 +71,12 @@ start() {
 stop() {
     clear
     echo -e "${Red}Removing bandwidth limit...${NC}"
-    sleep 1
+    wondershaper -c -a "$NIC" 2>/dev/null
 
-    wondershaper -c -a "$NIC"
+    # Hapus status file sepenuhnya
+    rm -f "$STATUS_FILE"
 
-    echo "" > "$STATUS_FILE"
-    echo -e "${Green}Done! Bandwidth limit has been removed.${NC}"
-
+    echo -e "${Green}Bandwidth limit removed.${NC}"
     echo ""
     read -n 1 -s -r -p $'\033[97mPress any key to back on menu\033[0m'
     exec limit-speed
@@ -97,18 +84,18 @@ stop() {
 
 # ----------------------------------------------------------------------------- #
 
-# Read current limit values
+# Read current limit
 current_limit="None"
-if [[ -f "$STATUS_FILE" ]] && grep -q "start" "$STATUS_FILE"; then
+if [[ -f "$STATUS_FILE" ]] && [[ -s "$STATUS_FILE" ]]; then
     sts=$Info
-    read _ d u < "$STATUS_FILE"
+    read nic d u < "$STATUS_FILE"
     current_limit="${d} Mbps / ${u} Mbps"
 else
     sts=$Error
 fi
 
 # ----------------------------------------------------------------------------- #
-# Display Menu
+# Display menu
 clear
 echo -e "${Cyan}========================================${NC}"
 echo -e "${Cyan}           Bandwidth Limit Menu          ${NC}"
@@ -127,11 +114,18 @@ read -rp $'\033[97mEnter your choice: \033[0m' num
 
 case $num in
     1) start ;;
-    3) speedtest ;;
     2) stop ;;
+    3)
+        if command -v speedtest &>/dev/null; then
+            speedtest
+        else
+            echo -e "${Red}Speedtest CLI not installed!${NC}"
+        fi
+        read -n 1 -s -r -p $'\033[97mPress any key to back on menu\033[0m'
+        exec limit-speed
+        ;;
     *)
         echo -e "${Red}Invalid selection!${NC}"
-        echo ""
         read -n 1 -s -r -p $'\033[97mPress any key to back on menu\033[0m'
         exec limit-speed
         ;;

@@ -14,7 +14,7 @@ clear
 Server_URL="raw.githubusercontent.com/JebonRX/test/main/xray"
 
 # make directory Menu
-cd /usr/bin
+cd /usr/local/bin/
 
 # XRAY VMESS FILES
 echo -e "[ ${green}INFO${NC} ] Downloading Vmess WS Files"
@@ -61,6 +61,7 @@ sleep 1
 sleep 1
 wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-tweak.sh" && chmod +x menu-tweak
 wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
+wget -O bbr-manager "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr-manager.sh" && chmod +x bbr-manager
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram
 wget -O xraychanger "https://raw.githubusercontent.com/JebonRX/test/main/tweak/xraychanger.sh" && chmod +x xraychanger
 wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/others/change-dropbear.sh" && chmod +x change-dropbear
@@ -77,6 +78,7 @@ wget -O change-port "https://raw.githubusercontent.com/JebonRX/test/main/others/
 wget -O clear-log "https://raw.githubusercontent.com/JebonRX/test/main/others/clear-log.sh" && chmod +x clear-log
 wget -O restart "https://raw.githubusercontent.com/JebonRX/test/main/others/restart.sh" && chmod +x restart
 wget -O system "https://raw.githubusercontent.com/JebonRX/test/main/others/system.sh" && chmod +x system
+wget -O certv2ray "https://raw.githubusercontent.com/JebonRX/test/main/others/certv2ray.sh" && chmod +x certv2ray
 
 # end
 cd
