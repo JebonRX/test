@@ -7,19 +7,40 @@ license key 2025-2026:
 ```
 MNVR7X-M1M3AF-WWV7DT-RJKFQ7-R5V7XE-JWYPO7
 ```
+───────────────────────────────  
+**SERVICES & PORTS**  
+───────────────────────────────  
 
+### SSH & WEBSOCKET
+- OpenSSH                        : 22  
+- Dropbear                       : 143, 109  
+- Stunnel4   : 222, 777  
+- Websocket HTTP   : 80  
+- Websocket HTTPS : 443  
+- BadVPN   : 7100, 7200, 7300  
+- Nginx   : 81  
 
-⏩ XRAY MULTIPORT AUTOSCRIPT ⏪
+### XRAY SERVICES
+- VMESS WS + TLS   : 443  
+- VLESS WS + TLS   : 443  
+- VLESS HTTPUpgrade + TLS   : 443  
+- VMESS WS + NTLS   : 80 , 8880
+- VLESS WS + NTLS   : 80 , 8080  
+- VLESS HTTPUpgrade + NTLS   : 80  
 
-[ VPS SERVICES ]
+───────────────────────────────  
+**SERVER INFORMATION & FEATURES**  
+───────────────────────────────  
 
-♦️ XRAY VMESS WEBSOCKET 443 / 80
+- Timezone   : Asia/Kuala_Lumpur (GMT +8)  
+- Fail2Ban   : [ENABLED]  
+- Dflate   : [ENABLED]  
+- IPTables  : [ENABLED]  
+- Auto-Reboot   : [ENABLED]  
+- Daily Reboot Time  : 05:00 (GMT +8)  
+- Auto Backup Data  : Yes  
+- Restore Data   : Yes  
+- Auto Delete Expired   : Yes  
+- Full Orders Support   : Yes  
 
-♦️ XRAY VLESS WEBSOCKET 443 / 80
-
-♦️ XRAY VLESS HTTPUGRADE 443 / 80
-
-♦️ XRAY SHADOWSOCKS WEBSOCKET 443 / 80
-
-♦️ SSH WEBSOCKET 443 / 80
-
+───────────────────────────────  
