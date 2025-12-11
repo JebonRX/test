@@ -1038,7 +1038,7 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
         "network": "ws",
         "security": "none",
         "wsSettings": {
-          "path": "/vmess",
+          "path": "/vms",
           "headers": {
             "Host": ""
           }
@@ -1075,7 +1075,7 @@ cat> /usr/local/etc/xray/vmess-custom.json << END
         "network": "ws",
         "security": "none",
         "wsSettings": {
-          "path": "/vless",
+          "path": "/vls",
           "headers": {
             "Host": ""
           }
