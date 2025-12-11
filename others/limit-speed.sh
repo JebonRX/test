@@ -1,63 +1,138 @@
 #!/bin/bash
 # =========================================
-# Menu Services | Create limit speed
-# Edition : Stable Edition V1.1
-# Auther  : NevermoreSSH
-# (C) Copyright 2025 - 2026
+# Limit Bandwidth Speed - Improved Version
+# Edition : Stable Edition V1.6 (Color, Bash-safe)
+# Author  : NevermoreSSH
 # =========================================
 
-# public ip
-MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
+# Colors
+Green="\033[32m"
+Red="\033[31m"
+Yellow="\033[33m"
+Cyan="\033[36m"
+Magenta="\033[35m"
+White="\033[97m"
+NC="\033[0m"
 
-# color
-Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[ON]${Font_color_suffix}"
-Error="${Red_font_prefix}[OFF]${Font_color_suffix}"
-cek=$(cat /home/limit)
-NIC=$(ip -o $ANU -4 route show to default | awk '{print $5}');
-function start () {
-echo -e "Limit Speed All Service"
-read -p "Set maximum download rate (in Kbps): " down
-read -p "Set maximum upload rate (in Kbps): " up
-if [[ -z "$down" ]] && [[ -z "$up" ]]; then
-echo > /dev/null 2>&1
-else
-echo "Start Configuration"
-sleep 0.5
-wondershaper -a $NIC -d $down -u $up > /dev/null 2>&1
-systemctl enable --now wondershaper.service
-echo "start" > /home/limit
-echo "Done"
-fi
+Info="${Green}[ON]${NC}"
+Error="${Red}[OFF]${NC}"
+
+STATUS_FILE="/home/limit"
+
+# Auto-detect main network interface (excluding lo)
+NIC=$(ip -o link show | awk -F': ' '$2!="lo"{print $2; exit}')
+
+# ----------------------------------------------------------------------------- #
+
+start() {
+    clear
+    echo -e "${Cyan}============================================${NC}"
+    echo -e "${Cyan}           APPLY BANDWIDTH LIMIT${NC}"
+    echo -e "${Cyan}============================================${NC}"
+    echo ""
+
+    # Input bandwidth limit
+        echo "Example:"
+    echo "  - 100  = 100 Mbps"
+    echo "  - 300  = 300 Mbps"
+    echo "  - 1000 = 1 Gbps"
+    echo "  - 5000 = 5 Gbps"
+    echo ""
+    read -p $'\033[97mSet maximum DOWNLOAD rate (Mbps): \033[0m' down_mbps
+    read -p $'\033[97mSet maximum UPLOAD rate   (Mbps): \033[0m' up_mbps
+
+    if [[ -z "$down_mbps" || -z "$up_mbps" ]]; then
+        echo -e "${Red}Error: values cannot be empty!${NC}"
+        exit 1
+    fi
+
+    # Convert Mbps → Kbps
+    down=$(( down_mbps * 1000 ))
+    up=$(( up_mbps * 1000 ))
+
+    echo ""
+    echo -e "${Magenta}Preparing to apply new limit...${NC}"
+    sleep 1
+
+    # OFF old limit only AFTER new input
+    if [[ -f "$STATUS_FILE" ]] && grep -q "start" "$STATUS_FILE"; then
+        echo -e "${Yellow}Old bandwidth limit detected. Removing old limit...${NC}"
+        wondershaper -c -a "$NIC"
+        sleep 1
+    fi
+
+    # Apply new limit
+    echo -e "${Green}Applying new bandwidth limit...${NC}"
+    wondershaper -a "$NIC" -d "$down" -u "$up"
+
+    # Save new limit
+    echo "start ${down_mbps} ${up_mbps}" > "$STATUS_FILE"
+
+    echo ""
+    echo -e "${Green}Done! New bandwidth limit is now active.${NC}"
+    echo -e "${Yellow}DOWNLOAD Limit: ${down_mbps} Mbps${NC}"
+    echo -e "${Yellow}UPLOAD Limit  : ${up_mbps} Mbps${NC}"
+
+    echo ""
+    read -n 1 -s -r -p $'\033[97mPress any key to back on menu\033[0m'
+    exec limit-speed
 }
-function stop () {
-wondershaper -ca $NIC
-systemctl stop wondershaper.service
-echo "Stop Configuration"
-sleep 0.5
-echo > /home/limit
-echo "Done"
+
+# ----------------------------------------------------------------------------- #
+
+stop() {
+    clear
+    echo -e "${Red}Removing bandwidth limit...${NC}"
+    sleep 1
+
+    wondershaper -c -a "$NIC"
+
+    echo "" > "$STATUS_FILE"
+    echo -e "${Green}Done! Bandwidth limit has been removed.${NC}"
+
+    echo ""
+    read -n 1 -s -r -p $'\033[97mPress any key to back on menu\033[0m'
+    exec limit-speed
 }
-if [[ "$cek" = "start" ]]; then
-sts="${Info}"
+
+# ----------------------------------------------------------------------------- #
+
+# Read current limit values
+current_limit="None"
+if [[ -f "$STATUS_FILE" ]] && grep -q "start" "$STATUS_FILE"; then
+    sts=$Info
+    read _ d u < "$STATUS_FILE"
+    current_limit="${d} Mbps / ${u} Mbps"
 else
-sts="${Error}"
+    sts=$Error
 fi
+
+# ----------------------------------------------------------------------------- #
+# Display Menu
 clear
-echo -e " \e[0;32m==============================\e[0m"
-echo -e "     \e[1;36mLimit Bandwidth Speed\e[0m"
-echo -e " \e[0;32m==============================\e[0m"
-echo -e " Status $sts"
-echo -e "  1. Start Limit"
-echo -e "  2. Stop Limit"
-echo -e " Press CTRL+C to return"
-read -rp " Please Enter The Correct Number : " -e num
-if [[ "$num" = "1" ]]; then
-start
-elif [[ "$num" = "2" ]]; then
-stop
-else
-clear
-echo " You Entered The Wrong Number"
-menu
-fi
+echo -e "${Cyan}========================================${NC}"
+echo -e "${Cyan}           Bandwidth Limit Menu          ${NC}"
+echo -e "${Cyan}========================================${NC}"
+echo -e "${White} Network Interface : ${Magenta}$NIC${NC}"
+echo -e " Limit Status      : $sts"
+echo -e " Current Speed Limit = ${Yellow}${current_limit}${NC}"
+echo -e "${Cyan}----------------------------------------${NC}"
+echo -e "${White} 1. Start / Change Limit${NC}"
+echo -e " 2. Stop Limit"
+echo -e " 3. Speedtest"
+echo -e ""
+echo -e " Press CTRL + C to exit"
+echo ""
+read -rp $'\033[97mEnter your choice: \033[0m' num
+
+case $num in
+    1) start ;;
+    3) speedtest ;;
+    2) stop ;;
+    *)
+        echo -e "${Red}Invalid selection!${NC}"
+        echo ""
+        read -n 1 -s -r -p $'\033[97mPress any key to back on menu\033[0m'
+        exec limit-speed
+        ;;
+esac
