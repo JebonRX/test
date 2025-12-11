@@ -5,7 +5,7 @@ apt update -y && apt upgrade -y && apt dist-upgrade -y && apt install -y screen 
 
 license key 2025-2026:
 ```
-MNVRNX-M1M3AF-WWV7DT-RJKFQ7-R5V7XE-JWYPOR
+MNVR7X-M1M3AF-WWV7DT-RJKFQ7-R5V7XE-JWYPO7
 ```
 
 
