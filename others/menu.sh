@@ -276,7 +276,7 @@ case $menu in
     exec menu-ssh
     ;;
 4)
-    exec menu
+    exec menu-ssws
     ;;
 5)
     exec system
