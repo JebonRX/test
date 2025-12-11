@@ -77,7 +77,7 @@ vless=$(grep -c -E "^#vls " "/usr/local/etc/xray/vless-tls.json")
 # TOTAL ACC CREATE OVPN SSH
 sshws="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 # Total Shadowsocks
-ss=$(grep -c -E "^#ss " "/usr/local/etc/xray/ss-tls.json")
+#ss=$(grep -c -E "^#ss " "/usr/local/etc/xray/ss-tls.json")
 clear
 
 # ------------------------------
@@ -236,7 +236,7 @@ echo -e "\e[${line}m════════════════════
 echo -e "  \e[${number}m(•1)\e[0m \e[${below}mXRAY VLESS${reset}     ${PINK}[${GREEN}${vless}${PINK}]  "
 echo -e "  \e[${number}m(•2)\e[0m \e[${below}mXRAY VMESS${reset}     ${PINK}[${GREEN}${vmess}${PINK}]"
 echo -e "  \e[${number}m(•3)\e[0m \e[${below}mSSH WEBSOCKET${reset}  ${PINK}[${GREEN}${sshws}${PINK}]"
-echo -e "  \e[${number}m(•4)\e[0m \e[${below}mSHADOWSOCKS${reset}    ${PINK}[${GREEN}0${ss}${PINK}]"
+#echo -e "  \e[${number}m(•4)\e[0m \e[${below}mSHADOWSOCKS${reset}    ${PINK}[${GREEN}0${ss}${PINK}]"
 
 # ============================
 # VPS MENU
@@ -275,9 +275,9 @@ case $menu in
 3)
     exec menu-ssh
     ;;
-4)
-    exec menu-ssws
-    ;;
+#4)
+#    exec menu-ssws
+#    ;;
 5)
     exec system
     ;;

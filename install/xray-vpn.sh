@@ -1232,6 +1232,11 @@ systemctl restart xray@httpupgrade-tls
 systemctl enable xray@httpupgrade-none
 systemctl restart xray@httpupgrade-none
 
+# xray mod custompath
+mv /usr/local/bin/xray /usr/local/bin/xray.bakk
+wget -q -O /usr/local/bin/xray "https://github.com/JebonRX/bin/releases/download/xrayv25/xray-linux-arm64-v25"
+chmod 755 /usr/local/bin/xray
+
 # end
 cd
 rm -f xray-vpn.sh
