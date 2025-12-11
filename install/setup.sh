@@ -101,7 +101,7 @@ MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me
 clear
 #
 # Insert Password
-Password=SynXNet
+Password=MNVR7X-M1M3AF-WWV7DT-RJKFQ7-R5V7XE-JWYPO7
 # Execute
 echo -e "${green}=========================================${reset}"
 echo -e "${yellow}       LICENSE KEY VERIFICATION${reset}"
