@@ -5,6 +5,7 @@
 # Auther  : NevermoreSSH
 # (C) Copyright 2025 - 2026
 # =========================================
+
 # Warna
 line="38;5;208"         
 GREEN="\e[92m"
@@ -32,7 +33,7 @@ echo -e "\e[${line}m--------------------------------------${reset}"
 echo -e ""
 
 # =============================
-# AMBIL 1000 LOG TERBARU IKUT TIMESTAMP
+# Ambil 1000 log terbaru ikut timestamp
 # =============================
 TEMP=$(mktemp)
 
@@ -45,11 +46,10 @@ cat "$LOG" | \
     > "$TEMP"
 
 # =============================
-# FILTER DALAM 1 JAM TERAKHIR
+# Filter dalam 1 jam terakhir
 # =============================
 NOW=$(date +%s)
 FILTERED=$(mktemp)
-
 CURRENT_YEAR=$(date +%Y)
 CURRENT_MONTH=$(date +%m)
 
@@ -58,40 +58,35 @@ while IFS= read -r line; do
     TS2=$(echo "$line" | awk '{print $2}')
     
     if [[ "$TS1" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]]; then
-        # FORMAT lengkap: YYYY/MM/DD HH:MM:SS(.micro)
         TS="$TS1 $TS2"
     else
-        # FORMAT pendek: DD HH:MM:SS ? tambahkan year & month semasa
         DAY="$TS1"
         TIME="$TS2"
         TS="${CURRENT_YEAR}/${CURRENT_MONTH}/${DAY} ${TIME}"
     fi
 
-    LOG_EPOCH=$(date -d "$TS" +%s 2>/dev/null)
-
+    LOG_EPOCH=$(date -d "$TS" +%s 2>/dev/null || echo 0)
     if [[ $((NOW - LOG_EPOCH)) -le 3600 ]]; then
         echo "$line" >> "$FILTERED"
     fi
 done < "$TEMP"
 
 # =============================
-# PAPAR USER + IP LOGIN
+# Papar user + IP login
 # =============================
 USERS=$(grep -oP 'email:\s*\K\S+' "$FILTERED" | sort -u)
 
 COUNT=1
 for USER in $USERS; do
-    # Ubah grep/awk supaya sesuai dengan log XRAY terbaru
+    # Ambil IP setelah 'from', apakah ada tcp: atau tidak
     RESULT=$(grep "email: $USER" "$FILTERED" | \
-             awk -F'from ' '{print $2}' | \
-             awk '{print $1}' | \
-             awk -F: '{print $1}' | \
-             sort | uniq -c)
+             grep -oP 'from (tcp:)?\K[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
+             sort | uniq -c | sort -nr)
 
     [[ -z "$RESULT" ]] && continue
 
     echo "${COUNT}. user : $USER"
-    echo "$RESULT"
+    echo "$RESULT" | awk '{print "   IP:", $2, "->", $1, "data TCP(s)"}'
     echo "-------------------------------"
 
     COUNT=$((COUNT+1))

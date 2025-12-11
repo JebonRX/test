@@ -11,7 +11,7 @@ BLUE='\e[0;34m'
 RED='\e[1;31m'
 NC='\e[0m'
 
-DOMAIN_FILE="/root/domain"
+DOMAIN_FILE="/usr/local/etc/xray/domain"
 #IPVPS_FILE="/var/lib/premium-script/ipvps.conf"
 
 clear
@@ -74,5 +74,5 @@ clear
 echo -e "${GREEN}✅ Add / Renew Domain Completed Successfully!${NC}"
 echo -e "   Domain: ${domain}"
 echo ""
-read -n 1 -s -r -p "Press any key to return to menu"
-exec menu
+read -n 1 -s -r -p "Press any key to Restart All Services"
+exec restart
