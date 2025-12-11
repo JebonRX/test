@@ -139,11 +139,11 @@ xraychanger
 ;;
 0)
 clear
-exec menu
+exec menu-tweak
 ;;
 x)
 clear
-exec menu
+exec menu-tweak
 ;;
 *)
 clear

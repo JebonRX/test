@@ -130,7 +130,8 @@ while true; do
     echo -e "${WHITE}2) Disable BBR${NC}"
     echo -e "${WHITE}3) Optimize system parameters${NC}"
     echo -e "${WHITE}4) Check BBR status${NC}"
-    echo -e "${RED}0) Exit${NC}"
+	echo -e " "
+    echo -e "${RED}0) Back to menu${NC}"
     read -p "Enter choice [0-4]: " choice
 
     case $choice in
@@ -138,7 +139,8 @@ while true; do
         2) disable_bbr ;;
         3) optimize_parameters ;;
         4) check_status ;;
-        0) exit ;;
+        0) menu-tweak ;;
+		x) menu-tweak ;;
         *) echo -e "${RED}Invalid choice!${NC}" ; sleep 1 ;;
     esac
     read -p "Press Enter to return to menu..."

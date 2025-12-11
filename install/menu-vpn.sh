@@ -59,7 +59,7 @@ sleep 1
 
 # Tweak files
 sleep 1
-wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/ssh/menu-tweak.sh" && chmod +x menu-tweak
+wget -O menu-tweak "https://raw.githubusercontent.com/JebonRX/test/main/tweak/menu-tweak.sh" && chmod +x menu-tweak
 wget -O bbr "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr.sh" && chmod +x bbr;bbr
 wget -O bbr-manager "https://raw.githubusercontent.com/JebonRX/test/main/tweak/bbr-manager.sh" && chmod +x bbr-manager
 wget -O swapram "https://raw.githubusercontent.com/JebonRX/test/main/tweak/swapram.sh" && chmod +x swapram

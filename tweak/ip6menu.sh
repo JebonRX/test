@@ -90,7 +90,7 @@ case $opt in
     ;;
 0|x)
     clear
-    exec tweak-menu
+    exec menu-tweak
     ;;
 *)
     echo "Wrong Button"
