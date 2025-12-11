@@ -23,9 +23,9 @@ MNVR7X-M1M3AF-WWV7DT-RJKFQ7-R5V7XE-JWYPO7
 ### XRAY SERVICES
 - VMESS WS + TLS   : 443  
 - VLESS WS + TLS   : 443  
-- VLESS HTTPUpgrade + TLS   : 443  
 - VMESS WS + NTLS   : 80 , 8880
-- VLESS WS + NTLS   : 80 , 8080  
+- VLESS WS + NTLS   : 80 , 8080
+- VLESS HTTPUpgrade + TLS   : 443  
 - VLESS HTTPUpgrade + NTLS   : 80  
 
 ───────────────────────────────  
