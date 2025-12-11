@@ -356,7 +356,7 @@ server {
 EOF
 /etc/init.d/nginx restart
 
-# Version
+### Version
 ver=$( curl https://raw.githubusercontent.com/JebonRX/test/main/version.conf )
 history -c
 echo "$ver" > /home/ver
