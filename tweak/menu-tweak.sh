@@ -67,11 +67,15 @@ case $opt in
     clear
     exec xraychanger    # Xray Core changer
     ;;
-#5)
+5)
     clear
     exec change-dropbear    # Check system info
     ;;
-0|x)
+0)
+    clear
+    exec menu           # Back to main menu
+    ;;
+x)
     clear
     exec menu           # Back to main menu
     ;;

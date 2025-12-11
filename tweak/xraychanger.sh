@@ -58,7 +58,7 @@ echo -e "
  
  [\033[1;36m•77\033[0m]  Xray-core MOD v1.6.5   
  [\033[1;36m•88\033[0m]  Xray-core MOD v1.7.2-1
- [\033[1;36m•89\033[0m]  Xray-core MOD v25.3.31
+ [\033[1;36m•89\033[0m]  Xray-core MOD v25.10.15
 
  [\033[1;36m•99\033[0m]  Check Xray-core version
  [\033[1;36m• 0 / x\033[0m]  Back To Main Menu
@@ -124,8 +124,7 @@ xraychanger
 ;;
 89)
 clear
-mv $xrays_path $xrays_path.bakk && curl -L https://github.com/NevermoreSSH/Xcore-custompath/releases/download/v25.3.31/Xray-linux-64-v25.3.31.zip > Xray.zip && unzip *.zip && mv xray /usr/local/bin && chmod +x $xrays_path && rm *.zip *.dat LICENSE README.md && xray version
-#mv $xrays_path $xrays_path.bakk && curl -L https://github.com/XTLS/Xray-core/releases/download/v${latest_version}/xray-linux-64.zip > xray-linux-64.zip && unzip *.zip && mv xray /usr/local/bin && chmod +x $xrays_path && rm *.zip *.dat LICENSE README.md && xray version
+mv $xrays_path $xrays_path.bakk && wget -q -O $xrays_path "https://github.com/JebonRX/bin/releases/download/xrayv25/xray-linux-arm64-v25" && chmod 755 $xrays_path && xray version
 read -p "$( echo -e "Press ${orange}[ ${NC}${green}Enter${NC} ${CYAN}]${NC} Back to menu . . .") "
 xraychanger
 ;;
