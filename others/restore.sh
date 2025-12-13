@@ -48,7 +48,7 @@ rm -f backup.zip
 sleep 1
 echo -e "[ ${green}INFO${NC} ] Start Restore . . . "
 cp -r /root/backup/xray/ /usr/local/etc/ >/dev/null
-cp -r /root/backup/config/ /etc/logcon/config/ >/dev/null
+cp -r /root/backup/config/ /etc/logcon/ >/dev/null
 cp -r /root/backup/crontab /etc/ &> /dev/null
 cp -r /root/backup/cron.d /etc/ &> /dev/null
 cp -r /root/backup/shadow /etc/ &> /dev/null
@@ -71,4 +71,4 @@ service cron restart
 
 # back to settings
 sleep 5
-system
+exec menu
