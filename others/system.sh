@@ -37,6 +37,8 @@ echo -e "   \e[${number}m(•8) \e[${below}mReboot VPN\e[m"
 echo -e "   \e[${number}m(•9) \e[${below}mRestart VPN\e[m"
 echo -e "   \e[${number}m(10) \e[${below}mSpeedtest VPS\e[m"
 echo -e "   \e[${number}m(11) \e[${below}mChange Password VPS\e[m"
+echo -e ""
+echo -e "   \e[${number}m(99) \e[${below}mUpdate/Fix/Missing Packages VPS\e[m"
 #echo -e ""
 #echo -e "   \e[${number}m(77) \e[${below}mInstall SlowDNS\e[m"
 #echo -e "   \e[${number}m(88) \e[${below}mInstall UDP Custom\e[m"
@@ -77,6 +79,9 @@ speedtest
 ;;
 11)
 passwd
+;;
+99)
+wget -q -O /usr/bin/updatemenu "https://raw.githubusercontent.com/NevermoreSSH/SkyNode/main/updates/updatemenu.sh" && chmod +x /usr/bin/updatemenu && updatemenu
 ;;
 77)
 wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main2/addons/dns2.sh && chmod +x dns2.sh && ./dns2.sh
