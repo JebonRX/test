@@ -1,7 +1,7 @@
 #!/bin/bash
 # =========================================
-# Delete any expired config
-# Date: 2025-11-29
+# Delete any expired config v2
+# Date: 2025-12-13
 # Author : NevermoreSSH
 # =========================================
 clear
@@ -61,70 +61,31 @@ done
 #----- Auto Remove Shadowsocks
 
 # (4)
-#----- Auto Delete Expired SSH Account
+#----- Auto Removes SSH
 clear
 hariini=`date +%d-%m-%Y`
-echo "Clear Expired User SSH Websocket"
-echo "Thank you for removing the EXPIRED USERS"
-echo "--------------------------------------"
+
 cat /etc/shadow | cut -d: -f1,8 | sed /:$/d > /tmp/expirelist.txt
-totalaccounts=`cat /tmp/expirelist.txt | wc -l`
+totalaccounts=`wc -l < /tmp/expirelist.txt`
 
-for((i=1; i<=$totalaccounts; i++ ))
+for((i=1;i<=$totalaccounts;i++))
 do
-    tuserval=`head -n $i /tmp/expirelist.txt | tail -n 1`
-    rawuser=`echo $tuserval | cut -f1 -d:`  # <-- username asli
-    userexp=`echo $tuserval | cut -f2 -d:`
-    userexpireinseconds=$(( userexp * 86400 ))
-    tglexp=`date -d @$userexpireinseconds`
-    tgl=`echo $tglexp | awk '{print $3}'`
+  tuserval=`sed -n "${i}p" /tmp/expirelist.txt`
+  rawuser=`echo $tuserval | cut -d: -f1`
+  userexp=`echo $tuserval | cut -d: -f2`
 
-    while [ ${#tgl} -lt 2 ]; do
-        tgl="0"$tgl
-    done
+  userexpireinseconds=$(( userexp * 86400 ))
+  todaystime=`date +%s`
 
-    # username dengan padding hanya untuk tampilan
-    username=$rawuser
-    while [ ${#username} -lt 15 ]; do
-        username="$username "
-    done
-
-    bulantahun=`echo $tglexp | awk '{print $2,$6}'`
-
-    echo "echo \"Expired- User : $username Expire at : $tgl $bulantahun\"" >> /usr/local/bin/alluser
-
-    todaystime=`date +%s`
-
-    if [ $userexpireinseconds -ge $todaystime ]; then
-        :
-    else
-        echo "echo \"Expired- Username : $username are expired at: $tgl $bulantahun and removed : $hariini\"" >> /usr/local/bin/deleteduser
-        echo "Username $rawuser expired at $tgl $bulantahun removed $hariini"
-
-        # DELETE USER
-        userdel $rawuser 2>/dev/null
-
-        # DELETE FILE CONFIG
-        filepath="/etc/logcon/config/ssh-$rawuser.txt"
-		
-        if [ -f "$filepath" ]; then
-            rm -f "$filepath"
-            echo "File expired $rawuser deleted."
-        else
-            echo "File expired $rawuser not found."
-        fi
-    fi
+  if [ $userexpireinseconds -lt $todaystime ]; then
+    userdel $rawuser 2>/dev/null
+    rm -f /etc/logcon/config/ssh-$rawuser.txt
+  fi
 done
-
-echo " "
-echo "--------------------------------------"
-echo "Script successfully run"
-
-
 
 # (5)
 # backup config for restore later
-sleep 5
+sleep 1
 # public ip
 MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
 IP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
@@ -132,7 +93,7 @@ date=$(date +"%Y-%m-%d-%H:%M:%S")
 domain=$(cat /usr/local/etc/xray/domain)
 clear
 # backup ssh xray
-echo "Clear Expired User XRAY Accounts"
+echo "Clear Expired User XRAY & SSH Accounts"
 mkdir -p /root/backup
 cp -r /usr/local/etc/xray/ /root/backup/xray/ >/dev/null 2>&1
 cp -r /etc/shadow /root/backup/shadow >/dev/null 2>&1
@@ -151,13 +112,14 @@ id=(`echo $url | grep '^https' | cut -d'=' -f2`)
 link="https://drive.google.com/u/4/uc?id=${id}&export=download"
 clear
 rm -rf /root/backup
-rm -r /root/$IP-$date-$domain-SkyNode.zip
+rm -f /root/*SkyNode.zip
+#rm -r /root/$IP-$date-$domain-SkyNode.zip
 sleep 1
 
 # (5)
 # complete delete all exp config
 echo -e " Success Delete Exp User Accounts"
-echo 
-echo -e " Back To Menu In 2 Sec"
+echo -e "  "
+echo -e " type 'menu' for other services"
 sleep 2
-exec menu
+pkill -f /usr/local/bin/xp-xrayssh
