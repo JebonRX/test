@@ -34,7 +34,7 @@ sleep 1
 wget -O menu-vless "https://${Server_URL}/menu-vless.sh" && chmod +x menu-vless
 wget -O add-vless "https://${Server_URL}/add-vless.sh" && chmod +x add-vless
 wget -O check-vless "https://${Server_URL}/check-vless.sh" && chmod +x check-vless
-wget -O check-xray "https://${Server_URL}/check-xray.sh" && chmod +x check-xray
+wget -O check-xray "https://raw.githubusercontent.com/JebonRX/test/main/xray/check-xray.sh" && chmod +x check-xray
 wget -O delete-vless "https://${Server_URL}/delete-vless.sh" && chmod +x delete-vless
 wget -O renew-vless "https://${Server_URL}/renew-vless.sh" && chmod +x renew-vless
 wget -O show-vless "https://${Server_URL}/show-vless.sh" && chmod +x show-vless

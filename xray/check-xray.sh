@@ -95,4 +95,4 @@ done
 rm -f "$TEMP" "$FILTERED"
 echo -e ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
-exec menu-vless
+exec menu
