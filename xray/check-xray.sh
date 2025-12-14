@@ -25,10 +25,10 @@ DIR="/etc/logcon/config"
 clear
 
 LOG="/var/log/xray/access.log"
-LINES=2000   # ambil 2000 log terbaru ikut timestamp
+LINES=20000   # ambil 2000 log terbaru ikut timestamp
 
 echo -e "\e[${line}m--------------------------------------${reset}"
-echo -e "  \e[${title}[ XRAY VLESS User Login ]${reset}"
+echo -e "  \e[${title}[ Show Xray User Login ]${reset}"
 echo -e "\e[${line}m--------------------------------------${reset}\e[${below}m"
 echo -e ""
 

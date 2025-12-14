@@ -25,7 +25,7 @@ DIR="/etc/logcon/config"
 clear
 
 LOG="/var/log/xray/access.log"
-LINES=1000   # ambil 1000 log terbaru ikut timestamp
+LINES=2000   # ambil 2000 log terbaru ikut timestamp
 
 echo -e "\e[${line}m--------------------------------------${reset}"
 echo -e "  \e[${title}[ XRAY VMESS User Login ]${reset}"
@@ -33,7 +33,7 @@ echo -e "\e[${line}m--------------------------------------${reset}"
 echo -e ""
 
 # =============================
-# Ambil 1000 log terbaru ikut timestamp
+# Ambil 2000 log terbaru ikut timestamp
 # =============================
 TEMP=$(mktemp)
 
