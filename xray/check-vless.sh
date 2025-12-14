@@ -1,98 +1,105 @@
 #!/bin/bash
 # =========================================
 # Menu Services | Check User login XRAY Config
-# Edition : Stable Edition V2.1
-# Auther  : NevermoreSSH
+# Edition : Stable Edition V2.2
+# Author  : NevermoreSSH
 # (C) Copyright 2025 - 2026
 # =========================================
 
-# Warna
-line="38;5;208"         
+# ===== WARNA =====
+line="38;5;208"
 GREEN="\e[92m"
 PINK="\e[38;5;205m"
-back_text="1;37;44"
-box="1;37"
-text="1;37"
 title="\e[30;107m"
-number="\e[38;5;205"
-below="0;37"
+reset="\e[0m"
+# Warna
+line="38;5;208"         # Oyen terang
+GREEN="\e[92m" # hijau
+PINK="\e[38;5;205m" # Pink terang
+back_text="1;37;44"  # Putih + biru gelap
+box="1;37"           # Putih bold
+# ============================
+# COLOR THEME PREMIUM
+# ============================
+text="1;37"          # Putih bold (info text)
+title="\e[30;107m"   # 30 = hitam, 107 = background putih
+number="\e[38;5;205"        # Kuning gold (untuk nombor menu)
+below="0;37"         # Putih lembut
 reset="\e[0m"
 
-# Public IP
-MYIP=$(curl -s ipv4.icanhazip.com || curl -s ipinfo.io/ip || curl -s ifconfig.me)
-domain=$(cat /usr/local/etc/xray/domain)
-DIR="/etc/logcon/config"
-clear
-
+# details
 LOG="/var/log/xray/access.log"
-LINES=2000   # ambil 2000 log terbaru ikut timestamp
+LIMIT_TIME="$(date -d '1 hour ago' '+%Y/%m/%d %H:%M:%S')"
+NOW_TIME="$(date '+%Y-%m-%d %H:%M:%S')"
 
-echo -e "\e[${line}m--------------------------------------${reset}"
-echo -e "  \e[${title}[ XRAY VLESS User Login ]${reset}"
-echo -e "\e[${line}m--------------------------------------${reset}\e[${below}m"
-echo -e ""
-
-# =============================
-# Ambil 2000 log terbaru ikut timestamp
-# =============================
-TEMP=$(mktemp)
-
-cat "$LOG" | \
-    sed -e 's/\./ /' | \
-    awk '{print $1, $2, $0}' | \
-    sort -k1,1 -k2,2r | \
-    head -n $LINES | \
-    awk '{$1=""; $2=""; sub(/^  */, ""); print}' \
-    > "$TEMP"
+clear
+echo -e "\e[${line}m═════════════════════════════════${reset}"
+echo -e "  \e[${title}[ Show Vless User Login ]${reset}"
+echo -e "\e[${line}m═════════════════════════════════${reset}"
+echo ""
+echo -e "${GREEN}• Filtering logins from ${LIMIT_TIME//\//-} to ${NOW_TIME}${reset}"
+echo ""
 
 # =============================
-# Filter dalam 1 jam terakhir
+# PARSE LOG (BETUL FORMAT & FIX TCP)
 # =============================
-NOW=$(date +%s)
-FILTERED=$(mktemp)
-CURRENT_YEAR=$(date +%Y)
-CURRENT_MONTH=$(date +%m)
+RESULT=$(awk -v limit="$LIMIT_TIME" '
+$1" "$2 >= limit {
+    # Ambil IP sebenar dari field ke-3, skip kalau bukan IPv4
+    split($3,a,":")
+    if(a[1] ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/){
+        ip=a[1]
+    } else { next }
 
-while IFS= read -r line; do
-    TS1=$(echo "$line" | awk '{print $1}')
-    TS2=$(echo "$line" | awk '{print $2}')
-    
-    if [[ "$TS1" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]]; then
-        TS="$TS1 $TS2"
-    else
-        DAY="$TS1"
-        TIME="$TS2"
-        TS="${CURRENT_YEAR}/${CURRENT_MONTH}/${DAY} ${TIME}"
-    fi
+    # Ambil user dari email:
+    user=""
+    for(i=1;i<=NF;i++){
+        if($i=="email:"){ user=$(i+1); break }
+    }
+    if(user=="") next
 
-    LOG_EPOCH=$(date -d "$TS" +%s 2>/dev/null || echo 0)
-    if [[ $((NOW - LOG_EPOCH)) -le 3600 ]]; then
-        echo "$line" >> "$FILTERED"
-    fi
-done < "$TEMP"
+    count[user,ip]++
+    users[user]=1
+    total++
+}
+END{
+    if(total==0){ print "NOLOG"; exit }
+    print total
+    for(u in users){
+        print "USER|"u
+        for(k in count){
+            split(k,a,SUBSEP)
+            if(a[1]==u){
+                print "IP|"a[2]"|"count[k]
+            }
+        }
+    }
+}' "$LOG")
 
-# =============================
-# Papar user + IP login
-# =============================
-USERS=$(grep -oP 'email:\s*\K\S+' "$FILTERED" | sort -u)
+FIRST=$(echo "$RESULT" | head -n1)
 
-COUNT=1
-for USER in $USERS; do
-    # Ambil IP setelah 'from', apakah ada tcp: atau tidak
-    RESULT=$(grep "email: $USER" "$FILTERED" | \
-             grep -oP 'from (tcp:)?\K[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
-             sort | uniq -c | sort -nr)
+if [[ "$FIRST" == "NOLOG" ]]; then
+    echo -e "${PINK}• No XRAY login detected in the last 1 hour${reset}"
+else
+    TOTAL="$FIRST"
+    echo -e "${GREEN}• Found $TOTAL login records in the last 1 hour${reset}"
+    echo ""
 
-    [[ -z "$RESULT" ]] && continue
-
-    echo "${COUNT}. user : $USER"
-    echo "$RESULT" | awk '{print "   IP:", $2, "->", $1, "data TCP(s)"}'
+    IDX=1
+    echo "$RESULT" | tail -n +2 | while read -r line; do
+        if [[ "$line" == USER* ]]; then
+            [[ $IDX -gt 1 ]] && echo "-------------------------------"
+            USER="${line#USER|}"
+            echo "${IDX}. user : $USER"
+            IDX=$((IDX+1))
+        elif [[ "$line" == IP* ]]; then
+            IFS='|' read _ IP CNT <<< "$line"
+            echo "   IP: $IP -> $CNT data "
+        fi
+    done
     echo "-------------------------------"
+fi
 
-    COUNT=$((COUNT+1))
-done
-
-rm -f "$TEMP" "$FILTERED"
-echo -e ""
+echo ""
 read -n 1 -s -r -p "Press any key to back on menu XRAY"
 exec menu-vless

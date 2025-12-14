@@ -420,7 +420,7 @@ END
 cat> /usr/local/etc/xray/vmess-tls.json << END
 {
   "log": {
-    "access": "/var/log/xray/access.log",
+    "access": "/var/log/xray/access2.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
        },
@@ -533,7 +533,7 @@ END
 cat> /usr/local/etc/xray/vmess-none.json << END
 {
   "log": {
-    "access": "/var/log/xray/access.log",
+    "access": "/var/log/xray/access2.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
        },
@@ -1094,7 +1094,7 @@ END
 cat> /usr/local/etc/xray/vmess-custom.json << END
 {
   "log": {
-    "access": "/var/log/xray/access.log",
+    "access": "/var/log/xray/access2.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
        },
