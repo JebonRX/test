@@ -8,7 +8,7 @@
 #
 #curl https://rclone.org/install.sh | bash
 # install pckg
-apt install -y git net-tools htop wget iftop bc sqlite3
+apt install -y git net-tools htop wget iftop bc sqlite3 bsdmainutils
 
 # rclone v2
 wget https://rclone.org/install.sh
