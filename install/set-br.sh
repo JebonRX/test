@@ -6,7 +6,10 @@
 # (C) Copyright 2025 - 2026
 # =========================================
 #
-curl https://rclone.org/install.sh | bash
+#curl https://rclone.org/install.sh | bash
+wget https://rclone.org/install.sh
+chmod +x install.sh
+./install.sh
 printf "q\n" | rclone config
 #wget -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/rclone.conf"
 git clone  https://github.com/MrMan21/wondershaper.git &> /dev/null
