@@ -7,14 +7,23 @@
 # =========================================
 #
 #curl https://rclone.org/install.sh | bash
+
+# rclone v2
 wget https://rclone.org/install.sh
 chmod +x install.sh
 ./install.sh
 printf "q\n" | rclone config
+
 #wget -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/rclone.conf"
-git clone  https://github.com/MrMan21/wondershaper.git &> /dev/null
+#git clone  https://github.com/MrMan21/wondershaper.git &> /dev/null
+#cd wondershaper
+#make install
+
+# wonder v2
+git clone https://github.com/MrMan21/wondershaper.git
 cd wondershaper
-make install
+chmod +x wondershaper
+cp wondershaper /usr/local/bin/
 cd
 rm -rf wondershaper
 cd /usr/bin
