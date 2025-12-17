@@ -1,11 +1,5 @@
 #!/bin/bash
-# =========================================
-# Quick Setup | Script Set-BR Manager
-# Edition : Stable Edition V1.1
-# Auther  : NevermoreSSH
-# (C) Copyright 2025 - 2026
-# =========================================
-#
+
 #curl https://rclone.org/install.sh | bash
 # install pckg
 apt install -y git net-tools htop wget iftop bc sqlite3 bsdmainutils
