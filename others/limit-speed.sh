@@ -41,7 +41,7 @@ apply_limit() {
 start() {
     clear
     echo -e "${Cyan}============================================${NC}"
-    echo -e "${Cyan}           APPLY BANDWIDTH LIMIT${NC}"
+    echo -e "${Cyan}           APPLY SPEED LIMIT${NC}"
     echo -e "${Cyan}============================================${NC}"
     echo ""
 
@@ -98,7 +98,7 @@ fi
 # Display menu
 clear
 echo -e "${Cyan}========================================${NC}"
-echo -e "${Cyan}           Bandwidth Limit Menu          ${NC}"
+echo -e "${Cyan}           Speed Limit Menu          ${NC}"
 echo -e "${Cyan}========================================${NC}"
 echo -e "${White} Network Interface : ${Magenta}$NIC${NC}"
 echo -e " Limit Status      : $sts"
@@ -108,6 +108,8 @@ echo -e "${White} 1. Start / Change Limit${NC}"
 echo -e " 2. Stop Limit"
 echo -e " 3. Speedtest"
 echo -e ""
+echo -e " 0. Back to Menu"
+echo -e ""
 echo -e " Press CTRL + C to exit"
 echo ""
 read -rp $'\033[97mEnter your choice: \033[0m' num
@@ -115,6 +117,8 @@ read -rp $'\033[97mEnter your choice: \033[0m' num
 case $num in
     1) start ;;
     2) stop ;;
+    0) exec menu-tweak ;;
+    x) exec menu-tweak ;;
     3)
         if command -v speedtest &>/dev/null; then
             speedtest

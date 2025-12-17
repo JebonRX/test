@@ -28,7 +28,7 @@ chmod +x wondershaper
 cp wondershaper /usr/local/bin/
 cd
 rm -rf wondershaper
-cd /usr/bin
+cd /usr/local/bin
 wget -O backup "https://raw.githubusercontent.com/JebonRX/test/main/others/backup.sh"
 wget -O restore "https://raw.githubusercontent.com/JebonRX/test/main/others/restore.sh"
 #wget -O strt "https://raw.githubusercontent.com/JebonRX/test/main/others/strt.sh"
