@@ -313,7 +313,7 @@ ln -fs /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime
 
 # install clouflare JQ
 apt install jq curl -y
-apt install -y git net-tools htop #wget iftop bc sqlite3 bsdmainutils
+apt install -y git net-tools htop wget iftop bc sqlite3 bsdmainutils
 
 # install webserver
 apt -y install nginx
