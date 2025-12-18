@@ -8,10 +8,12 @@
 #printf "q\n" | rclone config
 
 # rclone v3
+#wget https://raw.githubusercontent.com/JebonRX/test/main/setup/rclone-v1.72.1-linux-amd64.zip
 cd /root
-wget https://raw.githubusercontent.com/JebonRX/test/main/setup/rclone-v1.72.1-linux-amd64.zip
-unzip rclone-v1.72.1-linux-amd64.zip
-cd rclone-*-linux-amd64
+LATEST=$(curl -s https://api.github.com/repos/rclone/rclone/releases/latest | grep tag_name | cut -d '"' -f4)
+wget -O rclone.zip https://github.com/rclone/rclone/releases/download/${LATEST}/rclone-${LATEST}-linux-amd64.zip
+unzip -o rclone.zip
+cd rclone-${LATEST}-linux-amd64
 cp rclone /usr/local/bin/
 chmod 755 /usr/local/bin/rclone
 rclone version
