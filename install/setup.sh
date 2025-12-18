@@ -259,22 +259,6 @@ sleep 1
 clear
 
 # =============================
-# INSTALL SET-BR SERVER SECTION
-# =============================
-clear
-printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
-printf '   ⚙️  \033[1;37mInstalling Backup~Restore Server...\033[0m\n'
-printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
-echo -e "\e[0;32mINSTALLING SET-BR...\e[0m"
-sleep 1
-wget https://raw.githubusercontent.com/JebonRX/test/main/install/set-br.sh && chmod +x set-br.sh && ./set-br.sh
-printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
-printf '   ✅  \033[1;37mDone Installing Backup~Restore Server\033[0m\n'
-printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
-sleep 1
-clear
-
-# =============================
 # INSTALL TWEAK SERVER SECTION
 # =============================
 clear
@@ -355,6 +339,23 @@ server {
 EOF
 #restart nginx
 /etc/init.d/nginx restart
+
+# =============================
+# INSTALL SET-BR SERVER SECTION
+# =============================
+clear
+cd
+printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
+printf '   ⚙️  \033[1;37mInstalling Backup~Restore Server...\033[0m\n'
+printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
+echo -e "\e[0;32mINSTALLING SET-BR...\e[0m"
+sleep 1
+wget https://raw.githubusercontent.com/JebonRX/test/main/install/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
+printf '   ✅  \033[1;37mDone Installing Backup~Restore Server\033[0m\n'
+printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
+sleep 1
+clear
 
 ### Version
 ver=$( curl https://raw.githubusercontent.com/JebonRX/test/main/version.conf )
