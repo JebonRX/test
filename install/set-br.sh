@@ -108,4 +108,5 @@ systemctl enable limit-speed.service
 
 #done
 rm -r set-br.sh
+rm -r rclone.zip
 sleep 1
