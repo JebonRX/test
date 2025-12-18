@@ -70,7 +70,7 @@ cat> /usr/local/etc/xray/config.json << END
   "inbounds": [
     {
       "listen": "127.0.0.1",
-      "port": 10089,
+      "port": 10088,
       "protocol": "dokodemo-door",
       "settings": {
         "address": "127.0.0.1"
@@ -420,7 +420,7 @@ END
 cat> /usr/local/etc/xray/vmess-tls.json << END
 {
   "log": {
-    "access": "/var/log/xray/access2.log",
+    "access": "/var/log/xray/access.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
        },
@@ -533,7 +533,7 @@ END
 cat> /usr/local/etc/xray/vmess-none.json << END
 {
   "log": {
-    "access": "/var/log/xray/access2.log",
+    "access": "/var/log/xray/access.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
        },
@@ -878,7 +878,7 @@ cat> /usr/local/etc/xray/none.json << END
   "inbounds": [
       {
       "listen": "127.0.0.1",
-      "port": 10088, # 
+      "port": 10089, # 
       "protocol": "dokodemo-door",
       "settings": {
         "address": "127.0.0.1"
@@ -1094,7 +1094,7 @@ END
 cat> /usr/local/etc/xray/vmess-custom.json << END
 {
   "log": {
-    "access": "/var/log/xray/access2.log",
+    "access": "/var/log/xray/access.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
        },
