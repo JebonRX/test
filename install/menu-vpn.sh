@@ -81,6 +81,7 @@ wget -O restart "https://raw.githubusercontent.com/JebonRX/test/main/others/rest
 wget -O system "https://raw.githubusercontent.com/JebonRX/test/main/others/system.sh" && chmod +x system
 wget -O certv2ray "https://raw.githubusercontent.com/JebonRX/test/main/others/certv2ray.sh" && chmod +x certv2ray
 wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/others/change-dropbear.sh" && chmod +x change-dropbear
+wget -O gmt "https://raw.githubusercontent.com/JebonRX/test/main/others/gmt.sh" && chmod +x gmt
 
 # end
 cd
