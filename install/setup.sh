@@ -265,7 +265,7 @@ clear
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ⚙️  \033[1;37mInstalling Tweak Server...\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
-echo -e "\e[0;32mINSTALLING TWEAK...\e[0m"
+##echo -e "\e[0;32mINSTALLING TWEAK...\e[0m"
 sleep 1
 wget https://raw.githubusercontent.com/JebonRX/test/main/install/tweak-vpn.sh && chmod +x tweak-vpn.sh && ./tweak-vpn.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
@@ -281,7 +281,7 @@ clear
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ⚙️  \033[1;37mInstalling Menu Server...\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
-echo -e "\e[0;32mINSTALLING SET-BR...\e[0m"
+#echo -e "\e[0;32mINSTALLING MENU SERVER...\e[0m"
 sleep 1
 wget https://raw.githubusercontent.com/JebonRX/test/main/install/menu-vpn.sh && chmod +x menu-vpn.sh && ./menu-vpn.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
@@ -298,7 +298,7 @@ cd
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
 printf '   ⚙️  \033[1;37mInstalling Backup~Restore Server...\033[0m\n'
 printf '\033[1;32m╰────────────────────────────────────────────╯\033[0m\n\n'
-echo -e "\e[0;32mINSTALLING SET-BR...\e[0m"
+#echo -e "\e[0;32mINSTALLING SET-BR...\e[0m"
 sleep 1
 wget https://raw.githubusercontent.com/JebonRX/test/main/install/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 printf '\n\033[1;32m╭────────────────────────────────────────────╮\033[0m\n'
