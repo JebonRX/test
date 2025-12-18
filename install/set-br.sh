@@ -2,10 +2,20 @@
 
 #curl https://rclone.org/install.sh | bash
 # rclone v2
-wget https://rclone.org/install.sh
-chmod +x install.sh
-./install.sh
-printf "q\n" | rclone config
+#wget https://rclone.org/install.sh
+#chmod +x install.sh
+#./install.sh
+#printf "q\n" | rclone config
+
+# rclone v3
+cd /root
+wget https://raw.githubusercontent.com/JebonRX/test/main/setup/rclone-v1.72.1-linux-amd64.zip
+unzip rclone-v1.72.1-linux-amd64.zip
+cd rclone-*-linux-amd64
+cp rclone /usr/local/bin/
+chmod 755 /usr/local/bin/rclone
+rclone version
+sleep 5
 
 #wget -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/JebonRX/test/main/others/rclone.conf"
 #git clone  https://github.com/MrMan21/wondershaper.git &> /dev/null
