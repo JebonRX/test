@@ -37,8 +37,11 @@ echo -e "   \e[${number}m(•8) \e[${below}mReboot VPN\e[m"
 echo -e "   \e[${number}m(•9) \e[${below}mRestart VPN\e[m"
 echo -e "   \e[${number}m(10) \e[${below}mSpeedtest VPS\e[m"
 echo -e "   \e[${number}m(11) \e[${below}mChange Password VPS\e[m"
+echo -e "   \e[${number}m(12) \e[${below}mChange Timezone Country VPS\e[m"
 echo -e ""
 echo -e "   \e[${number}m(99) \e[${below}mUpdate/Fix/Missing Packages VPS\e[m"
+echo -e ""
+echo -e "   \e[${number}m(0) \e[${below}mBack to Menu VPS\e[m"
 #echo -e ""
 #echo -e "   \e[${number}m(77) \e[${below}mInstall SlowDNS\e[m"
 #echo -e "   \e[${number}m(88) \e[${below}mInstall UDP Custom\e[m"
@@ -80,6 +83,9 @@ speedtest
 11)
 passwd
 ;;
+12)
+gmt
+;;
 99)
 wget -q -O /usr/bin/updatemenu "https://raw.githubusercontent.com/NevermoreSSH/SkyNode/main/updates/updatemenu.sh" && chmod +x /usr/bin/updatemenu && updatemenu
 ;;
@@ -89,12 +95,15 @@ wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main2/addons/dns2.sh 
 88)
 wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main/Tunnel/udp.sh && bash udp.sh
 ;;
+0)
+exec menu
+;;
 x)
-menu
+exec menu
 ;;
 *)
 echo "Please enter an correct number"
 sleep 1
-system
+exec system
 ;;
 esac
