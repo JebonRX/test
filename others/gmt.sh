@@ -181,6 +181,7 @@ case "$gmt" in
  25)  set_tz "Pacific/Auckland" ;;
  88)  set_custom_datetime ;;
  99)  toggle_ntp ;;
-  0)  exec "$0" ;;
+  0)  exec system ;;
+  x)  exec system ;;
   *)  echo -e "${PINK}❌ Invalid selection${RESET}" ; pause_back ;;
 esac
