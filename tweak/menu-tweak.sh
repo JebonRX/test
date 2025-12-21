@@ -35,7 +35,7 @@ echo -e " [${CYAN}•2${RESET}]  Swap RAM Manager"
 echo -e " [${CYAN}•3${RESET}]  BBR Manager"
 echo -e " [${CYAN}•4${RESET}]  Xray Core Changer"
 echo -e " [${CYAN}•5${RESET}]  Change Dropbear SSH"
-echo -e " [${CYAN}•6${RESET}]  Install Cloudflare WARP+ (warp)"
+echo -e " [${CYAN}•6${RESET}]  Cloudflare WARP+ (WireGuard)"
 echo ""
 echo -e " [${CYAN}•0${RESET}]  Back To Main Menu"
 echo ""
@@ -74,7 +74,8 @@ case $opt in
     ;;
 6)
     clear
-    wget -q -O /usr/sbin/setup2 "https://raw.githubusercontent.com/NevermoreSSH/cfwarp/main/setup.sh" && chmod +x /usr/sbin/setup2 && setup2
+	exec warp
+#    wget -q -O /usr/sbin/setup2 "https://raw.githubusercontent.com/NevermoreSSH/cfwarp/main/setup.sh" && chmod +x /usr/sbin/setup2 && setup2
     ;;
 0)
     clear

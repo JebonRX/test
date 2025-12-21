@@ -83,6 +83,13 @@ wget -O certv2ray "https://raw.githubusercontent.com/JebonRX/test/main/others/ce
 wget -O change-dropbear "https://raw.githubusercontent.com/JebonRX/test/main/others/change-dropbear.sh" && chmod +x change-dropbear
 wget -O gmt "https://raw.githubusercontent.com/JebonRX/test/main/others/gmt.sh" && chmod +x gmt
 
+# others
+sleep 1
+wget -O warp "https://raw.githubusercontent.com/NevermoreSSH/cfwarp/main/menu.sh"
+wget -O warp2 "https://raw.githubusercontent.com/NevermoreSSH/cfwarp/main/warp.sh"
+chmod +x warp
+chmod +x warp2
+
 # end
 cd
 rm -r menu-vpn.sh
