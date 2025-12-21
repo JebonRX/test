@@ -89,89 +89,119 @@ if [ -z "$iface" ]; then
 fi
 
 # ------------------------------
+# VNSTAT SAFE OUTPUT (No data)
+# ------------------------------
+vn_sanitize() {
+    local v="$1"
+    # kosong / '-' / '- -' / '--' -> No data
+    if [[ -z "$v" ]] || [[ "$v" == "- -" ]] || [[ "$v" =~ ^-+$ ]] || [[ "$v" == "-"* ]]; then
+        echo ""
+    else
+        echo "$v"
+    fi
+}
+vn_pick() {
+    # pilih first yang ada data
+    local a b c d
+    a="$(vn_sanitize "${1:-}")"
+    b="$(vn_sanitize "${2:-}")"
+    c="$(vn_sanitize "${3:-}")"
+    d="$(vn_sanitize "${4:-}")"
+    if [[ -n "$a" ]]; then echo "$a"; return; fi
+    if [[ -n "$b" ]]; then echo "$b"; return; fi
+    if [[ -n "$c" ]]; then echo "$c"; return; fi
+    if [[ -n "$d" ]]; then echo "$d"; return; fi
+    echo "No data"
+}
+
+# ------------------------------
 # Prepare date variables
 # ------------------------------
+date_now=$(date)
 today=$(date +%Y-%m-%d)
 yesterday=$(date -d 'yesterday' +%Y-%m-%d)
 month=$(date +%Y-%m)
 month_deb=$(date +"%b '%y")  # For Debian old format
 #totalmon="$(vnstat | grep "total:" | awk '{print $8, $9}')"
-totalmon="$(vnstat -i $iface | grep 'total:' | awk '{print $8, $9}')"
+totalmon="$(vnstat -i $iface 2>/dev/null | grep 'total:' | awk '{print $8, $9}')"
+totalmon="$(vn_pick "$totalmon")"
 
 # ------------------------------
 # 1️⃣ Modern v2 global
 # ------------------------------
-dmon="$(vnstat -m | grep "$month" | awk '{print $2, $3}')"
-umon="$(vnstat -m | grep "$month" | awk '{print $5, $6}')"
-tmon="$(vnstat -m | grep "$month" | awk '{print $8, $9}')"
+dmon="$(vnstat -m 2>/dev/null | grep "$month" | awk '{print $2, $3}')"
+umon="$(vnstat -m 2>/dev/null | grep "$month" | awk '{print $5, $6}')"
+tmon="$(vnstat -m 2>/dev/null | grep "$month" | awk '{print $8, $9}')"
 
-dtoday="$(vnstat -d | grep "$today" | awk '{print $2, $3}')"
-utoday="$(vnstat -d | grep "$today" | awk '{print $5, $6}')"
-ttoday="$(vnstat -d | grep "$today" | awk '{print $8, $9}')"
+dtoday="$(vnstat -d 2>/dev/null | grep "$today" | awk '{print $2, $3}')"
+utoday="$(vnstat -d 2>/dev/null | grep "$today" | awk '{print $5, $6}')"
+ttoday="$(vnstat -d 2>/dev/null | grep "$today" | awk '{print $8, $9}')"
 
-dyest="$(vnstat -d | grep "$yesterday" | awk '{print $2, $3}')"
-uyest="$(vnstat -d | grep "$yesterday" | awk '{print $5, $6}')"
-tyest="$(vnstat -d | grep "$yesterday" | awk '{print $8, $9}')"
+dyest="$(vnstat -d 2>/dev/null | grep "$yesterday" | awk '{print $2, $3}')"
+uyest="$(vnstat -d 2>/dev/null | grep "$yesterday" | awk '{print $5, $6}')"
+tyest="$(vnstat -d 2>/dev/null | grep "$yesterday" | awk '{print $8, $9}')"
 
 # ------------------------------
 # 2️⃣ Modern v2 interface (-i $iface)
 # ------------------------------
-dmon_if2="$(vnstat -i $iface -m | grep "$month" | awk '{print $2, $3}')"
-umon_if2="$(vnstat -i $iface -m | grep "$month" | awk '{print $5, $6}')"
-tmon_if2="$(vnstat -i $iface -m | grep "$month" | awk '{print $8, $9}')"
+dmon_if2="$(vnstat -i $iface -m 2>/dev/null | grep "$month" | awk '{print $2, $3}')"
+umon_if2="$(vnstat -i $iface -m 2>/dev/null | grep "$month" | awk '{print $5, $6}')"
+tmon_if2="$(vnstat -i $iface -m 2>/dev/null | grep "$month" | awk '{print $8, $9}')"
 
-dtoday_if2="$(vnstat -i $iface -d | grep "$today" | awk '{print $2, $3}')"
-utoday_if2="$(vnstat -i $iface -d | grep "$today" | awk '{print $5, $6}')"
-ttoday_if2="$(vnstat -i $iface -d | grep "$today" | awk '{print $8, $9}')"
+dtoday_if2="$(vnstat -i $iface -d 2>/dev/null | grep "$today" | awk '{print $2, $3}')"
+utoday_if2="$(vnstat -i $iface -d 2>/dev/null | grep "$today" | awk '{print $5, $6}')"
+ttoday_if2="$(vnstat -i $iface -d 2>/dev/null | grep "$today" | awk '{print $8, $9}')"
 
-dyest_if2="$(vnstat -i $iface -d | grep "$yesterday" | awk '{print $2, $3}')"
-uyest_if2="$(vnstat -i $iface -d | grep "$yesterday" | awk '{print $5, $6}')"
-tyest_if2="$(vnstat -i $iface -d | grep "$yesterday" | awk '{print $8, $9}')"
+dyest_if2="$(vnstat -i $iface -d 2>/dev/null | grep "$yesterday" | awk '{print $2, $3}')"
+uyest_if2="$(vnstat -i $iface -d 2>/dev/null | grep "$yesterday" | awk '{print $5, $6}')"
+tyest_if2="$(vnstat -i $iface -d 2>/dev/null | grep "$yesterday" | awk '{print $8, $9}')"
 
 # ------------------------------
 # 3️⃣ v1 global (fallback)
 # ------------------------------
-dmon_v1="$(vnstat -m | grep "$month_deb" | awk '{print $3" "substr($4,1,1)}')"
-umon_v1="$(vnstat -m | grep "$month_deb" | awk '{print $6" "substr($7,1,1)}')"
-tmon_v1="$(vnstat -m | grep "$month_deb" | awk '{print $9" "substr($10,1,1)}')"
+dmon_v1="$(vnstat -m 2>/dev/null | grep "$month_deb" | awk '{print $3" "substr($4,1,1)}')"
+umon_v1="$(vnstat -m 2>/dev/null | grep "$month_deb" | awk '{print $6" "substr($7,1,1)}')"
+tmon_v1="$(vnstat -m 2>/dev/null | grep "$month_deb" | awk '{print $9" "substr($10,1,1)}')"
 
-dtoday_v1="$(vnstat -d | grep "today" | awk '{print $2" "substr($3,1,1)}')"
-utoday_v1="$(vnstat -d | grep "today" | awk '{print $5" "substr($6,1,1)}')"
-ttoday_v1="$(vnstat -d | grep "today" | awk '{print $8" "substr($9,1,1)}')"
+dtoday_v1="$(vnstat -d 2>/dev/null | grep "today" | awk '{print $2" "substr($3,1,1)}')"
+utoday_v1="$(vnstat -d 2>/dev/null | grep "today" | awk '{print $5" "substr($6,1,1)}')"
+ttoday_v1="$(vnstat -d 2>/dev/null | grep "today" | awk '{print $8" "substr($9,1,1)}')"
 
-dyest_v1="$(vnstat -d | grep "yesterday" | awk '{print $2" "substr($3,1,1)}')"
-uyest_v1="$(vnstat -d | grep "yesterday" | awk '{print $5" "substr($6,1,1)}')"
-tyest_v1="$(vnstat -d | grep "yesterday" | awk '{print $8" "substr($9,1,1)}')"
+dyest_v1="$(vnstat -d 2>/dev/null | grep "yesterday" | awk '{print $2" "substr($3,1,1)}')"
+uyest_v1="$(vnstat -d 2>/dev/null | grep "yesterday" | awk '{print $5" "substr($6,1,1)}')"
+tyest_v1="$(vnstat -d 2>/dev/null | grep "yesterday" | awk '{print $8" "substr($9,1,1)}')"
 
 # ------------------------------
 # 4️⃣ v1 interface (-i $iface)
 # ------------------------------
-dmon_if1="$(vnstat -i $iface -m | grep "$month_deb" | awk '{print $3" "substr($4,1,1)}')"
-umon_if1="$(vnstat -i $iface -m | grep "$month_deb" | awk '{print $6" "substr($7,1,1)}')"
-tmon_if1="$(vnstat -i $iface -m | grep "$month_deb" | awk '{print $9" "substr($10,1,1)}')"
+dmon_if1="$(vnstat -i $iface -m 2>/dev/null | grep "$month_deb" | awk '{print $3" "substr($4,1,1)}')"
+umon_if1="$(vnstat -i $iface -m 2>/dev/null | grep "$month_deb" | awk '{print $6" "substr($7,1,1)}')"
+tmon_if1="$(vnstat -i $iface -m 2>/dev/null | grep "$month_deb" | awk '{print $9" "substr($10,1,1)}')"
 
-dtoday_if1="$(vnstat -i $iface | grep "today" | awk '{print $2" "substr($3,1,1)}')"
-utoday_if1="$(vnstat -i $iface | grep "today" | awk '{print $5" "substr($6,1,1)}')"
-ttoday_if1="$(vnstat -i $iface | grep "today" | awk '{print $8" "substr($9,1,1)}')"
+dtoday_if1="$(vnstat -i $iface 2>/dev/null | grep "today" | awk '{print $2" "substr($3,1,1)}')"
+utoday_if1="$(vnstat -i $iface 2>/dev/null | grep "today" | awk '{print $5" "substr($6,1,1)}')"
+ttoday_if1="$(vnstat -i $iface 2>/dev/null | grep "today" | awk '{print $8" "substr($9,1,1)}')"
 
-dyest_if1="$(vnstat -i $iface | grep "yesterday" | awk '{print $2" "substr($3,1,1)}')"
-uyest_if1="$(vnstat -i $iface | grep "yesterday" | awk '{print $5" "substr($6,1,1)}')"
-tyest_if1="$(vnstat -i $iface | grep "yesterday" | awk '{print $8" "substr($9,1,1)}')"
+dyest_if1="$(vnstat -i $iface 2>/dev/null | grep "yesterday" | awk '{print $2" "substr($3,1,1)}')"
+uyest_if1="$(vnstat -i $iface 2>/dev/null | grep "yesterday" | awk '{print $5" "substr($6,1,1)}')"
+tyest_if1="$(vnstat -i $iface 2>/dev/null | grep "yesterday" | awk '{print $8" "substr($9,1,1)}')"
 
 # ------------------------------
 # Fallback logic: pilih yang ada output
+# (kekal style asal, cuma dibuat betul & No data)
 # ------------------------------
-dmon="${dmon:-$dmon_if2:-$dmon_v1:-$dmon_if1}"
-umon="${umon:-$umon_if2:-$umon_v1:-$umon_if1}"
-tmon="${tmon:-$tmon_if2:-$tmon_v1:-$tmon_if1}"
+dmon="$(vn_pick "$dmon" "$dmon_if2" "$dmon_v1" "$dmon_if1")"
+umon="$(vn_pick "$umon" "$umon_if2" "$umon_v1" "$umon_if1")"
+tmon="$(vn_pick "$tmon" "$tmon_if2" "$tmon_v1" "$tmon_if1")"
 
-dtoday="${dtoday:-$dtoday_if2:-$dtoday_v1:-$dtoday_if1}"
-utoday="${utoday:-$utoday_if2:-$utoday_v1:-$utoday_if1}"
-ttoday="${ttoday:-$ttoday_if2:-$ttoday_v1:-$ttoday_if1}"
+dtoday="$(vn_pick "$dtoday" "$dtoday_if2" "$dtoday_v1" "$dtoday_if1")"
+utoday="$(vn_pick "$utoday" "$utoday_if2" "$utoday_v1" "$utoday_if1")"
+ttoday="$(vn_pick "$ttoday" "$ttoday_if2" "$ttoday_v1" "$ttoday_if1")"
 
-dyest="${dyest:-$dyest_if2:-$dyest_v1:-$dyest_if1}"
-uyest="${uyest:-$uyest_if2:-$uyest_v1:-$uyest_if1}"
-tyest="${tyest:-$tyest_if2:-$tyest_v1:-$tyest_if1}"
+dyest="$(vn_pick "$dyest" "$dyest_if2" "$dyest_v1" "$dyest_if1")"
+uyest="$(vn_pick "$uyest" "$uyest_if2" "$uyest_v1" "$uyest_if1")"
+tyest="$(vn_pick "$tyest" "$tyest_if2" "$tyest_v1" "$tyest_if1")"
+
 clear
 # ============================
 # SERVER INFORMATION
@@ -213,6 +243,7 @@ echo -e "  \e[${text}mRAM Info             : ${uram} MB / ${tram} MB${reset}"
 echo -e "  \e[${text}mIPVPS/ IP Address    : ${IPVPS}, ${IPV6}${reset}"
 echo -e "  \e[${text}mDomain Name          : ${domain}${reset}"
 echo -e "  \e[${text}mSystem Uptime        : ${uptime}${reset}"
+echo -e "  \e[${text}mDate & Time          : ${date_now} ${reset}"
 
 # ============================
 # TRAFFIC TABLE
