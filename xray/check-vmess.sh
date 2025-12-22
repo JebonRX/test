@@ -28,7 +28,7 @@ below="0;37"         # Putih lembut
 reset="\e[0m"
 
 # details
-LOG="/var/log/xray/access2.log"
+LOG="/var/log/xray/access.log"
 LIMIT_TIME="$(date -d '1 hour ago' '+%Y/%m/%d %H:%M:%S')"
 NOW_TIME="$(date '+%Y-%m-%d %H:%M:%S')"
 
